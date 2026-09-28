@@ -1,0 +1,131 @@
+{
+  "id": "statue-trump",
+  "name": "Trump Statue",
+  "units": "mm",
+  "tags": [
+    "statue",
+    "novelty",
+    "plinth"
+  ],
+  "parts": [
+    {
+      "id": "plinth-base",
+      "label": "Plinth Base",
+      "colour": 0,
+      "mesh": "plinth-base.glb"
+    },
+    {
+      "id": "plinth-top",
+      "label": "Plinth Top",
+      "colour": 0,
+      "mesh": "plinth-top.glb"
+    },
+    {
+      "id": "plinth-front",
+      "label": "Plinth Front",
+      "colour": 0,
+      "mesh": "plinth-front.glb"
+    },
+    {
+      "id": "shoes",
+      "label": "Shoes",
+      "colour": 0,
+      "mesh": "shoes.glb"
+    },
+    {
+      "id": "suit",
+      "label": "Suit",
+      "colour": 5,
+      "mesh": "suit.glb"
+    },
+    {
+      "id": "shirt",
+      "label": "Shirt",
+      "colour": 4,
+      "mesh": "shirt.glb"
+    },
+    {
+      "id": "tie",
+      "label": "Tie",
+      "colour": 3,
+      "mesh": "tie.glb"
+    },
+    {
+      "id": "skin",
+      "label": "Skin",
+      "colour": 1,
+      "mesh": "skin.glb"
+    },
+    {
+      "id": "hair",
+      "label": "Hair",
+      "colour": 2,
+      "mesh": "hair.glb"
+    }
+  ],
+  "colours": [
+    "#222226",
+    "#e67e22",
+    "#f1c40f",
+    "#c0392b",
+    "#f4f4f0",
+    "#2c3e50"
+  ],
+  "notes": "Print the figure upright as placed with tree supports on: the forward arm, thumb, chin and the hair sweep all overhang. The plinth base is a hollow shell, open front and top — print it upright, then print the top cap and the front nameplate separately (the nameplate flat, face up, for the cleanest engraving). Neither is glued: the nameplate slides down into a slot behind the base's open front, and the cap sits on a friction-fit locating spigot — so the name can be swapped later by lifting the (unglued) cap off. Load the 3MF so the colour parts stay registered; with one colour, print the merged STLs. 0.12 mm layers flatter the face.",
+  "zones": [
+    {
+      "id": "name",
+      "label": "Name",
+      "part": "plinth-front",
+      "colour": 2,
+      "origin": [
+        0,
+        -25,
+        27
+      ],
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "width": 44,
+      "height": 10,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "THE DONALD"
+    },
+    {
+      "id": "caption",
+      "label": "Caption",
+      "part": "plinth-front",
+      "colour": 2,
+      "origin": [
+        0,
+        -25,
+        14
+      ],
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "width": 44,
+      "height": 14,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 2,
+      "default": "Nobody builds plinths\nlike I build plinths"
+    }
+  ]
+}

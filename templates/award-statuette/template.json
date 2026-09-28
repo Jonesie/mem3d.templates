@@ -1,0 +1,84 @@
+{
+  "id": "award-statuette",
+  "name": "Award Statuette",
+  "units": "mm",
+  "tags": [
+    "award",
+    "trophy",
+    "novelty"
+  ],
+  "parts": [
+    {
+      "id": "plinth",
+      "label": "Plinth",
+      "colour": 0,
+      "mesh": "plinth.glb"
+    },
+    {
+      "id": "figure",
+      "label": "Figure",
+      "colour": 1,
+      "mesh": "figure.glb"
+    }
+  ],
+  "colours": [
+    "#222226",
+    "#d4a017"
+  ],
+  "notes": "Print upright as placed with tree supports: the crossguard, shoulders, hands and chin overhang, and the blade is thin — 0.12 mm layers and a slow outer wall help. Load the 3MF for the black plinth and gold figure, or print the two STLs separately and glue the reel to the plinth.",
+  "zones": [
+    {
+      "id": "title",
+      "label": "Award",
+      "colour": 1,
+      "origin": [
+        0,
+        -24,
+        14.5
+      ],
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "width": 32,
+      "height": 5,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "BEST HAM ACTOR"
+    },
+    {
+      "id": "name",
+      "label": "Recipient",
+      "colour": 1,
+      "origin": [
+        0,
+        -24,
+        7.5
+      ],
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "width": 32,
+      "height": 5,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "Peter Jones",
+      "font": "PlayfairDisplay"
+    }
+  ]
+}

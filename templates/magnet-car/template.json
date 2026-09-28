@@ -1,0 +1,98 @@
+{
+  "id": "magnet-car",
+  "name": "Car Magnet",
+  "units": "mm",
+  "tags": [
+    "magnet",
+    "fridge",
+    "vehicle",
+    "car"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#c0392b",
+    "#f4f4f0"
+  ],
+  "notes": "Print face up with supports OFF: the magnet pockets on the back are bridged over, and supports would fill them. Glue a Ø6 × 2 mm disc magnet into each pocket afterwards.",
+  "zones": [
+    {
+      "id": "line1",
+      "label": "Business",
+      "colour": 1,
+      "origin": [
+        0,
+        15.5,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 40,
+      "height": 7,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "Jims Autos"
+    },
+    {
+      "id": "line2",
+      "label": "Phone",
+      "colour": 1,
+      "origin": [
+        0,
+        9.5,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 32,
+      "height": 5,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "987 6543"
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        32,
+        13,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 9,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "wrench"
+    }
+  ]
+}

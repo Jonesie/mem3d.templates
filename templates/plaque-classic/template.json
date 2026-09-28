@@ -1,0 +1,97 @@
+{
+  "id": "plaque-classic",
+  "name": "Classic Plaque",
+  "units": "mm",
+  "tags": [
+    "plaque",
+    "sign"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#e6d9bd",
+    "#2c3e50",
+    "#c0392b"
+  ],
+  "notes": "Print flat as placed, face up, no supports. The text is engraved; in a second colour it exports as a flush inlay, so load the 3MF for an AMS/MMU or print the merged STL in one colour.",
+  "zones": [
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "colour": 2,
+      "origin": [
+        -38,
+        0,
+        4
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 18,
+      "height": 18,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": ""
+    },
+    {
+      "id": "title",
+      "label": "Title",
+      "colour": 1,
+      "origin": [
+        10,
+        12,
+        4
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 72,
+      "height": 14,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "In Loving Memory"
+    },
+    {
+      "id": "body",
+      "label": "Body",
+      "colour": 1,
+      "origin": [
+        10,
+        -9,
+        4
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 72,
+      "height": 22,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 3,
+      "default": "Forever in our hearts"
+    }
+  ]
+}

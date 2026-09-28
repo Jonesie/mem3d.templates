@@ -1,0 +1,97 @@
+{
+  "id": "magnet-round",
+  "name": "Round Magnet",
+  "units": "mm",
+  "tags": [
+    "magnet",
+    "fridge",
+    "shape"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#c0392b",
+    "#f4f4f0"
+  ],
+  "notes": "Print face up with supports OFF: the magnet pockets on the back are bridged over, and supports would fill them. Glue a Ø6 × 2 mm disc magnet into each pocket afterwards.",
+  "zones": [
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        0,
+        13,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 16,
+      "height": 16,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "heart"
+    },
+    {
+      "id": "line1",
+      "label": "Line 1",
+      "colour": 1,
+      "origin": [
+        0,
+        -2,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 46,
+      "height": 12,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "MUM"
+    },
+    {
+      "id": "line2",
+      "label": "Line 2",
+      "colour": 1,
+      "origin": [
+        0,
+        -15,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 40,
+      "height": 7,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "best in the world"
+    }
+  ]
+}

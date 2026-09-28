@@ -1,0 +1,98 @@
+{
+  "id": "magnet-bus",
+  "name": "School Bus Magnet",
+  "units": "mm",
+  "tags": [
+    "magnet",
+    "fridge",
+    "vehicle",
+    "bus"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#f1c40f",
+    "#222226"
+  ],
+  "notes": "Print face up with supports OFF: the magnet pockets on the back are bridged over, and supports would fill them. Glue a Ø6 × 2 mm disc magnet into each pocket afterwards.",
+  "zones": [
+    {
+      "id": "line1",
+      "label": "Side",
+      "colour": 1,
+      "origin": [
+        0,
+        13,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 72,
+      "height": 7,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "SCHOOL BUS"
+    },
+    {
+      "id": "line2",
+      "label": "Lower",
+      "colour": 1,
+      "origin": [
+        0,
+        6,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 40,
+      "height": 4.5,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "route 66"
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        24,
+        25,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 9,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "sun"
+    }
+  ]
+}

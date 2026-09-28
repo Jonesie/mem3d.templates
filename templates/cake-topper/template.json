@@ -1,0 +1,48 @@
+{
+  "id": "cake-topper",
+  "name": "Cake Topper",
+  "units": "mm",
+  "tags": [
+    "cake",
+    "party",
+    "celebration"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#d4a017"
+  ],
+  "verified": true,
+  "notes": "Print flat as placed, no supports, 100 % infill for stiff prongs. The words and strip are one 2 mm piece; wash before use if it touches food, or wrap the prongs in cling film.",
+  "zones": [
+    {
+      "id": "text",
+      "label": "Words",
+      "origin": [
+        0,
+        13,
+        0
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 96,
+      "height": 22,
+      "mode": "emboss",
+      "depth": 2,
+      "maxLines": 1,
+      "default": "Happy Birthday",
+      "font": "Pacifico",
+      "backing": {
+        "offset": 1.2,
+        "height": 1
+      }
+    }
+  ]
+}

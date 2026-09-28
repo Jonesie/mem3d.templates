@@ -1,0 +1,98 @@
+{
+  "id": "magnet-truck",
+  "name": "Truck Magnet",
+  "units": "mm",
+  "tags": [
+    "magnet",
+    "fridge",
+    "vehicle",
+    "truck"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#2c3e50",
+    "#f4f4f0"
+  ],
+  "notes": "Print face up with supports OFF: the magnet pockets on the back are bridged over, and supports would fill them. Glue a Ø6 × 2 mm disc magnet into each pocket afterwards.",
+  "zones": [
+    {
+      "id": "line1",
+      "label": "Trailer",
+      "colour": 1,
+      "origin": [
+        -14,
+        24,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 56,
+      "height": 13,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "HAULAGE"
+    },
+    {
+      "id": "line2",
+      "label": "Trailer small",
+      "colour": 1,
+      "origin": [
+        -14,
+        12,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 56,
+      "height": 6,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "we deliver"
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        28,
+        12,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 8,
+      "height": 8,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "anchor"
+    }
+  ]
+}

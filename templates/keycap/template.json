@@ -1,0 +1,74 @@
+{
+  "id": "keycap",
+  "name": "Keycap",
+  "units": "mm",
+  "tags": [
+    "keyboard",
+    "keycap",
+    "desk",
+    "gadget"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#222226",
+    "#f4f4f0"
+  ],
+  "verified": true,
+  "notes": "Cherry MX fit: a 1u cap, 18 mm at the base and 9 mm tall, with a 4.2 x 1.35 mm cross socket. Print upside down — top face on the plate, skirt and stem upward — so it needs no supports and the legend comes out crisp off a smooth plate. Keep the legend engraved: embossed text would have to print into the bed. 0.12 mm layers; if the switch is tight, file the cross rather than reprinting.",
+  "zones": [
+    {
+      "id": "legend",
+      "label": "Legend",
+      "origin": [
+        0,
+        0,
+        9
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 10,
+      "height": 10,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "A",
+      "font": "Anton",
+      "colour": 1
+    },
+    {
+      "id": "icon",
+      "label": "Adornment (instead of the legend)",
+      "kind": "symbol",
+      "origin": [
+        0,
+        0,
+        9
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 10,
+      "height": 10,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "",
+      "colour": 1
+    }
+  ]
+}

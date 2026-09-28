@@ -1,0 +1,97 @@
+{
+  "id": "magnet-house",
+  "name": "House Magnet",
+  "units": "mm",
+  "tags": [
+    "magnet",
+    "fridge",
+    "home"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#e67e22",
+    "#f4f4f0"
+  ],
+  "notes": "Print face up with supports OFF: the magnet pockets on the back are bridged over, and supports would fill them. Glue a Ø6 × 2 mm disc magnet into each pocket afterwards.",
+  "zones": [
+    {
+      "id": "line1",
+      "label": "Roof",
+      "colour": 1,
+      "origin": [
+        0,
+        42,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 30,
+      "height": 8,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "THE JONESES"
+    },
+    {
+      "id": "line2",
+      "label": "Wall",
+      "colour": 1,
+      "origin": [
+        0,
+        8,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 48,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "est. 1999"
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        0,
+        25,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 9,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "house"
+    }
+  ]
+}

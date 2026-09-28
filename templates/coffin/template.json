@@ -1,0 +1,119 @@
+{
+  "id": "coffin",
+  "name": "Coffin",
+  "units": "mm",
+  "tags": [
+    "memorial",
+    "novelty",
+    "halloween"
+  ],
+  "parts": [
+    {
+      "id": "body",
+      "label": "Coffin",
+      "colour": 0,
+      "mesh": "body.glb"
+    },
+    {
+      "id": "lid",
+      "label": "Lid",
+      "colour": 0,
+      "mesh": "lid.glb"
+    },
+    {
+      "id": "handles",
+      "label": "Handles",
+      "colour": 1,
+      "mesh": "handles.glb"
+    }
+  ],
+  "colours": [
+    "#7b4a2d",
+    "#d4a017"
+  ],
+  "notes": "Print the body as placed, open side up — it's a hollow shell now, no supports needed. The lid drops on by its own locating spigot, no glue: lift it off to reach the (empty) inside. The handles hang mid-air off the sides: printed together (3MF) they need supports; otherwise print the handles STL on its own — the six pieces lie flat — and glue them on.",
+  "zones": [
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "part": "lid",
+      "colour": 1,
+      "origin": [
+        -28,
+        0,
+        22
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 11,
+      "height": 11,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "cross"
+    },
+    {
+      "id": "name",
+      "label": "Name",
+      "part": "lid",
+      "colour": 1,
+      "origin": [
+        5,
+        4,
+        22
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 52,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "R.I.P."
+    },
+    {
+      "id": "dates",
+      "label": "Dates / line",
+      "part": "lid",
+      "colour": 1,
+      "origin": [
+        5,
+        -6,
+        22
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 52,
+      "height": 7,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "1958 – 2058"
+    }
+  ]
+}

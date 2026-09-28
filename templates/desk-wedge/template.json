@@ -1,0 +1,69 @@
+{
+  "id": "desk-wedge",
+  "name": "Desk Name Plate",
+  "units": "mm",
+  "tags": [
+    "name plate",
+    "desk"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#222226",
+    "#d4a017"
+  ],
+  "notes": "Print as placed with the flat base down, no supports — the 40° slope is self-supporting. The text sits on the slope, so nothing overhangs.",
+  "zones": [
+    {
+      "id": "name",
+      "label": "Name",
+      "colour": 1,
+      "origin": [
+        0,
+        3.6000000000000014,
+        15.5
+      ],
+      "normal": [
+        0,
+        -0.6401843996644798,
+        0.7682212795973757
+      ],
+      "up": [
+        0,
+        0.7682212795973757,
+        0.6401843996644798
+      ],
+      "width": 104,
+      "height": 17,
+      "mode": "emboss",
+      "depth": 1.5,
+      "maxLines": 1,
+      "default": "Peter Jones"
+    },
+    {
+      "id": "title",
+      "label": "Title",
+      "colour": 1,
+      "origin": [
+        0,
+        -7.800000000000001,
+        6
+      ],
+      "normal": [
+        0,
+        -0.6401843996644798,
+        0.7682212795973757
+      ],
+      "up": [
+        0,
+        0.7682212795973757,
+        0.6401843996644798
+      ],
+      "width": 104,
+      "height": 7,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "Executive VP of Printing"
+    }
+  ]
+}

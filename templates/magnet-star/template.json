@@ -1,0 +1,97 @@
+{
+  "id": "magnet-star",
+  "name": "Star Magnet",
+  "units": "mm",
+  "tags": [
+    "magnet",
+    "fridge",
+    "shape"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#d4a017",
+    "#222226"
+  ],
+  "notes": "Print face up with supports OFF: the magnet pockets on the back are bridged over, and supports would fill them. Glue a Ø6 × 2 mm disc magnet into each pocket afterwards.",
+  "zones": [
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        0,
+        12,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 10,
+      "height": 10,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "crown"
+    },
+    {
+      "id": "line1",
+      "label": "Line 1",
+      "colour": 1,
+      "origin": [
+        0,
+        0,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 26,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "STAR"
+    },
+    {
+      "id": "line2",
+      "label": "Line 2",
+      "colour": 1,
+      "origin": [
+        0,
+        -9,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 22,
+      "height": 5,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "of the week"
+    }
+  ]
+}

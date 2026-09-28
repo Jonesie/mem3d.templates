@@ -1,0 +1,113 @@
+{
+  "id": "headstone-classic",
+  "name": "Classic Headstone",
+  "units": "mm",
+  "tags": [
+    "memorial",
+    "garden"
+  ],
+  "parts": [
+    {
+      "id": "slab",
+      "label": "Headstone",
+      "colour": 0,
+      "mesh": "slab.glb"
+    },
+    {
+      "id": "base",
+      "label": "Base",
+      "colour": 0,
+      "mesh": "base.glb"
+    }
+  ],
+  "colours": [
+    "#8b8f98",
+    "#f4f4f0"
+  ],
+  "verified": true,
+  "notes": "Two parts, printed separately then assembled by hand afterward: the headstone prints lying flat, engraved/embossed face up (no rotation needed, no supports) — stand it up and push its tenon into the base’s socket, a firm friction fit (add a dot of glue if you want it permanent). The base prints separately, as placed, no supports. Printing the headstone flat rather than standing also means a multi-colour (AMS/MMU) print only swaps filament within the top ~1–2 mm of engraving/emboss depth, not across the whole standing height.",
+  "zones": [
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "part": "slab",
+      "colour": 1,
+      "origin": [
+        0,
+        75,
+        10
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 14,
+      "height": 14,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "dog"
+    },
+    {
+      "id": "name",
+      "label": "Name",
+      "part": "slab",
+      "colour": 1,
+      "origin": [
+        0,
+        56,
+        10
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 50,
+      "height": 12,
+      "mode": "engrave",
+      "depth": 1.2,
+      "maxLines": 1,
+      "default": "REX"
+    },
+    {
+      "id": "epitaph",
+      "label": "Epitaph",
+      "part": "slab",
+      "colour": 1,
+      "origin": [
+        0,
+        32,
+        10
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 50,
+      "height": 30,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 4,
+      "default": "2011 – 2024\nGood boy"
+    }
+  ]
+}

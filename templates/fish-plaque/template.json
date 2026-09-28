@@ -1,0 +1,98 @@
+{
+  "id": "fish-plaque",
+  "name": "Fishing Trophy Plaque",
+  "units": "mm",
+  "tags": [
+    "plaque",
+    "fishing",
+    "trophy"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#7b4a2d",
+    "#d4a017",
+    "#222226"
+  ],
+  "notes": "Print flat as placed, face up, no supports. The fish stands 3.5 mm proud and the engraved lines below it are flush inlays in their own colours, so load the 3MF for an AMS/MMU; the merged STL prints fine in one colour.",
+  "zones": [
+    {
+      "id": "fish",
+      "label": "Fish",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        0,
+        6,
+        5
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 78,
+      "height": 39,
+      "mode": "emboss",
+      "depth": 3.5,
+      "maxLines": 1,
+      "default": "trout"
+    },
+    {
+      "id": "title",
+      "label": "Title",
+      "colour": 2,
+      "origin": [
+        0,
+        -21,
+        5
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 76,
+      "height": 8.5,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "BIGGEST CATCH"
+    },
+    {
+      "id": "caption",
+      "label": "Caption",
+      "colour": 2,
+      "origin": [
+        0,
+        -30.5,
+        5
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 44,
+      "height": 5,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "Lake Taupō · 2026"
+    }
+  ]
+}

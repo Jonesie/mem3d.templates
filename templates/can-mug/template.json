@@ -1,0 +1,117 @@
+{
+  "id": "can-mug",
+  "name": "Beer Can Mug",
+  "units": "mm",
+  "tags": [
+    "mug",
+    "beer",
+    "drink",
+    "novelty"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#2c3e50",
+    "#d4a017"
+  ],
+  "verified": true,
+  "notes": "Prints upright as placed. The body needs no supports, but the handle does — turn on tree supports (from the build plate is enough) or the underside of the handle will droop. A 355 ml can (66 mm) drops into the sleeve with 2 mm clearance all round; most slim bottles (up to ~74 mm) fit too, but a wide stubby will not. Text and adornments are engraved into the outside wall, and they sit in two short bands rather than spread up the whole mug, so a two-colour AMS print only swaps filament across those few layers. To cut the purge waste further: in Orca/Bambu Studio, turn on \"Flush into objects' infill\" (Print Settings > Others) so the purged filament goes into the mug's own infill instead of a waste tower — or skip the swap altogether and print the merged STL in one colour, which leaves the engraving open with no purge at all.",
+  "zones": [
+    {
+      "id": "text",
+      "label": "Wrap-around text",
+      "colour": 1,
+      "origin": [
+        -41,
+        0,
+        72
+      ],
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "width": 170,
+      "height": 34,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 2,
+      "default": "CHEERS",
+      "font": "Anton",
+      "wrap": {
+        "radius": 41
+      }
+    },
+    {
+      "id": "band",
+      "label": "Adornment (repeats around the foot)",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        -41,
+        0,
+        12
+      ],
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "width": 14,
+      "height": 14,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "star",
+      "wrap": {
+        "radius": 41
+      },
+      "repeat": [
+        [
+          32.20132469929538,
+          0,
+          0
+        ],
+        [
+          64.40264939859075,
+          0,
+          0
+        ],
+        [
+          96.60397409788612,
+          0,
+          0
+        ],
+        [
+          128.8052987971815,
+          0,
+          0
+        ],
+        [
+          161.0066234964769,
+          0,
+          0
+        ],
+        [
+          193.20794819577225,
+          0,
+          0
+        ],
+        [
+          225.40927289506763,
+          0,
+          0
+        ]
+      ]
+    }
+  ]
+}

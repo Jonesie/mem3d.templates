@@ -1,0 +1,130 @@
+{
+  "id": "casino-chip",
+  "name": "Casino Chip",
+  "units": "mm",
+  "tags": [
+    "chip",
+    "novelty",
+    "game"
+  ],
+  "parts": [
+    {
+      "id": "body",
+      "label": "Chip",
+      "colour": 0,
+      "mesh": "body.glb"
+    },
+    {
+      "id": "spots",
+      "label": "Edge spots",
+      "colour": 1,
+      "mesh": "spots.glb"
+    },
+    {
+      "id": "inlay",
+      "label": "Inlay",
+      "colour": 2,
+      "mesh": "inlay.glb"
+    }
+  ],
+  "colours": [
+    "#c0392b",
+    "#f4f4f0",
+    "#e6d9bd"
+  ],
+  "notes": "Print flat as placed, no supports. Three colours: load the 3MF and assign a filament to body, edge spots and inlay — all three are flush, so a single-colour print of the merged STL works too. The curved text is only 0.5 mm deep; 0.12 mm layers keep it crisp.",
+  "zones": [
+    {
+      "id": "top",
+      "label": "Top arc",
+      "colour": 1,
+      "origin": [
+        0,
+        0,
+        3.3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 0,
+      "height": 4,
+      "mode": "engrave",
+      "depth": 0.5,
+      "maxLines": 1,
+      "default": "MEM3D CASINO",
+      "font": "Anton",
+      "arc": {
+        "radius": 12.9,
+        "sweep": 170,
+        "side": "top"
+      }
+    },
+    {
+      "id": "bottom",
+      "label": "Bottom arc",
+      "colour": 1,
+      "origin": [
+        0,
+        0,
+        3.3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 0,
+      "height": 4,
+      "mode": "engrave",
+      "depth": 0.5,
+      "maxLines": 1,
+      "default": "NO CASH VALUE",
+      "font": "Anton",
+      "arc": {
+        "radius": 12.9,
+        "sweep": 170,
+        "side": "bottom"
+      }
+    },
+    {
+      "id": "value",
+      "label": "Denomination",
+      "part": "inlay",
+      "colour": 0,
+      "origin": [
+        0,
+        0,
+        3.3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 18,
+      "height": 12,
+      "mode": "engrave",
+      "depth": 0.4,
+      "maxLines": 1,
+      "default": "100",
+      "font": "Anton"
+    }
+  ]
+}

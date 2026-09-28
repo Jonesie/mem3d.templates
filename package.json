@@ -1,0 +1,17 @@
+{
+  "name": "mem3d-templates",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "gen": "tsx scripts/gen-templates.mts",
+    "sync": "tsx scripts/sync-published.mts"
+  },
+  "dependencies": {
+    "manifold-3d": "^3.5.3",
+    "tsx": "^4.23.13"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "typescript": "~6.0.2"
+  }
+}

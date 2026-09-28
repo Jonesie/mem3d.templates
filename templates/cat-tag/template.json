@@ -1,0 +1,71 @@
+{
+  "id": "cat-tag",
+  "name": "Cat Tag",
+  "units": "mm",
+  "tags": [
+    "pet",
+    "tag",
+    "cat"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#8e44ad",
+    "#f1c40f"
+  ],
+  "notes": "Print flat as placed, no supports. The phone number is engraved into the face on the bed, so use a smooth plate for a clean underside. Fit a split ring through the hole between the ears.",
+  "zones": [
+    {
+      "id": "name",
+      "label": "Name",
+      "colour": 1,
+      "origin": [
+        0,
+        0,
+        2.5
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 26,
+      "height": 8,
+      "mode": "engrave",
+      "depth": 0.6,
+      "maxLines": 1,
+      "default": "MITTENS"
+    },
+    {
+      "id": "phone",
+      "label": "Phone / message",
+      "colour": 1,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 24,
+      "height": 16,
+      "mode": "engrave",
+      "depth": 0.6,
+      "maxLines": 3,
+      "default": "123 456 789\nIf found\nplease call",
+      "font": "OpenSans"
+    }
+  ]
+}

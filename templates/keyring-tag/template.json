@@ -1,0 +1,43 @@
+{
+  "id": "keyring-tag",
+  "name": "Keyring Tag",
+  "units": "mm",
+  "tags": [
+    "keyring",
+    "tag"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#2980b9",
+    "#f4f4f0"
+  ],
+  "notes": "Print flat as placed, no supports. The raised text is 1 mm proud; a 0.4 mm nozzle is fine. Fit a split ring through the hole.",
+  "zones": [
+    {
+      "id": "text",
+      "label": "Text",
+      "colour": 1,
+      "origin": [
+        3.5,
+        0,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 36,
+      "height": 14,
+      "mode": "emboss",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "PETER"
+    }
+  ]
+}

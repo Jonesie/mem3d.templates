@@ -1,0 +1,252 @@
+{
+  "id": "picture-frame",
+  "name": "Picture Frame",
+  "units": "mm",
+  "tags": [
+    "frame",
+    "photo",
+    "home",
+    "gift"
+  ],
+  "parts": [
+    {
+      "id": "frame",
+      "label": "Frame",
+      "colour": 0,
+      "mesh": "frame.glb"
+    },
+    {
+      "id": "back",
+      "label": "Back panel",
+      "colour": 1,
+      "mesh": "back.glb"
+    },
+    {
+      "id": "stand",
+      "label": "Desk stand",
+      "colour": 1,
+      "mesh": "stand.glb"
+    }
+  ],
+  "colours": [
+    "#2c3e50",
+    "#d4a017"
+  ],
+  "notes": "Three parts, shown assembled but printed one at a time — the STL zip has a file per part. Frame and stand print as placed with no supports; flip the back panel so the keyhole recess faces up. A 6 x 4\" (152 x 102 mm) photo drops into the rebate, then the panel holds it in; the stand clips onto the bottom rail, or hang it on a screw through the keyhole.",
+  "zones": [
+    {
+      "id": "top",
+      "label": "Top line",
+      "colour": 1,
+      "origin": [
+        0,
+        55.5,
+        10
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 110,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "THE JONES FAMILY"
+    },
+    {
+      "id": "bottom",
+      "label": "Bottom line",
+      "colour": 1,
+      "origin": [
+        0,
+        -55.5,
+        10
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 110,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "Summer 2026"
+    },
+    {
+      "id": "corners",
+      "label": "Corner adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        -80.5,
+        55.5,
+        10
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 9,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "star",
+      "repeat": [
+        [
+          161,
+          0,
+          0
+        ],
+        [
+          161,
+          -111,
+          0
+        ],
+        [
+          0,
+          -111,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "sides",
+      "label": "Side adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        -80.5,
+        40,
+        10
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 9,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "heart",
+      "repeat": [
+        [
+          0,
+          -20,
+          0
+        ],
+        [
+          0,
+          -40,
+          0
+        ],
+        [
+          0,
+          -60,
+          0
+        ],
+        [
+          0,
+          -80,
+          0
+        ],
+        [
+          161,
+          0,
+          0
+        ],
+        [
+          161,
+          -20,
+          0
+        ],
+        [
+          161,
+          -40,
+          0
+        ],
+        [
+          161,
+          -60,
+          0
+        ],
+        [
+          161,
+          -80,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "edges",
+      "label": "Edge adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        -68,
+        55.5,
+        10
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 9,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "leaf",
+      "repeat": [
+        [
+          136,
+          0,
+          0
+        ],
+        [
+          136,
+          -111,
+          0
+        ],
+        [
+          0,
+          -111,
+          0
+        ]
+      ]
+    }
+  ]
+}

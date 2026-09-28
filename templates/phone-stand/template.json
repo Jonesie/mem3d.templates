@@ -1,0 +1,151 @@
+{
+  "id": "phone-stand",
+  "name": "Phone Stand",
+  "units": "mm",
+  "tags": [
+    "desk",
+    "phone",
+    "gift"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#2c3e50",
+    "#f4f4f0",
+    "#c0392b"
+  ],
+  "notes": "Print as placed, base on the bed, no supports: the backrest leans 25° and the cable slot under the lip bridges. The raised adornments on the lip face are 1 mm proud and print fine on the vertical face.",
+  "zones": [
+    {
+      "id": "name",
+      "label": "Name",
+      "colour": 1,
+      "origin": [
+        0,
+        -46,
+        4
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 60,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "Peter"
+    },
+    {
+      "id": "front",
+      "label": "Front of upright",
+      "colour": 1,
+      "origin": [
+        0,
+        38.36902089918378,
+        33.414464759246094
+      ],
+      "normal": [
+        0,
+        -0.9063077870366499,
+        0.42261826174069944
+      ],
+      "up": [
+        0,
+        0.42261826174069944,
+        0.9063077870366499
+      ],
+      "width": 58,
+      "height": 40,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 3,
+      "default": "I'm out"
+    },
+    {
+      "id": "back",
+      "label": "Back of upright",
+      "colour": 1,
+      "origin": [
+        0,
+        43.80686762140368,
+        30.8787551888019
+      ],
+      "normal": [
+        0,
+        0.9063077870366499,
+        -0.42261826174069944
+      ],
+      "up": [
+        0,
+        0.42261826174069944,
+        0.9063077870366499
+      ],
+      "width": 58,
+      "height": 40,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 3,
+      "default": "Do not\ndisturb"
+    },
+    {
+      "id": "left",
+      "label": "Left adornment",
+      "kind": "symbol",
+      "colour": 2,
+      "origin": [
+        -21,
+        -40,
+        11
+      ],
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "width": 13,
+      "height": 13,
+      "mode": "emboss",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "heart"
+    },
+    {
+      "id": "right",
+      "label": "Right adornment",
+      "kind": "symbol",
+      "colour": 2,
+      "origin": [
+        21,
+        -40,
+        11
+      ],
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "width": 13,
+      "height": 13,
+      "mode": "emboss",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "heart"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "id": "coaster",
+  "name": "Coaster",
+  "units": "mm",
+  "tags": [
+    "coaster",
+    "kitchen",
+    "gift"
+  ],
+  "parts": [
+    {
+      "id": "body",
+      "label": "Coaster",
+      "colour": 0,
+      "mesh": "body.glb"
+    },
+    {
+      "id": "rim",
+      "label": "Rim",
+      "colour": 1,
+      "mesh": "rim.glb"
+    }
+  ],
+  "colours": [
+    "#2c3e50",
+    "#d4a017"
+  ],
+  "notes": "Print flat as placed, no supports. The rim is a separate part standing 1.2 mm above the face: print the merged STL in one colour, or pause at 4 mm and swap filament for a two-tone rim without an AMS. The curved text and icon are engraved 0.8 mm.",
+  "zones": [
+    {
+      "id": "top",
+      "label": "Top arc",
+      "colour": 1,
+      "origin": [
+        0,
+        0,
+        4
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 0,
+      "height": 7,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "PETER'S COFFEE",
+      "arc": {
+        "radius": 31,
+        "sweep": 160,
+        "side": "top"
+      }
+    },
+    {
+      "id": "bottom",
+      "label": "Bottom arc",
+      "colour": 1,
+      "origin": [
+        0,
+        0,
+        4
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 0,
+      "height": 7,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "EST. 2026",
+      "arc": {
+        "radius": 31,
+        "sweep": 160,
+        "side": "bottom"
+      }
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        0,
+        0,
+        4
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 36,
+      "height": 36,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "mug-hot"
+    }
+  ]
+}

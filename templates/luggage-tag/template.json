@@ -1,0 +1,125 @@
+{
+  "id": "luggage-tag",
+  "name": "Luggage Tag",
+  "units": "mm",
+  "tags": [
+    "tag",
+    "travel",
+    "luggage"
+  ],
+  "mesh": "mesh.glb",
+  "colours": [
+    "#e67e22",
+    "#f4f4f0"
+  ],
+  "notes": "Print flat as placed, no supports. The address is engraved into the bed face, so use a smooth plate for a clean underside. Thread a strap through the slot at the left end.",
+  "zones": [
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "colour": 1,
+      "origin": [
+        -21,
+        0,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 14,
+      "height": 14,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "bicycle"
+    },
+    {
+      "id": "name",
+      "label": "Name",
+      "colour": 1,
+      "origin": [
+        9,
+        9,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 56,
+      "height": 14,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "Peter Jones"
+    },
+    {
+      "id": "phone",
+      "label": "Phone",
+      "colour": 1,
+      "origin": [
+        9,
+        -9,
+        3
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 56,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "+64 21 123 4567",
+      "font": "OpenSans"
+    },
+    {
+      "id": "address",
+      "label": "Address (back)",
+      "colour": 1,
+      "origin": [
+        4,
+        0,
+        0
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 64,
+      "height": 40,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 4,
+      "default": "12 Example Street\nWellington\nNew Zealand",
+      "font": "OpenSans"
+    }
+  ]
+}

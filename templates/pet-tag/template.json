@@ -1,0 +1,115 @@
+{
+  "id": "pet-tag",
+  "name": "Pet Tag",
+  "units": "mm",
+  "tags": [
+    "pet",
+    "tag"
+  ],
+  "notes": "Print flat as placed, no supports. The phone number is engraved into the face that sits on the bed, so use a smooth plate for a clean underside. Single colour: the rim prints as part of the tag.",
+  "parts": [
+    {
+      "id": "tag",
+      "label": "Tag",
+      "mesh": "tag.glb",
+      "colour": 0
+    },
+    {
+      "id": "rim",
+      "label": "Rim",
+      "mesh": "rim.glb",
+      "colour": 1
+    }
+  ],
+  "colours": [
+    "#2980b9",
+    "#d4a017"
+  ],
+  "zones": [
+    {
+      "id": "name",
+      "label": "Name",
+      "kind": "text",
+      "part": "tag",
+      "origin": [
+        0.0,
+        -1.0,
+        2.5
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "up": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "width": 22.0,
+      "height": 9.0,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "Wolfie",
+      "colour": 1
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "part": "tag",
+      "origin": [
+        0.0,
+        -9.5,
+        2.5
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "up": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "width": 8.0,
+      "height": 5.5,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "paw",
+      "colour": 1
+    },
+    {
+      "id": "phone",
+      "label": "Phone / message",
+      "kind": "text",
+      "part": "tag",
+      "origin": [
+        0.0,
+        3.0,
+        0.0
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "up": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "width": 24.0,
+      "height": 14.0,
+      "mode": "engrave",
+      "depth": 0.6,
+      "maxLines": 2,
+      "default": "101-800-1000\nIf found",
+      "font": "OpenSans",
+      "colour": 1
+    }
+  ]
+}

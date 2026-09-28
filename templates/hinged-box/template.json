@@ -1,0 +1,115 @@
+{
+  "id": "hinged-box",
+  "name": "Hinged Box",
+  "units": "mm",
+  "tags": [
+    "box",
+    "gift",
+    "storage"
+  ],
+  "parts": [
+    {
+      "id": "base",
+      "label": "Base",
+      "colour": 0,
+      "mesh": "base.glb"
+    },
+    {
+      "id": "lid",
+      "label": "Lid",
+      "colour": 1,
+      "mesh": "lid.glb"
+    }
+  ],
+  "colours": [
+    "#2c3e50",
+    "#d4a017",
+    "#f4f4f0"
+  ],
+  "notes": "Both halves print flat with the hinge already assembled — no pins to fit. Work the hinge gently a few times after printing to free it.",
+  "printInPlace": true,
+  "zones": [
+    {
+      "id": "line1",
+      "label": "Lid line 1",
+      "part": "lid",
+      "colour": 2,
+      "origin": [
+        -9,
+        57.5,
+        2.5
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 44,
+      "height": 11,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "For Mum"
+    },
+    {
+      "id": "line2",
+      "label": "Lid line 2",
+      "part": "lid",
+      "colour": 2,
+      "origin": [
+        -9,
+        46.5,
+        2.5
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 44,
+      "height": 7,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 2,
+      "default": "with love, 2026"
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "part": "lid",
+      "colour": 2,
+      "origin": [
+        23,
+        52,
+        2.5
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 13,
+      "height": 13,
+      "mode": "engrave",
+      "depth": 0.8,
+      "maxLines": 1,
+      "default": "heart"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "id": "valentine-heart",
+  "name": "Valentine Heart",
+  "units": "mm",
+  "tags": [
+    "love",
+    "valentine",
+    "gift"
+  ],
+  "parts": [
+    {
+      "id": "heart",
+      "label": "Heart",
+      "colour": 0,
+      "mesh": "heart.glb"
+    },
+    {
+      "id": "arrow",
+      "label": "Arrow",
+      "colour": 1,
+      "mesh": "arrow.glb"
+    }
+  ],
+  "colours": [
+    "#c0392b",
+    "#d4a017",
+    "#f4f4f0"
+  ],
+  "notes": "Print flat as placed, no supports. The arrow lies on the bed and runs under the heart’s top skin, so load the 3MF for two colours; a single-colour print of the merged STL works too. The filleted edge is stacked layers, so 0.12 mm layers smooth it.",
+  "zones": [
+    {
+      "id": "left",
+      "label": "Left initials",
+      "colour": 2,
+      "origin": [
+        -10.5,
+        9.5,
+        6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 13,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "PJ"
+    },
+    {
+      "id": "right",
+      "label": "Right initials",
+      "colour": 2,
+      "origin": [
+        10.5,
+        9.5,
+        6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 13,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "MJ"
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "colour": 2,
+      "origin": [
+        0,
+        -4.5,
+        6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 9,
+      "height": 9,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "infinity"
+    }
+  ]
+}
