@@ -2,9 +2,14 @@
 
 Template source for [mem3d](https://mem3d.jonesie.kiwi) — kept independent
 of the site's own repo (`~/dev/mem3d`) so templates can be authored,
-reviewed and (eventually) contributed by others without touching the app
-itself, and so a template can sit as a draft indefinitely with zero risk of
-it going live before it's ready.
+reviewed and contributed by others without touching the app itself, and so
+a template can sit as a draft indefinitely with zero risk of it going live
+before it's ready.
+
+Anyone can fork this repo and open a pull request with a new template or a
+fix to an existing one — see [Contributing](CONTRIBUTING.md) for the
+format and how to check your work, and [Review & publishing](#review--publishing)
+below for what happens after you open the PR.
 
 ## Layout
 
@@ -35,3 +40,46 @@ it going live before it's ready.
    `TemplateCatalogue` rescans on file mtime.
 4. Commit. This repo is the history of what's been published and when,
    independent of the mem3d app's own commit history.
+
+## Contributing
+
+New templates and fixes come in as pull requests from forks — see
+[CONTRIBUTING.md](CONTRIBUTING.md) for the `template.json` format, the
+three ways to author one (procedural/Manifold, FreeCAD, or by hand), and
+how to check your work before opening a PR. `npm run sync` is a
+maintainer-only step (it writes to a path on the live host) — don't run
+it yourself; just leave `"published": false` and open the PR.
+
+## Review & publishing
+
+Every submission goes through the same path:
+
+```mermaid
+flowchart LR
+    A[PR opened] --> B[Review]
+    B -->|changes requested| A
+    B -->|merged| C[Draft publish to mem3d<br/>unverified, author-only]
+    C --> D[Verification<br/>submitter sends a print photo]
+    D --> E[Final approval<br/>verified, live in the public gallery]
+```
+
+1. **PR opened.** One template (or one focused fix) per PR, `"published": false`.
+2. **Review.** I read through the PR — geometry, zone placement, notes —
+   the same way I'd review any of my own additions, and merge it into
+   `main` once it looks right (or ask for changes first).
+3. **Unverified publish.** After merging, I `npm run sync` it to the live
+   site as unverified (`"verified"` unset/`false`). At this stage it's
+   visible only to the GitHub account in the template's `"author"` field,
+   not in the public gallery, so they can check it renders and exports
+   correctly before anyone else sees it.
+4. **Verification.** Once the submitter sends a photo of an actual print,
+   I set `"verified": true` and publish again — from there it's live in
+   the public gallery like any other template.
+
+A template can also stay a draft indefinitely (step 1 only) with zero
+risk of it reaching the site — see Workflow above.
+
+## License
+
+[CC BY-NC-SA 4.0](LICENSE) — share and remix freely with attribution,
+noncommercial use only, derivatives stay under the same license.

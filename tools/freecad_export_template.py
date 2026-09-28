@@ -29,9 +29,10 @@ index) on a body, and --colours "#hex,#hex,#hex" for the palette.
 
 Usage (any of):
   python3 tools/freecad_export_template.py model.FCStd --out templates \
-      [--id pet-tag] [--name "Pet Tag"] [--tags pet,tag] [--draft]
-  FreeCADCmd tools/freecad_export_template.py      (with MEM3D_MODEL / MEM3D_OUT env)
-  Run as a macro inside FreeCAD on the active document (writes next to it).
+      --author your-github-username [--id pet-tag] [--name "Pet Tag"] [--tags pet,tag] [--draft]
+  FreeCADCmd tools/freecad_export_template.py      (with MEM3D_MODEL / MEM3D_OUT / MEM3D_AUTHOR env)
+  Run as a macro inside FreeCAD on the active document (writes next to it;
+  set MEM3D_AUTHOR in the environment first).
 """
 import json
 import math
@@ -54,6 +55,7 @@ def _main_cli():
     ap.add_argument("--out", required=True, help="templates root; writes <out>/<id>/")
     ap.add_argument("--id", help="template id (default: file stem, slugified)")
     ap.add_argument("--name", help="display name (default: from id)")
+    ap.add_argument("--author", required=True, help="your GitHub username/id; mem3d links to it")
     ap.add_argument("--tags", default="", help="comma-separated tags")
     ap.add_argument("--draft", action="store_true", help='write "published": false')
     ap.add_argument("--verified", action="store_true", help='write "verified": true (a real print has been checked)')
@@ -67,6 +69,7 @@ def _main_cli():
                MEM3D_OUT=os.path.abspath(a.out),
                MEM3D_ID=a.id or "",
                MEM3D_NAME=a.name or "",
+               MEM3D_AUTHOR=a.author,
                MEM3D_TAGS=a.tags,
                MEM3D_DRAFT="1" if a.draft else "",
                MEM3D_VERIFIED="1" if a.verified else "",
@@ -100,7 +103,7 @@ def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
-def export(doc, out_root, tid, name, tags, draft, deflection, colours=(), log=print):
+def export(doc, out_root, tid, name, author, tags, draft, deflection, colours=(), log=print):
     import FreeCAD
     import Part
     import MeshPart
@@ -167,7 +170,7 @@ def export(doc, out_root, tid, name, tags, draft, deflection, colours=(), log=pr
         with open(os.path.join(out_dir, p["mesh"]), "wb") as f:
             f.write(write_glb(pts, facets))
 
-    tpl = {"id": tid, "name": name, "units": "mm", "tags": tags}
+    tpl = {"id": tid, "name": name, "units": "mm", "tags": tags, "author": author}
     if multi:
         tpl["parts"] = [{"id": p["id"], "label": p["label"], "mesh": p["mesh"], "colour": p["colour"]} for p in parts]
         if colours:
@@ -310,12 +313,15 @@ def _main_freecad():
     stem = os.path.splitext(os.path.basename(model))[0]
     tid = os.environ.get("MEM3D_ID") or slug(stem)
     name = os.environ.get("MEM3D_NAME") or stem.replace("-", " ").replace("_", " ").title()
+    author = os.environ.get("MEM3D_AUTHOR")
+    if not author:
+        raise SystemExit("--author is required (your GitHub username/id)")
     tags = [t.strip() for t in os.environ.get("MEM3D_TAGS", "").split(",") if t.strip()]
     draft = bool(os.environ.get("MEM3D_DRAFT"))
     deflection = float(os.environ.get("MEM3D_DEFLECTION", "0.05"))
     colours = [c.strip() for c in os.environ.get("MEM3D_COLOURS", "").split(",") if c.strip()]
     doc.recompute()
-    export(doc, out, tid, name, tags, draft, deflection, colours, log=FreeCAD.Console.PrintMessage
+    export(doc, out, tid, name, author, tags, draft, deflection, colours, log=FreeCAD.Console.PrintMessage
            if not model else lambda s: print(s))
 
 

@@ -7,6 +7,7 @@
     "novelty",
     "plinth"
   ],
+  "author": "Jonesie",
   "parts": [
     {
       "id": "plinth-base",

@@ -8,6 +8,7 @@
     "desk",
     "gadget"
   ],
+  "author": "Jonesie",
   "mesh": "mesh.glb",
   "colours": [
     "#222226",

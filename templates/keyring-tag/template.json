@@ -6,6 +6,7 @@
     "keyring",
     "tag"
   ],
+  "author": "Jonesie",
   "mesh": "mesh.glb",
   "colours": [
     "#2980b9",

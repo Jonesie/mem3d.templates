@@ -6,6 +6,7 @@
     "plaque",
     "sign"
   ],
+  "author": "Jonesie",
   "mesh": "mesh.glb",
   "colours": [
     "#e6d9bd",

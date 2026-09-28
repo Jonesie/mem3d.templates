@@ -8,6 +8,7 @@
     "vehicle",
     "bus"
   ],
+  "author": "Jonesie",
   "mesh": "mesh.glb",
   "colours": [
     "#f1c40f",

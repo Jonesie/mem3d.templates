@@ -36,11 +36,16 @@ interface Tpl {
   colours?: string[]
   /** Set once a real print has been checked; shows a badge in the gallery. */
   verified?: boolean
+  /** GitHub username of the author; mem3d links to it. Defaults to DEFAULT_AUTHOR below. */
+  author?: string
   /** Shown in the editor: printing / assembly notes. */
   notes?: string
   /** Parts must be printed together as placed; STL export is one merged file. */
   printInPlace?: boolean
 }
+
+/** GitHub username used for templates with no explicit `author`. */
+const DEFAULT_AUTHOR = 'Jonesie'
 
 const roundedRect = (w: number, h: number, r: number) =>
   CrossSection.square([w - 2 * r, h - 2 * r], true).offset(r, 'Round', 2, 32)
@@ -1187,7 +1192,7 @@ for (const t of templates) {
     writeFileSync(`${dir}/${pid}.glb`, writeGlb(positions, new Uint32Array(mesh.triVerts)))
     tris += mesh.numTri
   }
-  const json: Record<string, unknown> = { id: t.id, name: t.name, units: 'mm', tags: t.tags }
+  const json: Record<string, unknown> = { id: t.id, name: t.name, units: 'mm', tags: t.tags, author: t.author ?? DEFAULT_AUTHOR }
   if (t.parts) {
     for (const p of t.parts) if (!solids[p.id]) throw new Error(`${t.id}: build() returned no solid for part ${p.id}`)
     json.parts = t.parts.map((p) => ({ ...p, mesh: `${p.id}.glb` }))

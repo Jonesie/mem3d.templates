@@ -8,6 +8,7 @@
     "vehicle",
     "car"
   ],
+  "author": "Jonesie",
   "mesh": "mesh.glb",
   "colours": [
     "#c0392b",
