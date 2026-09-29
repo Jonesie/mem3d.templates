@@ -7,34 +7,47 @@
     "desk"
   ],
   "author": "Jonesie",
-  "mesh": "mesh.glb",
+  "parts": [
+    {
+      "id": "ends",
+      "label": "Ends",
+      "colour": 0,
+      "mesh": "ends.glb"
+    },
+    {
+      "id": "plate",
+      "label": "Face Plate",
+      "colour": 1,
+      "mesh": "plate.glb"
+    }
+  ],
   "colours": [
     "#222226",
     "#d4a017"
   ],
-  "notes": "Print as placed with the flat base down, no supports — the 40° slope is self-supporting. The text sits on the slope, so nothing overhangs.",
+  "notes": "Three prints, no glue. Print the face plate flat, text up, no supports — it is the whole reason this is split, so the name and title get a flat, crisp surface. The two triangular ends are laid on their outer faces (slot side up), so the slot is open to the top. The lip over the slot is a 40° overhang, so print with supports there or a slightly slow bridge. Assemble by sliding the plate down into the slots from the top edge until it stops on the bottom of the slots; it sits ~1 mm below the ends' slope, held by a lip over each edge, and the two ends and plate lock into one rigid wedge at 40°. Snug fit — lift it back out the same way to swap the text.",
   "zones": [
     {
       "id": "name",
       "label": "Name",
-      "colour": 1,
+      "part": "plate",
       "origin": [
         0,
-        3.6000000000000014,
-        15.5
+        -30,
+        3
       ],
       "normal": [
         0,
-        -0.6401843996644798,
-        0.7682212795973757
+        0,
+        1
       ],
       "up": [
         0,
-        0.7682212795973757,
-        0.6401843996644798
+        1,
+        0
       ],
-      "width": 104,
-      "height": 17,
+      "width": 100,
+      "height": 15,
       "mode": "emboss",
       "depth": 1.5,
       "maxLines": 1,
@@ -43,23 +56,23 @@
     {
       "id": "title",
       "label": "Title",
-      "colour": 1,
+      "part": "plate",
       "origin": [
         0,
-        -7.800000000000001,
-        6
+        -44.5,
+        3
       ],
       "normal": [
         0,
-        -0.6401843996644798,
-        0.7682212795973757
+        0,
+        1
       ],
       "up": [
         0,
-        0.7682212795973757,
-        0.6401843996644798
+        1,
+        0
       ],
-      "width": 104,
+      "width": 100,
       "height": 7,
       "mode": "engrave",
       "depth": 0.8,

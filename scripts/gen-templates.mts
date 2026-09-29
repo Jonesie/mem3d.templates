@@ -182,29 +182,61 @@ const templates: Tpl[] = [
     id: 'desk-wedge',
     name: 'Desk Name Plate',
     tags: ['name plate', 'desk'],
-    notes: 'Print as placed with the flat base down, no supports — the 40° slope is self-supporting. The text sits on the slope, so nothing overhangs.',
+    notes: 'Three prints, no glue. Print the face plate flat, text up, no supports — it is the whole reason this is split, so the name and title get a flat, crisp surface. The two triangular ends are laid on their outer faces (slot side up), so the slot is open to the top. The lip over the slot is a 40° overhang, so print with supports there or a slightly slow bridge. Assemble by sliding the plate down into the slots from the top edge until it stops on the bottom of the slots; it sits ~1 mm below the ends\' slope, held by a lip over each edge, and the two ends and plate lock into one rigid wedge at 40°. Snug fit — lift it back out the same way to swap the text.',
+    parts: [
+      { id: 'ends', label: 'Ends', colour: 0 },
+      { id: 'plate', label: 'Face Plate', colour: 1 },
+    ],
     colours: ['#222226', '#d4a017'],
-    // Triangular prism 120 long (X), 30 deep (Y), 25 tall: the sloped face
-    // leans back at ~40°. Text goes on the slope — a non-axis-aligned zone.
+    // Assembled it is still a triangular wedge 120 long (X), 30 deep (Y), 25
+    // tall, its face leaning back at ~40°, but as two 8 mm triangular ends
+    // and a separate plate that slides into a slot in each. Authored in print
+    // layout (as headstone-classic is): the plate flat, the ends on their
+    // inner faces, so the zones are plain +Z faces on the plate.
     build: () => {
-      const profile = CrossSection.ofPolygons([[[0, 0], [30, 0], [30, 25]]]) // YZ profile
-      return Manifold.extrude(profile, 120).rotate(0, 0, 0).rotate(90, 0, 90).translate(-60, -15, 0)
-    },
-    zones: (() => {
-      // Sloped face passes through (y=-15, z=0) and (y=15, z=25) in world.
       const dy = 30, dz = 25, len = Math.hypot(dy, dz)
-      const normal: Vec3 = [0, -dz / len, dy / len]
-      const up: Vec3 = [0, dy / len, dz / len]
-      // Two zones stacked on the slope: name (upper ~60%) and a title line.
-      // Points along the slope: t=0 at the bottom edge, 1 at the top.
-      const at = (t: number): Vec3 => [0, -15 + dy * t, dz * t]
-      return [
-        { id: 'name', label: 'Name', colour: 1, origin: at(0.62), normal, up,
-          width: 104, height: 17, mode: 'emboss', depth: 1.5, maxLines: 1, default: 'Peter Jones' },
-        { id: 'title', label: 'Title', colour: 1, origin: at(0.24), normal, up,
-          width: 104, height: 7, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'Executive VP of Printing' },
-      ] as Zone[]
-    })(),
+      const END_T = 8, END_X = 52 // ends span |x| in [52, 60]; plate spans between
+      const SLOT_D = 2            // how far the plate seats into each end
+      const LIP = 1, PLATE_T = 3, CLEAR = 0.3
+      const profile = CrossSection.ofPolygons([[[0, 0], [30, 0], [30, 25]]]) // YZ profile
+      const end = (x0: number) => Manifold.extrude(profile, END_T).rotate(90, 0, 90).translate(x0, -15, 0)
+
+      // Slope frame: local x = world x, local y runs up the slope, local z
+      // is the slope's outward normal, origin at the slope's bottom edge.
+      const u: Vec3 = [0, dy / len, dz / len]
+      const nrm: Vec3 = [0, -dz / len, dy / len]
+      const toWorld = (m: M) => m.transform([1, 0, 0, 0, ...u, 0, ...nrm, 0, 0, -15, 0, 1])
+      const box = (x0: number, x1: number, s0: number, s1: number, n0: number, n1: number) =>
+        toWorld(Manifold.cube([x1 - x0, s1 - s0, n1 - n0], false).translate(x0, s0, n0))
+
+      // Slot: closed at the bottom, open at the top edge (plate slides down
+      // into it), a LIP thick over the plate's edges to hold it in.
+      const slotN0 = -(LIP + CLEAR + PLATE_T + CLEAR), slotN1 = -LIP
+      const slotL = box(-END_X - SLOT_D, -END_X + 1, 2, len + 5, slotN0, slotN1)
+      const slotR = box(END_X - 1, END_X + SLOT_D, 2, len + 5, slotN0, slotN1)
+      const endL = end(-END_X - END_T).subtract(slotL)
+      const endR = end(END_X).subtract(slotR)
+
+      // Lay each end on its outer face (slot up), side by side behind the plate.
+      const lay = (m: M, angle: number, cx: number) => {
+        const r = m.rotate(0, angle, 0)
+        const bb = r.boundingBox()
+        return r.translate(cx - (bb.min[0] + bb.max[0]) / 2, 30, -bb.min[2])
+      }
+      const ends = Manifold.union(lay(endL, -90, -20), lay(endR, 90, 20))
+
+      // Plate: fits between the ends plus SLOT_D at each side, less clearance.
+      const plateW = 2 * (END_X + SLOT_D) - 2 * CLEAR
+      const plateL = len - 2 - CLEAR - 3.5
+      const plate = Manifold.cube([plateW, plateL, PLATE_T], false).translate(-plateW / 2, -35 - plateL / 2, 0)
+      return { ends, plate }
+    },
+    zones: [
+      { id: 'name', label: 'Name', part: 'plate', origin: [0, -30, 3], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 100, height: 15, mode: 'emboss', depth: 1.5, maxLines: 1, default: 'Peter Jones' },
+      { id: 'title', label: 'Title', part: 'plate', origin: [0, -44.5, 3], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 100, height: 7, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'Executive VP of Printing' },
+    ],
   },
   {
     id: 'statue-trump',
@@ -1171,7 +1203,7 @@ const templates: Tpl[] = [
         zones: [icon(-20, 0, 10, 'moon'), tz('line1', 'Line 1', 6, 3, 36, 10, 'DREAM'), tz('line2', 'Line 2', 4, -7, 40, 6, 'big')],
       },
     ]
-    const notes = 'Print face up with supports OFF: the magnet pockets on the back are bridged over, and supports would fill them. Glue a Ø6 × 2 mm disc magnet into each pocket afterwards.'
+    const notes = 'Print face up with supports OFF: the magnet pockets on the back are bridged over, and supports would fill them. Glue a Ø6 × 2 mm disc magnet into each pocket afterwards. For a smoother top, set Ironing to "Top surface" in your slicer.'
     return list.map((t) => ({ ...t, notes }))
   })(),
 ]
