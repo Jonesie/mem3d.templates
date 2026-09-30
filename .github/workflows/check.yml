@@ -1,0 +1,23 @@
+name: Check templates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # gen-templates.mts throws if any solid has a non-NoError Manifold
+      # status or a part has no solid, so a failure here is a broken mesh.
+      - run: npm run gen
+      # Committed templates/ must match what the generator produces.
+      - name: Check generated templates are committed
+        run: git diff --exit-code -- templates && test -z "$(git ls-files --others --exclude-standard templates)"
