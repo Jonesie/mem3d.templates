@@ -5,7 +5,9 @@
   "scripts": {
     "gen": "tsx scripts/gen-templates.mts",
     "stl-check": "tsx scripts/stl-check.mts",
-    "sync": "tsx scripts/sync-published.mts"
+    "check-schema": "tsx scripts/check-schema.mts",
+    "verify": "tsx scripts/verify.mts",
+    "sync": "npm run verify && tsx scripts/sync-published.mts"
   },
   "dependencies": {
     "manifold-3d": "^3.5.3",

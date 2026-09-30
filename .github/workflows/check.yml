@@ -18,6 +18,7 @@ jobs:
       # gen-templates.mts throws if any solid has a non-NoError Manifold
       # status or a part has no solid, so a failure here is a broken mesh.
       - run: npm run gen
+      - run: npm run check-schema
       # Every mesh watertight; multi-part templates must not self-intersect.
       - run: npm run stl-check
       # Committed templates/ must match what the generator produces.

@@ -63,6 +63,18 @@ flowchart LR
     D --> E[Final approval<br/>verified, live in the public gallery]
 ```
 
+Checks at each stage:
+
+- **On the PR (public CI):** `npm run gen` (no mesh errors, committed
+  templates match), `npm run check-schema` (`template.json` valid),
+  `npm run stl-check` (meshes watertight, parts don't intersect).
+- **Before publishing (maintainer, local):** check out the PR and run
+  `npm run verify`. It runs the above plus the main mem3d repo's full
+  `stl-check` (default text on every zone, every symbol, stroke
+  printability) against this checkout. Set `MEM3D_REPO` if the main repo
+  isn't at `~/dev/mem3d`. `npm run sync` runs `verify` first and won't
+  publish if it fails.
+
 1. **PR opened.** One template (or one focused fix) per PR, `"published": false`.
 2. **Review.** I read through the PR — geometry, zone placement, notes —
    the same way I'd review any of my own additions, and merge it into
