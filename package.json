@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "gen": "tsx scripts/gen-templates.mts",
+    "stl-check": "tsx scripts/stl-check.mts",
     "sync": "tsx scripts/sync-published.mts"
   },
   "dependencies": {
