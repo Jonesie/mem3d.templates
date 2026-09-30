@@ -840,20 +840,17 @@ const templates: Tpl[] = [
     ],
   },
   {
-    id: 'hinged-box',
-    name: 'Hinged Box',
+    id: 'magnet-box',
+    name: 'Magnetic Box',
     tags: ['box', 'gift', 'storage'],
-    printInPlace: true,
-    notes: 'Both halves print flat with the hinge already assembled — no pins to fit. Work the hinge gently a few times after printing to free it.',
-    // Print-in-place clamshell, after a proven design: two identical 70 × 50
-    // × 17 trays with a 2 mm rim rebate (inner lip on the base, outer lip on
-    // the lid) so they interlock closed. Hinge axis 2 mm below the rim, 1 mm
-    // outside each wall. Two small hinges: base has 3 mm knuckles either
-    // side carrying a Ø2 pin, the lid a single 4.6 mm knuckle (r 2, Ø2.8
-    // hole) between them — 0.4 mm radial / 0.25 mm axial clearance, and the
-    // wall under the other part's knuckle is cut away. Small knuckles and
-    // short pins are what make it print reliably. Crosshatch on the base
-    // sides, text inside the lid.
+    notes: 'Two trays that close over each other, held shut by 2.5 mm round magnets in the four corners of each half — no hinge. Print both halves as placed, no supports. Glue a magnet into each corner recess (8 in all), every one the same way round: keep the same face up in every recess, and since the lid flips over to close, its magnets then meet the base\'s opposite poles and attract. Check with the lid before the glue sets. Flip the lid over onto the base to close it. The lid text is on the outside of the lid, which prints face down on the bed: the engraving is a recess open to the bed, so nothing needs supporting, and with a second colour it prints as a flush inlay.',
+    // Two identical 70 x 50 x 17 trays with a 2 mm rim rebate (inner lip on
+    // the base, outer lip on the lid) so they locate on each other. Each has
+    // a half-round corner post up to the rebate step carrying a Ø3.5 magnet
+    // recess, opening at the mating face (glued in). Set MAG_SKIN > 0 to
+    // leave a thin roof over the magnet instead, for pausing the print to
+    // drop the magnets in and printing over them. Crosshatch on all four
+    // sides of both halves, text on the outside of the lid.
     parts: [
       { id: 'base', label: 'Base', colour: 0 },
       { id: 'lid', label: 'Lid', colour: 1 },
@@ -862,13 +859,11 @@ const templates: Tpl[] = [
     build: () => {
       const W = 70, D = 50, R = 6, WALL = 2, FLOOR = 2.5, H = 17
       const LIP = 2, CHAMFER = 1.2
-      const AZ = H - LIP                 // hinge axis height
-      const AY = D / 2 + 1               // axis 1 mm outside the base's back face
-      const LY = D + 2                   // lid centre: walls 2 mm apart, axis midway
-      const KR = 2, PIN = 1.0, HOLE = 1.4, GAPX = 0.25
-      const HALF = 4.6                   // lid knuckle length
-      const KB = 3                       // base knuckle length
-      const hinges = [-17.5, 17.5]       // hinge centres along x
+      const STEP = H - LIP               // where the two halves meet
+      const LY = D + 2                   // lid sits behind the base, clear of it
+      const MAG_R = 1.75, MAG_DEPTH = 1.5, MAG_SKIN = 0 // Ø3.5 recess for a Ø2.5 magnet
+      const PILLAR_R = 2.8               // half-round post hugging the corner wall
+      const MAG_OFF = 3.7                // magnet centre, from the corner arc's centre toward the corner
 
       const outline = roundedRect(W, D, R)
       const tray = () => {
@@ -879,32 +874,49 @@ const templates: Tpl[] = [
         const body = Manifold.union(bottom, Manifold.extrude(outline, H - CHAMFER).translate(0, 0, CHAMFER))
         return body.subtract(Manifold.extrude(roundedRect(W - 2 * WALL, D - 2 * WALL, R - WALL), H).translate(0, 0, FLOOR))
       }
-      const alongX = (r: number, x0: number, len: number, y: number) =>
-        Manifold.cylinder(len, r, r, 40).rotate(0, 90, 0).translate(x0, y, AZ)
+      // A half-round post in each corner, up to the step, with a magnet
+      // recess opening at its top. It sits against the corner wall (centre
+      // MAG_OFF out from the corner arc's centre along the diagonal) and is
+      // clipped to the outline, so it only bulges into the tray, not out.
+      const corners: [number, number, number, number][] = [[-1, -1], [1, -1], [-1, 1], [1, 1]].map(
+        ([sx, sy]): [number, number, number, number] => [sx * (W / 2 - R), sy * (D / 2 - R), sx, sy])
+      const at = ([cx, cy, sx, sy]: [number, number, number, number]): XY => [cx + (sx * MAG_OFF) / Math.SQRT2, cy + (sy * MAG_OFF) / Math.SQRT2]
+      const clip = Manifold.extrude(outline, H)
+      const withMagnets = (t: M) => {
+        let out = t
+        for (const c of corners) {
+          const [mx, my] = at(c)
+          out = out.add(Manifold.cylinder(STEP - FLOOR + 0.01, PILLAR_R, PILLAR_R, 40).translate(mx, my, FLOOR - 0.01).intersect(clip))
+        }
+        for (const c of corners) {
+          const [mx, my] = at(c)
+          out = out.subtract(Manifold.cylinder(MAG_DEPTH + 0.01, MAG_R, MAG_R, 32).translate(mx, my, STEP - MAG_SKIN - MAG_DEPTH))
+          if (MAG_SKIN === 0) out = out.subtract(Manifold.cylinder(0.02, MAG_R, MAG_R, 32).translate(mx, my, STEP - 0.01))
+        }
+        return out
+      }
+
+      // The rim (lip) stands 2 mm above the step and would cover the recess
+      // mouth, so cut it away around each corner recess. On the base the lip
+      // is inboard, so cut a generous round. On the lid the lip is the outer
+      // skin: cut only the recess's own width so the skin stays whole on the
+      // outside (no gap in the rim).
+      const clearRim = (m: M, dy: number, r: number) => corners.reduce((out, c) => {
+        const [mx, my] = at(c)
+        return out.subtract(Manifold.cylinder(LIP + 0.02, r, r, 40).translate(mx, my + dy, STEP))
+      }, m)
 
       // Base: inner lip (remove the outer 1.2 mm of the top 2 mm of wall).
-      let base = tray().subtract(
-        Manifold.extrude(outline.subtract(outline.offset(-1.2, 'Round', 2, 24)), LIP + 0.01).translate(0, 0, H - LIP))
+      let base = withMagnets(tray()).subtract(
+        Manifold.extrude(outline.offset(1, 'Round', 2, 32).subtract(outline.offset(-1.2, 'Round', 2, 32)), LIP + 0.01).translate(0, 0, H - LIP))
       // Lid: outer lip (remove the inner 1.2 mm), placed behind the base.
-      let lid = tray().subtract(
+      let lid = withMagnets(tray()).subtract(
         Manifold.extrude(outline.offset(-0.8, 'Round', 2, 24).subtract(outline.offset(-2, 'Round', 2, 24)), LIP + 0.01).translate(0, 0, H - LIP))
         .translate(0, LY, 0)
 
-      for (const hx of hinges) {
-        const lidX0 = hx - HALF / 2
-        // Base: knuckles either side of the lid knuckle, pin through the middle.
-        base = base.add(alongX(KR, lidX0 - GAPX - KB, KB, AY)).add(alongX(KR, lidX0 + HALF + GAPX, KB, AY))
-        base = base.add(alongX(PIN, lidX0 - GAPX - KB + 0.5, HALF + 2 * GAPX + KB, AY))
-        // Cut the base wall away under the lid knuckle (with clearance), keep the pin.
-        const slot = Manifold.cube([HALF + 2 * GAPX, 6, 6]).translate(lidX0 - GAPX, AY - 3, AZ - 3)
-        base = base.subtract(slot.subtract(alongX(PIN, lidX0 - GAPX - 1, HALF + 2 * GAPX + 2, AY)))
-        // Lid: one knuckle with a clearance hole; cut its wall away under the base knuckles.
-        lid = lid.add(alongX(KR, lidX0, HALF, AY)).subtract(alongX(HOLE, lidX0 - 1, HALF + 2, AY))
-        for (const x0 of [lidX0 - GAPX - KB - GAPX, lidX0 + HALF + GAPX])
-          lid = lid.subtract(Manifold.cube([KB + GAPX, 6, 6]).translate(x0, AY - 3, AZ - 3))
-      }
-
-      // Crosshatch grooves on the base's front and sides, below the lip.
+      // Crosshatch grooves on all four sides of both halves, below the lip.
+      // Same heights on both: the lid is flipped when closed, so the
+      // patterns line up around the box.
       const hatch = (len: number, height: number) => {
         const bars: CrossSection[] = []
         for (let d = -len - height; d <= len + height; d += 5) {
@@ -913,19 +925,31 @@ const templates: Tpl[] = [
         }
         return Manifold.extrude(CrossSection.union(bars).intersect(roundedRect(len, height, 1)), 0.7)
       }
-      const zc = (CHAMFER + AZ) / 2, hh = AZ - CHAMFER - 2
+      const zc = (CHAMFER + STEP) / 2, hh = STEP - CHAMFER - 2
       const front = hatch(56, hh).rotate(90, 0, 0).translate(0, -D / 2 + 0.7, zc)
+      const back = hatch(56, hh).rotate(-90, 0, 0).translate(0, D / 2 - 0.7, zc)
       const side = (sx: number) => hatch(36, hh).rotate(90, 0, 0).rotate(0, 0, sx * 90).translate(sx * (W / 2 - 0.7), 0, zc)
-      base = base.subtract(front).subtract(side(-1)).subtract(side(1))
+      const cut = (m: M, dy: number) =>
+        m.subtract(front.translate(0, dy, 0)).subtract(back.translate(0, dy, 0))
+          .subtract(side(-1).translate(0, dy, 0)).subtract(side(1).translate(0, dy, 0))
+      base = clearRim(cut(base, 0), 0, MAG_R + 0.6)
+      lid = clearRim(cut(lid, LY), LY, MAG_R + 0.05)
       return { base, lid }
     },
     zones: [
-      { id: 'line1', label: 'Lid line 1', part: 'lid', colour: 2, origin: [-9, 57.5, 2.5], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 44, height: 11, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'For Mum' },
-      { id: 'line2', label: 'Lid line 2', part: 'lid', colour: 2, origin: [-9, 46.5, 2.5], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 44, height: 7, mode: 'engrave', depth: 0.8, maxLines: 2, default: 'with love, 2026' },
-      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'lid', colour: 2, origin: [23, 52, 2.5], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 13, height: 13, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'heart' },
+      // Outside of the lid = its underside as printed (z = 0, on the bed), so
+      // the zones face -Z. "Up" points toward -y so the text reads correctly
+      // once the lid is flipped over the x axis and closed.
+      // Rounded Fredoka rather than the default Cinzel: Cinzel's hairline
+      // serifs are thinner than a nozzle, so on the bed face (first layers,
+      // slightly squished) the inlay came out fuzzy. 1 mm deep keeps the inlay
+      // a solid 5 layers.
+      { id: 'line1', label: 'Lid line 1', part: 'lid', colour: 2, origin: [-8, 46.5, 0], normal: [0, 0, -1], up: [0, -1, 0],
+        width: 46, height: 12, mode: 'engrave', depth: 1, maxLines: 1, default: 'For Mum', font: 'Fredoka' },
+      { id: 'line2', label: 'Lid line 2', part: 'lid', colour: 2, origin: [-8, 57.5, 0], normal: [0, 0, -1], up: [0, -1, 0],
+        width: 46, height: 8, mode: 'engrave', depth: 1, maxLines: 2, default: 'with love, 2026', font: 'Fredoka' },
+      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'lid', colour: 2, origin: [23, 52, 0], normal: [0, 0, -1], up: [0, -1, 0],
+        width: 13, height: 13, mode: 'engrave', depth: 1, maxLines: 1, default: 'heart' },
     ],
   },
   {

@@ -1,6 +1,6 @@
 {
-  "id": "hinged-box",
-  "name": "Hinged Box",
+  "id": "magnet-box",
+  "name": "Magnetic Box",
   "units": "mm",
   "tags": [
     "box",
@@ -27,8 +27,7 @@
     "#d4a017",
     "#f4f4f0"
   ],
-  "notes": "Both halves print flat with the hinge already assembled — no pins to fit. Work the hinge gently a few times after printing to free it.",
-  "printInPlace": true,
+  "notes": "Two trays that close over each other, held shut by 2.5 mm round magnets in the four corners of each half — no hinge. Print both halves as placed, no supports. Glue a magnet into each corner recess (8 in all), every one the same way round: keep the same face up in every recess, and since the lid flips over to close, its magnets then meet the base's opposite poles and attract. Check with the lid before the glue sets. Flip the lid over onto the base to close it. The lid text is on the outside of the lid, which prints face down on the bed: the engraving is a recess open to the bed, so nothing needs supporting, and with a second colour it prints as a flush inlay.",
   "zones": [
     {
       "id": "line1",
@@ -36,26 +35,27 @@
       "part": "lid",
       "colour": 2,
       "origin": [
-        -9,
-        57.5,
-        2.5
+        -8,
+        46.5,
+        0
       ],
       "normal": [
         0,
         0,
-        1
+        -1
       ],
       "up": [
         0,
-        1,
+        -1,
         0
       ],
-      "width": 44,
-      "height": 11,
+      "width": 46,
+      "height": 12,
       "mode": "engrave",
-      "depth": 0.8,
+      "depth": 1,
       "maxLines": 1,
-      "default": "For Mum"
+      "default": "For Mum",
+      "font": "Fredoka"
     },
     {
       "id": "line2",
@@ -63,26 +63,27 @@
       "part": "lid",
       "colour": 2,
       "origin": [
-        -9,
-        46.5,
-        2.5
+        -8,
+        57.5,
+        0
       ],
       "normal": [
         0,
         0,
-        1
+        -1
       ],
       "up": [
         0,
-        1,
+        -1,
         0
       ],
-      "width": 44,
-      "height": 7,
+      "width": 46,
+      "height": 8,
       "mode": "engrave",
-      "depth": 0.8,
+      "depth": 1,
       "maxLines": 2,
-      "default": "with love, 2026"
+      "default": "with love, 2026",
+      "font": "Fredoka"
     },
     {
       "id": "icon",
@@ -93,22 +94,22 @@
       "origin": [
         23,
         52,
-        2.5
+        0
       ],
       "normal": [
         0,
         0,
-        1
+        -1
       ],
       "up": [
         0,
-        1,
+        -1,
         0
       ],
       "width": 13,
       "height": 13,
       "mode": "engrave",
-      "depth": 0.8,
+      "depth": 1,
       "maxLines": 1,
       "default": "heart"
     }
