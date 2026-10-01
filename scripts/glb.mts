@@ -1,8 +1,14 @@
 import { readFileSync } from 'node:fs'
 import type { TriMesh } from '../src/geom/csg'
 
+/** Licence / provenance stamped into the GLB's `asset` block. */
+export interface GlbMeta {
+  copyright: string
+  extras: Record<string, string>
+}
+
 /** Minimal binary glTF writer: one mesh, positions + uint32 indices, mm units. */
-export function writeGlb(positions: Float32Array, indices: Uint32Array): Uint8Array {
+export function writeGlb(positions: Float32Array, indices: Uint32Array, meta?: GlbMeta): Uint8Array {
   const pad4 = (n: number) => (n + 3) & ~3
   const posBytes = positions.byteLength
   const idxBytes = indices.byteLength
@@ -16,7 +22,7 @@ export function writeGlb(positions: Float32Array, indices: Uint32Array): Uint8Ar
     }
 
   const json = {
-    asset: { version: '2.0', generator: 'mem3d' },
+    asset: { version: '2.0', generator: 'mem3d', ...meta },
     scene: 0,
     scenes: [{ nodes: [0] }],
     nodes: [{ mesh: 0 }],
@@ -60,4 +66,11 @@ export function readGlb(path: string): TriMesh {
     positions: new Float32Array(b.buffer.slice(bin + p.byteOffset, bin + p.byteOffset + p.byteLength)),
     indices: new Uint32Array(b.buffer.slice(bin + x.byteOffset, bin + x.byteOffset + x.byteLength)),
   }
+}
+
+/** Read the `asset` block of a GLB's JSON chunk. */
+export function readGlbAsset(path: string): Record<string, any> {
+  const b = readFileSync(path)
+  const jsonLen = b.readUInt32LE(12)
+  return JSON.parse(b.subarray(20, 20 + jsonLen).toString()).asset ?? {}
 }

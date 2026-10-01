@@ -168,7 +168,7 @@ def export(doc, out_root, tid, name, author, tags, draft, deflection, colours=()
         log("mesh %s: %d vertices, %d triangles" % (p["id"], len(pts), len(facets)))
         p["mesh"] = "%s.glb" % p["id"] if multi else "mesh.glb"
         with open(os.path.join(out_dir, p["mesh"]), "wb") as f:
-            f.write(write_glb(pts, facets))
+            f.write(write_glb(pts, facets, tid, author))
 
     tpl = {"id": tid, "name": name, "units": "mm", "tags": tags, "author": author}
     if multi:
@@ -265,7 +265,7 @@ def r3(v):
     return [round(v.x, 3), round(v.y, 3), round(v.z, 3)]
 
 
-def write_glb(points, facets):
+def write_glb(points, facets, tid="", author=""):
     """Minimal binary glTF: one mesh, float32 positions + uint32 indices."""
     pos = struct.pack("<%df" % (len(points) * 3), *[c for p in points for c in (p.x, p.y, p.z)])
     idx = struct.pack("<%dI" % (len(facets) * 3), *[i for f in facets for i in f])
@@ -274,7 +274,12 @@ def write_glb(points, facets):
     mn = [min(p.x for p in points), min(p.y for p in points), min(p.z for p in points)]
     mx = [max(p.x for p in points), max(p.y for p in points), max(p.z for p in points)]
     gltf = {
-        "asset": {"version": "2.0", "generator": "mem3d freecad_export_template"},
+        "asset": {
+            "version": "2.0", "generator": "mem3d freecad_export_template",
+            "copyright": "\u00a9 %s. CC-BY-NC-SA-4.0 (noncommercial, share-alike) \u2014 https://creativecommons.org/licenses/by-nc-sa/4.0/" % author,
+            "extras": {"license": "CC-BY-NC-SA-4.0", "author": author,
+                       "source": "https://github.com/Jonesie/mem3d.templates/tree/main/templates/%s" % tid},
+        },
         "scene": 0, "scenes": [{"nodes": [0]}], "nodes": [{"mesh": 0}],
         "meshes": [{"primitives": [{"attributes": {"POSITION": 0}, "indices": 1}]}],
         "accessors": [

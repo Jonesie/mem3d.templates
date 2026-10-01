@@ -3,6 +3,7 @@
 // Cheap and dependency-free, so it runs in public CI on every PR.
 // Exits non-zero on any error. Run: npm run check-schema
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { readGlbAsset } from './glb.mts'
 
 const templatesDir = process.env.MEM3D_TEMPLATES_DIR ?? 'templates'
 const hex = /^#[0-9a-fA-F]{6}$/
@@ -45,6 +46,16 @@ function check(id: string): string[] {
       if (!isStr(p.mesh) || !existsSync(`${dir}/${p.mesh}`)) errs.push(`part ${p.id}: mesh file "${p.mesh}" not found`)
     }
   } else if (!isStr(t.mesh) || !existsSync(`${dir}/${t.mesh}`)) errs.push(`mesh file "${t.mesh}" not found`)
+
+  // Every mesh must carry licence metadata (glTF asset.copyright + extras.license).
+  const meshFiles = Array.isArray(t.parts) ? t.parts.map((p: any) => p?.mesh) : [t.mesh]
+  for (const f of meshFiles) {
+    if (!isStr(f) || !existsSync(`${dir}/${f}`)) continue
+    try {
+      const a = readGlbAsset(`${dir}/${f}`)
+      if (!isStr(a.copyright) || !isStr(a.extras?.license)) errs.push(`${f}: GLB asset missing copyright/extras.license (re-run gen-templates)`)
+    } catch (e) { errs.push(`${f}: unreadable GLB: ${(e as Error).message}`) }
+  }
 
   // Zones
   if (!Array.isArray(t.zones)) return [...errs, 'zones must be an array']

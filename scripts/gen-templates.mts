@@ -46,6 +46,10 @@ interface Tpl {
 
 /** GitHub username used for templates with no explicit `author`. */
 const DEFAULT_AUTHOR = 'Jonesie'
+const AUTHOR_FULL = 'Peter Jones (Jonesie)'
+const LICENSE_ID = 'CC-BY-NC-SA-4.0'
+const LICENSE_URL = 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+const REPO_URL = 'https://github.com/Jonesie/mem3d.templates'
 
 const roundedRect = (w: number, h: number, r: number) =>
   CrossSection.square([w - 2 * r, h - 2 * r], true).offset(r, 'Round', 2, 32)
@@ -1245,7 +1249,10 @@ for (const t of templates) {
     const positions = new Float32Array(mesh.numVert * 3)
     for (let i = 0; i < mesh.numVert; i++)
       for (let k = 0; k < 3; k++) positions[i * 3 + k] = mesh.vertProperties[i * mesh.numProp + k]
-    writeFileSync(`${dir}/${pid}.glb`, writeGlb(positions, new Uint32Array(mesh.triVerts)))
+    writeFileSync(`${dir}/${pid}.glb`, writeGlb(positions, new Uint32Array(mesh.triVerts), {
+      copyright: `© ${AUTHOR_FULL}. ${LICENSE_ID} (noncommercial, share-alike) — ${LICENSE_URL}`,
+      extras: { license: LICENSE_ID, author: t.author ? t.author : AUTHOR_FULL, source: `${REPO_URL}/tree/main/templates/${t.id}` },
+    }))
     tris += mesh.numTri
   }
   const json: Record<string, unknown> = { id: t.id, name: t.name, units: 'mm', tags: t.tags, author: t.author ?? DEFAULT_AUTHOR }
