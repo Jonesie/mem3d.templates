@@ -1128,8 +1128,8 @@ const templates: Tpl[] = [
     const zTop = T
     const roundCorners = (c: CrossSection, r: number) => c.offset(-r, 'Round', 2, 24).offset(r, 'Round', 2, 24)
     const softenAll = (c: CrossSection, r: number) => roundCorners(c, r).offset(r, 'Round', 2, 24).offset(-r, 'Round', 2, 24)
-    const magnet = (profile: CrossSection, pockets: [number, number][] = [[0, 0]]) =>
-      Manifold.extrude(profile, T).subtract(Manifold.union(
+    const magnet = (profile: CrossSection, pockets: [number, number][] = [[0, 0]], thick = T) =>
+      Manifold.extrude(profile, thick).subtract(Manifold.union(
         pockets.map(([x, y]) => Manifold.cylinder(2.01, 3.1, 3.1, 48).translate(x, y, -0.01))))
     const tz = (id: string, label: string, x: number, y: number, w: number, h: number, text: string, lines = 1, extra: Partial<Zone> = {}): Zone => ({
       id, label, colour: 1, origin: [x, y, zTop], normal: [0, 0, 1], up: [0, 1, 0],
@@ -1190,9 +1190,12 @@ const templates: Tpl[] = [
           for (let i = 0; i < 4; i++) windows.push(roundedRect(11, 9, 1.5).translate(-32 + i * 14, 25))
           const front = roundedRect(11, 9, 1.5).translate(38, 25)
           const wheels = CrossSection.union(circ(6.5, -30, 4), circ(6.5, 30, 4))
-          return magnet(body.subtract(CrossSection.union([...windows, front])).add(wheels), [[-25, 15], [25, 15]])
+          // 4 mm plate: the side text overlaps the magnet pockets, so the
+          // roof over them must stay well thicker than the 0.8 mm engraving
+          // (at 3 mm the inlay was left on a 0.2 mm skin and fell off).
+          return magnet(body.subtract(CrossSection.union([...windows, front])).add(wheels), [[-25, 15], [25, 15]], 4)
         },
-        zones: [tz('line1', 'Side', 0, 13, 72, 7, 'SCHOOL BUS'), tz('line2', 'Lower', 0, 6, 40, 4.5, 'route 66'), icon(24, 25, 9, 'sun')],
+        zones: [tz('line1', 'Side', 0, 13, 72, 7, 'SCHOOL BUS', 1, { origin: [0, 13, 4] }), tz('line2', 'Lower', 0, 6, 40, 4.5, 'route 66', 1, { origin: [0, 6, 4] }), icon(24, 25, 9, 'sun', { origin: [24, 25, 4] })],
       },
       {
         id: 'magnet-truck', name: 'Truck Magnet', tags: [...tags, 'vehicle', 'truck'], colours: ['#2c3e50', '#f4f4f0'],
@@ -1202,9 +1205,9 @@ const templates: Tpl[] = [
           const window = roundCorners(poly([[30, 16], [42, 16], [39.5, 26], [30, 26]]), 1.5)
           const wheels = CrossSection.union([circ(6, -34, 4), circ(6, -18, 4), circ(6, 34, 4)])
           const coupling = rect(10, 8, 19, 10) // bridges the 2 mm gap between trailer and cab
-          return magnet(trailer.add(cab.subtract(window)).add(wheels).add(coupling), [[-30, 21], [2, 21], [32, 10]])
+          return magnet(trailer.add(cab.subtract(window)).add(wheels).add(coupling), [[-30, 21], [2, 21], [32, 10]], 4) // 4 mm: text/icon overlap the pockets, see the bus
         },
-        zones: [tz('line1', 'Trailer', -14, 24, 56, 13, 'HAULAGE'), tz('line2', 'Trailer small', -14, 12, 56, 6, 'we deliver'), icon(28, 12, 8, 'anchor')],
+        zones: [tz('line1', 'Trailer', -14, 24, 56, 13, 'HAULAGE', 1, { origin: [-14, 24, 4] }), tz('line2', 'Trailer small', -14, 12, 56, 6, 'we deliver', 1, { origin: [-14, 12, 4] }), icon(28, 12, 8, 'anchor', { origin: [28, 12, 4] })],
       },
       {
         id: 'magnet-house', name: 'House Magnet', tags: [...tags, 'home'], colours: ['#e67e22', '#f4f4f0'],
@@ -1212,9 +1215,9 @@ const templates: Tpl[] = [
           const walls = rect(56, 36, 0, 18)
           const roof = roundCorners(poly([[-34, 34], [34, 34], [0, 60]]), 3)
           const windows = CrossSection.union(roundedRect(11, 10, 1.5).translate(-16, 25), roundedRect(11, 10, 1.5).translate(16, 25))
-          return magnet(walls.add(roof).subtract(windows), [[-16, 10], [16, 10]])
+          return magnet(walls.add(roof).subtract(windows), [[-16, 10], [16, 10]], 4) // 4 mm: the wall text overlaps the pockets, see the bus
         },
-        zones: [tz('line1', 'Roof', 0, 42, 30, 8, 'THE JONESES'), tz('line2', 'Wall', 0, 8, 48, 9, 'est. 1999'), icon(0, 25, 9, 'house')],
+        zones: [tz('line1', 'Roof', 0, 42, 30, 8, 'THE JONESES', 1, { origin: [0, 42, 4] }), tz('line2', 'Wall', 0, 8, 48, 9, 'est. 1999', 1, { origin: [0, 8, 4] }), icon(0, 25, 9, 'house', { origin: [0, 25, 4] })],
       },
       {
         id: 'magnet-star', name: 'Star Magnet', tags: [...tags, 'shape'], colours: ['#d4a017', '#222226'],
