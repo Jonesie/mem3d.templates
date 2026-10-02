@@ -962,10 +962,10 @@ const templates: Tpl[] = [
     id: 'lunch-box',
     name: 'Lunch Box',
     tags: ['lunch', 'box', 'school', 'storage'],
-    notes: 'A 170 x 115 x 50 mm lunch box with a divider wall and a friction-fit lid — no hinge, no hardware. Print both parts as placed, no supports. The lid prints upside down (outside face on the bed, plug lip pointing up), so the name and adornment are engraved recesses open to the bed: nothing to support, and with a second colour they print as flush inlays. The lid plug has 0.25 mm clearance to the box walls; if yours is too tight or too loose, scale the lid by a percent either way. Food safety: best for dry, cold food (sandwiches, fruit, crackers, snacks) — it is not watertight and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup. Print in PETG (PLA softens in a hot car or dishwasher); look for a filament that states it is food-contact safe, and use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead. Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.',
-    // Base: rounded tray with a divider 55 mm in from the left, 3 mm short
-    // of the rim so the lid plug clears it. Lid: 2.5 mm plate plus a plug
-    // lip that drops 6 mm inside the base walls, placed behind the base.
+    notes: 'A 170 x 115 x 50 mm lunch box with a divider wall and a friction-fit lid — no hinge, no hardware. Print both parts as placed, no supports. The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it as part of the same object, so there is nothing to swap or paint. Underneath is a solid plug that drops inside the box walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support; the chamfer seats on the box rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way. Food safety: best for dry, cold food (sandwiches, fruit, crackers, snacks) — it is not watertight and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup. Print in PETG (PLA softens in a hot car or dishwasher); look for a filament that states it is food-contact safe, and use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead. Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.',
+    // Base: rounded tray with a divider 30 mm left of centre, 5 mm short of
+    // the rim so the lid plug clears it. Lid: solid plug, 45 degree chamfer
+    // and a thin flange, printed face up, placed behind the base.
     parts: [
       { id: 'base', label: 'Box', colour: 0 },
       { id: 'lid', label: 'Lid', colour: 0 },
@@ -973,39 +973,46 @@ const templates: Tpl[] = [
     colours: ['#2980b9', '#f4f4f0'],
     build: () => {
       const W = 170, D = 115, R = 12, WALL = 2.4, FLOOR = 2.4, H = 50
-      const PLATE = 2.5, LIP_H = 6, LIP_T = 1.6, CLEAR = 0.25
+      const PLUG_H = 3.5, CLEAR = 0.25
       const DIV_X = -30, DIV_T = 2
       const LY = D + 10                  // lid sits behind the base, clear of it
       const outline = roundedRect(W, D, R)
       const inner = roundedRect(W - 2 * WALL, D - 2 * WALL, R - WALL)
       const base = Manifold.extrude(outline, H)
         .subtract(Manifold.extrude(inner, H).translate(0, 0, FLOOR))
-        .add(Manifold.cube([DIV_T, D - WALL, H - 3], false).translate(DIV_X - DIV_T / 2, -(D - WALL) / 2, 0))
-      // Lid, flipped: plate at z = 0..PLATE (outside face on the bed), plug above.
+        .add(Manifold.cube([DIV_T, D - WALL, H - 5], false).translate(DIV_X - DIV_T / 2, -(D - WALL) / 2, 0))
+      // Lid, printed face up: a solid plug that drops inside the walls, a 45 deg chamfer
+      // out to the box's outline (so the overhang needs no supports and the lid
+      // self-centres on the rim), then a thin flange carrying the embossed text.
       const plug = inner.offset(-CLEAR, 'Round', 2, 32)
-      const ring = plug.subtract(plug.offset(-LIP_T, 'Round', 2, 32))
-      const lid = Manifold.extrude(outline, PLATE)
-        .add(Manifold.extrude(ring, LIP_H).translate(0, 0, PLATE))
-        .translate(0, LY, 0)
+      const CHAMFER = WALL + CLEAR, FLANGE = 1.5
+      const lid = Manifold.union([
+        Manifold.extrude(plug, PLUG_H + 0.01),
+        Manifold.hull([
+          Manifold.extrude(plug, 0.01).translate(0, 0, PLUG_H),
+          Manifold.extrude(outline, 0.01).translate(0, 0, PLUG_H + CHAMFER),
+        ]),
+        Manifold.extrude(outline, FLANGE).translate(0, 0, PLUG_H + CHAMFER),
+      ]).translate(0, LY, 0)
       return { base, lid }
     },
     zones: [
-      // Lid is centred at y = 125 (D + 10). Outside of the lid = its underside as printed (z = 0), so the zones
-      // face -Z with "up" toward -y, as on the magnetic box. Fredoka for the
-      // same reason: hairline serifs are thinner than a nozzle on the bed face.
-      { id: 'line1', label: 'Name', part: 'lid', colour: 1, origin: [-20, 111, 0], normal: [0, 0, -1], up: [0, -1, 0],
-        width: 100, height: 30, mode: 'engrave', depth: 1, maxLines: 1, default: 'Charlie', font: 'Fredoka' },
-      { id: 'line2', label: 'Subtitle', part: 'lid', colour: 1, origin: [-20, 139, 0], normal: [0, 0, -1], up: [0, -1, 0],
-        width: 100, height: 16, mode: 'engrave', depth: 1, maxLines: 2, default: 'lunch time', font: 'Fredoka' },
-      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'lid', colour: 1, origin: [55, 125, 0], normal: [0, 0, -1], up: [0, -1, 0],
-        width: 40, height: 40, mode: 'engrave', depth: 1, maxLines: 1, default: 'star' },
+      // Lid top face (z = 7.65, face up), centred on y = 125 (D + 10). Embossed 0.8 mm
+      // proud and deliberately no `colour`, so the text is part of the lid object.
+      // Fredoka rather than the default serif so thin strokes stay printable.
+      { id: 'line1', label: 'Name', part: 'lid', origin: [-20, 139, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 100, height: 30, mode: 'emboss', depth: 0.8, maxLines: 1, default: 'Charlie', font: 'Fredoka' },
+      { id: 'line2', label: 'Subtitle', part: 'lid', origin: [-20, 111, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 100, height: 16, mode: 'emboss', depth: 0.8, maxLines: 2, default: 'lunch time', font: 'Fredoka' },
+      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'lid', origin: [55, 125, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 40, height: 40, mode: 'emboss', depth: 0.8, maxLines: 1, default: 'star' },
     ],
   },
   {
     id: 'bento-box',
     name: 'Bento Box',
     tags: ['lunch', 'bento', 'box', 'school', 'storage'],
-    notes: 'A 190 x 120 x 40 mm bento box: a black outer shell and lid with a subtle seigaiha (wave) pattern engraved around the outside, and four removable white inserts — one large compartment on the left and three small ones stacked on the right. Print the shell and lid in black and the inserts in white. Everything prints as placed, no supports. The inserts are shown seated in the shell; each prints on its own (flat on the bed) and drops in with 0.3 mm clearance, standing well below the rim so the lid clears them. The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it (print them in white for a white-on-black lid). Underneath is a solid plug that drops inside the shell walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support; the chamfer seats on the shell rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way. Food safety: best for dry, cold food (sandwiches, fruit, crackers, snacks) — it is not watertight and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup. Print in PETG (PLA softens in a hot car or dishwasher); look for a filament that states it is food-contact safe, and use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead. Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.',
+    notes: 'A 190 x 120 x 40 mm bento box: a black outer shell and lid with a subtle seigaiha (wave) pattern engraved around the outside, and four removable white inserts — one large compartment on the left and three small ones stacked on the right. Print the shell and lid in black and the inserts in white. Everything prints as placed, no supports. The inserts are shown seated in the shell; each prints on its own (flat on the bed) and drops in with 0.3 mm clearance, standing well below the rim so the lid clears them. The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it, as part of the same object, so the text is the same colour as the lid. Underneath is a solid plug that drops inside the shell walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support; the chamfer seats on the shell rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way. Food safety: best for dry, cold food (sandwiches, fruit, crackers, snacks) — it is not watertight and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup. Print in PETG (PLA softens in a hot car or dishwasher); look for a filament that states it is food-contact safe, and use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead. Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.',
     // Shell: plain tray. Inserts: thin-walled open boxes that tile the cavity
     // (large on the left, three small in a column on the right), each
     // clipped to the shell's rounded cavity so the corners nest.
@@ -1091,13 +1098,14 @@ const templates: Tpl[] = [
     },
     zones: [
       // Lid top face (z = 7.65, face up), centred on y = 130 (D + 10). Embossed: it
-      // stands 0.8 mm proud of the flange, in white. Fredoka rather than the default
+      // stands 0.8 mm proud of the flange, with no `colour` so it is part of the lid
+      // object (same black as the lid). Fredoka rather than the default
       // serif so thin strokes stay printable.
-      { id: 'line1', label: 'Name', part: 'lid', colour: 1, origin: [-25, 144, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
+      { id: 'line1', label: 'Name', part: 'lid', origin: [-25, 144, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
         width: 105, height: 30, mode: 'emboss', depth: 0.8, maxLines: 1, default: 'Charlie', font: 'Fredoka' },
-      { id: 'line2', label: 'Subtitle', part: 'lid', colour: 1, origin: [-25, 116, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
+      { id: 'line2', label: 'Subtitle', part: 'lid', origin: [-25, 116, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
         width: 105, height: 16, mode: 'emboss', depth: 0.8, maxLines: 2, default: 'bento time', font: 'Fredoka' },
-      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'lid', colour: 1, origin: [60, 130, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
+      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'lid', origin: [60, 130, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
         width: 40, height: 40, mode: 'emboss', depth: 0.8, maxLines: 1, default: 'star' },
     ],
   },

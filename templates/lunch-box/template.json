@@ -27,32 +27,31 @@
     "#2980b9",
     "#f4f4f0"
   ],
-  "notes": "A 170 x 115 x 50 mm lunch box with a divider wall and a friction-fit lid — no hinge, no hardware. Print both parts as placed, no supports. The lid prints upside down (outside face on the bed, plug lip pointing up), so the name and adornment are engraved recesses open to the bed: nothing to support, and with a second colour they print as flush inlays. The lid plug has 0.25 mm clearance to the box walls; if yours is too tight or too loose, scale the lid by a percent either way. Food safety: best for dry, cold food (sandwiches, fruit, crackers, snacks) — it is not watertight and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup. Print in PETG (PLA softens in a hot car or dishwasher); look for a filament that states it is food-contact safe, and use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead. Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.",
+  "notes": "A 170 x 115 x 50 mm lunch box with a divider wall and a friction-fit lid — no hinge, no hardware. Print both parts as placed, no supports. The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it as part of the same object, so there is nothing to swap or paint. Underneath is a solid plug that drops inside the box walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support; the chamfer seats on the box rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way. Food safety: best for dry, cold food (sandwiches, fruit, crackers, snacks) — it is not watertight and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup. Print in PETG (PLA softens in a hot car or dishwasher); look for a filament that states it is food-contact safe, and use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead. Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.",
   "zones": [
     {
       "id": "line1",
       "label": "Name",
       "part": "lid",
-      "colour": 1,
       "origin": [
         -20,
-        111,
-        0
+        139,
+        7.65
       ],
       "normal": [
         0,
         0,
-        -1
+        1
       ],
       "up": [
         0,
-        -1,
+        1,
         0
       ],
       "width": 100,
       "height": 30,
-      "mode": "engrave",
-      "depth": 1,
+      "mode": "emboss",
+      "depth": 0.8,
       "maxLines": 1,
       "default": "Charlie",
       "font": "Fredoka"
@@ -61,26 +60,25 @@
       "id": "line2",
       "label": "Subtitle",
       "part": "lid",
-      "colour": 1,
       "origin": [
         -20,
-        139,
-        0
+        111,
+        7.65
       ],
       "normal": [
         0,
         0,
-        -1
+        1
       ],
       "up": [
         0,
-        -1,
+        1,
         0
       ],
       "width": 100,
       "height": 16,
-      "mode": "engrave",
-      "depth": 1,
+      "mode": "emboss",
+      "depth": 0.8,
       "maxLines": 2,
       "default": "lunch time",
       "font": "Fredoka"
@@ -90,26 +88,25 @@
       "label": "Adornment",
       "kind": "symbol",
       "part": "lid",
-      "colour": 1,
       "origin": [
         55,
         125,
-        0
+        7.65
       ],
       "normal": [
         0,
         0,
-        -1
+        1
       ],
       "up": [
         0,
-        -1,
+        1,
         0
       ],
       "width": 40,
       "height": 40,
-      "mode": "engrave",
-      "depth": 1,
+      "mode": "emboss",
+      "depth": 0.8,
       "maxLines": 1,
       "default": "star"
     }
