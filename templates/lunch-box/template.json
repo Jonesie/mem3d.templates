@@ -1,0 +1,117 @@
+{
+  "id": "lunch-box",
+  "name": "Lunch Box",
+  "units": "mm",
+  "tags": [
+    "lunch",
+    "box",
+    "school",
+    "storage"
+  ],
+  "author": "Jonesie",
+  "parts": [
+    {
+      "id": "base",
+      "label": "Box",
+      "colour": 0,
+      "mesh": "base.glb"
+    },
+    {
+      "id": "lid",
+      "label": "Lid",
+      "colour": 0,
+      "mesh": "lid.glb"
+    }
+  ],
+  "colours": [
+    "#2980b9",
+    "#f4f4f0"
+  ],
+  "notes": "A 170 x 115 x 50 mm lunch box with a divider wall and a friction-fit lid — no hinge, no hardware. Print both parts as placed, no supports. The lid prints upside down (outside face on the bed, plug lip pointing up), so the name and adornment are engraved recesses open to the bed: nothing to support, and with a second colour they print as flush inlays. The lid plug has 0.25 mm clearance to the box walls; if yours is too tight or too loose, scale the lid by a percent either way. The box is not watertight — it suits sandwiches, fruit and snacks, not soup. Print in PETG or a food-safe filament and hand-wash only; FDM layer lines trap residue, so line the box with baking paper if you want to keep it truly clean.",
+  "zones": [
+    {
+      "id": "line1",
+      "label": "Name",
+      "part": "lid",
+      "colour": 1,
+      "origin": [
+        -20,
+        111,
+        0
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "up": [
+        0,
+        -1,
+        0
+      ],
+      "width": 100,
+      "height": 30,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "Charlie",
+      "font": "Fredoka"
+    },
+    {
+      "id": "line2",
+      "label": "Subtitle",
+      "part": "lid",
+      "colour": 1,
+      "origin": [
+        -20,
+        139,
+        0
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "up": [
+        0,
+        -1,
+        0
+      ],
+      "width": 100,
+      "height": 16,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 2,
+      "default": "lunch time",
+      "font": "Fredoka"
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "part": "lid",
+      "colour": 1,
+      "origin": [
+        55,
+        125,
+        0
+      ],
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "up": [
+        0,
+        -1,
+        0
+      ],
+      "width": 40,
+      "height": 40,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "star"
+    }
+  ]
+}

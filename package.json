@@ -7,7 +7,7 @@
     "stl-check": "tsx scripts/stl-check.mts",
     "check-schema": "tsx scripts/check-schema.mts",
     "verify": "tsx scripts/verify.mts",
-    "sync": "npm run verify && tsx scripts/sync-published.mts"
+    "sync": "tsx scripts/sync-published.mts"
   },
   "dependencies": {
     "manifold-3d": "^3.5.3",

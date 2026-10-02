@@ -1,0 +1,89 @@
+{
+  "id": "toolbox",
+  "name": "Toolbox",
+  "units": "mm",
+  "tags": [
+    "toolbox",
+    "tools",
+    "storage",
+    "workshop"
+  ],
+  "author": "Jonesie",
+  "parts": [
+    {
+      "id": "base",
+      "label": "Box",
+      "colour": 0,
+      "mesh": "base.glb"
+    },
+    {
+      "id": "handle",
+      "label": "Handle",
+      "colour": 1,
+      "mesh": "handle.glb"
+    }
+  ],
+  "colours": [
+    "#c0392b",
+    "#2c3e50"
+  ],
+  "notes": "An open carry-all tray with a tall tent-shaped plate at each end and a long front compartment plus three small ones behind it. The handle is a separate round bar that snaps into a hole at the top of each end plate — no nuts, glue or hardware — and it can swing freely on those two pins, so the box hangs level whichever way you pick it up. Print the box as placed, no supports. Print the handle as placed too, lying on its side: the flat on its underside is the bed contact, and the split pins at each end print with their layers running along them, which is the strong direction. Use PETG or tougher; PLA pins can crack when you snap them in. To fit, push each pin into its hole until the barb clicks through, one end at a time. To remove, squeeze the two halves of a pin together with pliers and pull. The pins carry the full weight of the box, so keep loads reasonable (a few kilos of hand tools is fine, not a bag of bricks). The name and adornment are engraved into the front wall; fill them with a second colour for an inlay.",
+  "zones": [
+    {
+      "id": "line1",
+      "label": "Name",
+      "part": "base",
+      "colour": 1,
+      "origin": [
+        -14,
+        -60,
+        30
+      ],
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "width": 140,
+      "height": 36,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "TOOLS",
+      "font": "Anton"
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "part": "base",
+      "colour": 1,
+      "origin": [
+        72,
+        -60,
+        30
+      ],
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "width": 36,
+      "height": 36,
+      "mode": "engrave",
+      "depth": 1,
+      "maxLines": 1,
+      "default": "wrench"
+    }
+  ]
+}

@@ -42,6 +42,8 @@ interface Tpl {
   notes?: string
   /** Parts must be printed together as placed; STL export is one merged file. */
   printInPlace?: boolean
+  /** Set false to keep the template a draft (not mirrored to the live site). */
+  published?: false
 }
 
 /** GitHub username used for templates with no explicit `author`. */
@@ -957,6 +959,212 @@ const templates: Tpl[] = [
     ],
   },
   {
+    id: 'lunch-box',
+    name: 'Lunch Box',
+    tags: ['lunch', 'box', 'school', 'storage'],
+    notes: 'A 170 x 115 x 50 mm lunch box with a divider wall and a friction-fit lid — no hinge, no hardware. Print both parts as placed, no supports. The lid prints upside down (outside face on the bed, plug lip pointing up), so the name and adornment are engraved recesses open to the bed: nothing to support, and with a second colour they print as flush inlays. The lid plug has 0.25 mm clearance to the box walls; if yours is too tight or too loose, scale the lid by a percent either way. The box is not watertight — it suits sandwiches, fruit and snacks, not soup. Print in PETG or a food-safe filament and hand-wash only; FDM layer lines trap residue, so line the box with baking paper if you want to keep it truly clean.',
+    // Base: rounded tray with a divider 55 mm in from the left, 3 mm short
+    // of the rim so the lid plug clears it. Lid: 2.5 mm plate plus a plug
+    // lip that drops 6 mm inside the base walls, placed behind the base.
+    parts: [
+      { id: 'base', label: 'Box', colour: 0 },
+      { id: 'lid', label: 'Lid', colour: 0 },
+    ],
+    colours: ['#2980b9', '#f4f4f0'],
+    build: () => {
+      const W = 170, D = 115, R = 12, WALL = 2.4, FLOOR = 2.4, H = 50
+      const PLATE = 2.5, LIP_H = 6, LIP_T = 1.6, CLEAR = 0.25
+      const DIV_X = -30, DIV_T = 2
+      const LY = D + 10                  // lid sits behind the base, clear of it
+      const outline = roundedRect(W, D, R)
+      const inner = roundedRect(W - 2 * WALL, D - 2 * WALL, R - WALL)
+      const base = Manifold.extrude(outline, H)
+        .subtract(Manifold.extrude(inner, H).translate(0, 0, FLOOR))
+        .add(Manifold.cube([DIV_T, D - WALL, H - 3], false).translate(DIV_X - DIV_T / 2, -(D - WALL) / 2, 0))
+      // Lid, flipped: plate at z = 0..PLATE (outside face on the bed), plug above.
+      const plug = inner.offset(-CLEAR, 'Round', 2, 32)
+      const ring = plug.subtract(plug.offset(-LIP_T, 'Round', 2, 32))
+      const lid = Manifold.extrude(outline, PLATE)
+        .add(Manifold.extrude(ring, LIP_H).translate(0, 0, PLATE))
+        .translate(0, LY, 0)
+      return { base, lid }
+    },
+    zones: [
+      // Lid is centred at y = 125 (D + 10). Outside of the lid = its underside as printed (z = 0), so the zones
+      // face -Z with "up" toward -y, as on the magnetic box. Fredoka for the
+      // same reason: hairline serifs are thinner than a nozzle on the bed face.
+      { id: 'line1', label: 'Name', part: 'lid', colour: 1, origin: [-20, 111, 0], normal: [0, 0, -1], up: [0, -1, 0],
+        width: 100, height: 30, mode: 'engrave', depth: 1, maxLines: 1, default: 'Charlie', font: 'Fredoka' },
+      { id: 'line2', label: 'Subtitle', part: 'lid', colour: 1, origin: [-20, 139, 0], normal: [0, 0, -1], up: [0, -1, 0],
+        width: 100, height: 16, mode: 'engrave', depth: 1, maxLines: 2, default: 'lunch time', font: 'Fredoka' },
+      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'lid', colour: 1, origin: [55, 125, 0], normal: [0, 0, -1], up: [0, -1, 0],
+        width: 40, height: 40, mode: 'engrave', depth: 1, maxLines: 1, default: 'star' },
+    ],
+  },
+  {
+    id: 'bento-box',
+    name: 'Bento Box',
+    tags: ['lunch', 'bento', 'box', 'school', 'storage'],
+    notes: 'A 190 x 120 x 40 mm bento box: a black outer shell and lid with a subtle seigaiha (wave) pattern engraved around the outside, and four removable white inserts — one large compartment on the left and three small ones stacked on the right. Print the shell and lid in black and the inserts in white. Everything prints as placed, no supports. The inserts are shown seated in the shell; each prints on its own (flat on the bed) and drops in with 0.3 mm clearance, standing well below the rim so the lid clears them. The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it (print them in white for a white-on-black lid). Underneath is a solid plug that drops inside the shell walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support; the chamfer seats on the shell rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way. The box is not watertight — keep wet foods in a silicone cup. Print in PETG or a food-safe filament and hand-wash only; FDM layer lines trap residue.',
+    // Shell: plain tray. Inserts: thin-walled open boxes that tile the cavity
+    // (large on the left, three small in a column on the right), each
+    // clipped to the shell's rounded cavity so the corners nest.
+    parts: [
+      { id: 'shell', label: 'Shell', colour: 0 },
+      { id: 'lid', label: 'Lid', colour: 0 },
+      { id: 'insert-main', label: 'Main compartment', colour: 1 },
+      { id: 'insert-1', label: 'Small compartment 1', colour: 1 },
+      { id: 'insert-2', label: 'Small compartment 2', colour: 1 },
+      { id: 'insert-3', label: 'Small compartment 3', colour: 1 },
+    ],
+    colours: ['#1a1a1a', '#f4f4f0'],
+    build: () => {
+      const W = 190, D = 120, R = 12, WALL = 2.4, FLOOR = 2.4, H = 40
+      const PLUG_H = 3.5, CLEAR = 0.25
+      const INS_WALL = 1.6, INS_FLOOR = 1.6, INS_H = 30, INS_GAP = 0.3, INS_SEAT = 0.1
+      const LY = D + 10
+      const outline = roundedRect(W, D, R)
+      const inner = roundedRect(W - 2 * WALL, D - 2 * WALL, R - WALL)
+      let shell = Manifold.extrude(outline, H).subtract(Manifold.extrude(inner, H).translate(0, 0, FLOOR))
+
+      // Seigaiha (overlapping waves) engraved 0.5 mm into the four outer walls: each
+      // wave is three concentric rings, drawn top row first so the rows below cover
+      // the ones above, which leaves the classic fan of arches. Rows are R/2 apart,
+      // alternate rows shifted by R. Kept inside the straight part of each wall.
+      const WAVE_R = 8, RING_W = 0.7, WAVE_DEPTH = 0.5, BAND_Z0 = 4, BAND_Z1 = H - 4
+      const seigaiha = (len: number, hh: number) => {
+        const centres: XY[] = []
+        for (let j = 0, y = hh / 2 + WAVE_R / 2; y > -hh / 2 - WAVE_R; j++, y -= WAVE_R / 2)
+          for (let x = -len / 2 - WAVE_R * 2 + (j % 2) * WAVE_R; x < len / 2 + WAVE_R * 2; x += WAVE_R * 2) centres.push([x, y])
+        const rings = (r: number) => CrossSection.union([1, 0.72, 0.44].map((k) =>
+          CrossSection.circle(WAVE_R * k, 48).subtract(CrossSection.circle(WAVE_R * k - RING_W, 48))))
+        const unit = rings(WAVE_R)
+        const waves = centres.map(([x, y], i) => {
+          const later = centres.slice(i + 1).filter(([qx, qy]) => Math.hypot(qx - x, qy - y) < 2 * WAVE_R)
+            .map(([qx, qy]) => CrossSection.circle(WAVE_R, 48).translate(qx - x, qy - y))
+          const visible = later.length ? unit.subtract(CrossSection.union(later)) : unit
+          return visible.translate(x, y)
+        })
+        return CrossSection.union(waves).intersect(roundedRect(len, hh, 1))
+      }
+      const bandH = BAND_Z1 - BAND_Z0
+      const onWall = (len: number, rotZ: number, dist: number) =>
+        Manifold.extrude(seigaiha(len, bandH), WAVE_DEPTH + 0.01).rotate(90, 0, 0).translate(0, WAVE_DEPTH, (BAND_Z0 + BAND_Z1) / 2)
+          .translate(0, -dist - 0.01, 0).rotate(0, 0, rotZ)
+      for (const [len, rot, dist] of [[150, 0, D / 2], [150, 180, D / 2], [88, 90, W / 2], [88, -90, W / 2]] as [number, number, number][])
+        shell = shell.subtract(onWall(len, rot, dist))
+      // Lid, printed face up: a solid plug that drops inside the shell walls, a 45 deg
+      // chamfer out to the shell's outline (so the overhang needs no supports and the
+      // lid self-centres on the rim), then a thin flange carrying the embossed text.
+      const plug = inner.offset(-CLEAR, 'Round', 2, 32)
+      const CHAMFER = WALL + CLEAR, FLANGE = 1.5
+      const LID_H = PLUG_H + CHAMFER + FLANGE
+      const lid = Manifold.union([
+        Manifold.extrude(plug, PLUG_H + 0.01),
+        Manifold.hull([
+          Manifold.extrude(plug, 0.01).translate(0, 0, PLUG_H),
+          Manifold.extrude(outline, 0.01).translate(0, 0, PLUG_H + CHAMFER),
+        ]),
+        Manifold.extrude(outline, FLANGE).translate(0, 0, PLUG_H + CHAMFER),
+      ]).translate(0, LY, 0)
+
+      // Insert footprints: cavity shrunk by INS_GAP, cut into a left block and
+      // a right column of three, with INS_GAP * 1.3 between neighbours.
+      const cav = inner.offset(-INS_GAP, 'Round', 2, 32)
+      const cx0 = -(W / 2 - WALL) + INS_GAP, cx1 = -cx0
+      const cy0 = -(D / 2 - WALL) + INS_GAP, cy1 = -cy0
+      const SEP = INS_GAP * 1.3, SPLIT = 18                      // large block ends at x = SPLIT
+      const cell = (x0: number, x1: number, y0: number, y1: number) =>
+        roundedRect(x1 - x0, y1 - y0, 2).translate((x0 + x1) / 2, (y0 + y1) / 2).intersect(cav)
+      const smallH = (cy1 - cy0 - 2 * SEP) / 3
+      const cells = [
+        cell(cx0, SPLIT - SEP / 2, cy0, cy1),
+        ...[0, 1, 2].map((i) => cell(SPLIT + SEP / 2, cx1, cy0 + i * (smallH + SEP), cy0 + i * (smallH + SEP) + smallH)),
+      ]
+      const box = (c: CrossSection) =>
+        Manifold.extrude(c, INS_H).subtract(Manifold.extrude(c.offset(-INS_WALL, 'Round', 2, 24), INS_H).translate(0, 0, INS_FLOOR))
+          .translate(0, 0, FLOOR + INS_SEAT)
+      return {
+        shell, lid,
+        'insert-main': box(cells[0]), 'insert-1': box(cells[1]), 'insert-2': box(cells[2]), 'insert-3': box(cells[3]),
+      }
+    },
+    zones: [
+      // Lid top face (z = 7.65, face up), centred on y = 130 (D + 10). Embossed: it
+      // stands 0.8 mm proud of the flange, in white. Fredoka rather than the default
+      // serif so thin strokes stay printable.
+      { id: 'line1', label: 'Name', part: 'lid', colour: 1, origin: [-25, 144, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 105, height: 30, mode: 'emboss', depth: 0.8, maxLines: 1, default: 'Charlie', font: 'Fredoka' },
+      { id: 'line2', label: 'Subtitle', part: 'lid', colour: 1, origin: [-25, 116, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 105, height: 16, mode: 'emboss', depth: 0.8, maxLines: 2, default: 'bento time', font: 'Fredoka' },
+      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'lid', colour: 1, origin: [60, 130, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 40, height: 40, mode: 'emboss', depth: 0.8, maxLines: 1, default: 'star' },
+    ],
+  },
+  {
+    id: 'toolbox',
+    name: 'Toolbox',
+    tags: ['toolbox', 'tools', 'storage', 'workshop'],
+    notes: 'An open carry-all tray with a tall tent-shaped plate at each end and a long front compartment plus three small ones behind it. The handle is a separate round bar that snaps into a hole at the top of each end plate — no nuts, glue or hardware — and it can swing freely on those two pins, so the box hangs level whichever way you pick it up. Print the box as placed, no supports. Print the handle as placed too, lying on its side: the flat on its underside is the bed contact, and the split pins at each end print with their layers running along them, which is the strong direction. Use PETG or tougher; PLA pins can crack when you snap them in. To fit, push each pin into its hole until the barb clicks through, one end at a time. To remove, squeeze the two halves of a pin together with pliers and pull. The pins carry the full weight of the box, so keep loads reasonable (a few kilos of hand tools is fine, not a bag of bricks). The name and adornment are engraved into the front wall; fill them with a second colour for an inlay.',
+    parts: [
+      { id: 'base', label: 'Box', colour: 0 },
+      { id: 'handle', label: 'Handle', colour: 1 },
+    ],
+    colours: ['#c0392b', '#2c3e50'],
+    build: () => {
+      const X = 200, Y = 120, R = 6, WALL = 3, FLOOR = 3, WALL_H = 60, DIV_H = 50, DIV_T = 2.4
+      const PLATE = 3, HZ = 130, TOP_R = 22, HOLE_R = 4.7  // pivot height above the floor, hole radius
+      const outline = roundedRect(X, Y, R)
+      const inner = roundedRect(X - 2 * WALL, Y - 2 * WALL, R - WALL)
+      let base = Manifold.extrude(outline, WALL_H).subtract(Manifold.extrude(inner, WALL_H).translate(0, 0, FLOOR))
+
+      // End plate: the wall footprint (Y x WALL_H) tapering by a tangent hull to a round top
+      // carrying the pivot hole. Drawn in (y, z), extruded along x.
+      const tent = CrossSection.hull([CrossSection.square([Y, WALL_H], false).translate(-Y / 2, 0), CrossSection.circle(TOP_R, 48).translate(0, HZ)])
+      const plate = (sx: number) => Manifold.extrude(tent, PLATE).rotate(90, 0, 90).translate(sx > 0 ? X / 2 - PLATE : -X / 2, 0, 0)
+      base = base.add(plate(1)).add(plate(-1))
+      // Pivot holes, clear through each plate.
+      const hole = Manifold.cylinder(PLATE + 2, HOLE_R, HOLE_R, 32).rotate(0, 90, 0)
+      base = base.subtract(hole.translate(X / 2 - PLATE - 1, 0, HZ)).subtract(hole.translate(-X / 2 - 1, 0, HZ))
+
+      // Dividers: one long wall parallel to the front, three small bays behind it.
+      const DIV_Y = -12
+      const innerLen = X - 2 * WALL
+      base = base.add(Manifold.cube([innerLen + 0.02, DIV_T, DIV_H], false).translate(-innerLen / 2 - 0.01, DIV_Y - DIV_T / 2, FLOOR - 0.01))
+      const back = Y / 2 - WALL - (DIV_Y + DIV_T / 2) + 0.02
+      for (const cx of [-34, 34])
+        base = base.add(Manifold.cube([DIV_T, back, DIV_H], false).translate(cx - DIV_T / 2, DIV_Y + DIV_T / 2 - 0.01, FLOOR - 0.01))
+
+      // Handle: a round bar between the plates, flat underneath for the bed, with a split
+      // snap pin on each end. Drawn along x, centred on y = 0 / z = 0, then moved behind the box.
+      const GAP = X - 2 * PLATE, HALF = GAP / 2 - 0.5      // 0.5 mm running clearance to each plate
+      const BAR_R = 7, CORE_R = 4.3, BARB_R = 5.2
+      const CORE_L = 0.5 + PLATE + 0.6, BARB_L = 2        // pin reaches 0.6 mm past the plate, then the barb
+      const pin = () => Manifold.union([
+        Manifold.cylinder(CORE_L + 0.1, CORE_R, CORE_R, 32).translate(0, 0, -0.1),
+        Manifold.cylinder(BARB_L, BARB_R, CORE_R - 0.4, 32).translate(0, 0, CORE_L),
+      ]).rotate(0, 90, 0)
+      const slot = Manifold.cube([CORE_L + BARB_L, 2 * BARB_R + 2, 1.6], false).translate(1.2, -BARB_R - 1, -0.8) // halves flex up/down
+      const end = () => pin().subtract(slot)
+      let handle = Manifold.union([
+        Manifold.cylinder(2 * HALF, BAR_R, BAR_R, 64).rotate(0, 90, 0).translate(-HALF, 0, 0),
+        end().translate(HALF, 0, 0),
+        end().mirror([1, 0, 0]).translate(-HALF, 0, 0),
+      ])
+      handle = handle.intersect(Manifold.cube([X + 40, 4 * BAR_R, 2 * BAR_R + 2], false).translate(-X / 2 - 20, -2 * BAR_R, -(BAR_R - 1.5)))
+      handle = handle.translate(0, Y / 2 + 20, BAR_R - 1.5)
+      return { base, handle }
+    },
+    zones: [
+      // Front wall, outside face (y = -60). Anton: a bold face holds up when engraved
+      // into a 3 mm wall.
+      { id: 'line1', label: 'Name', part: 'base', colour: 1, origin: [-14, -60, 30], normal: [0, -1, 0], up: [0, 0, 1],
+        width: 140, height: 36, mode: 'engrave', depth: 1, maxLines: 1, default: 'TOOLS', font: 'Anton' },
+      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'base', colour: 1, origin: [72, -60, 30], normal: [0, -1, 0], up: [0, 0, 1],
+        width: 36, height: 36, mode: 'engrave', depth: 1, maxLines: 1, default: 'wrench' },
+    ],
+  },
+  {
     id: 'picture-frame',
     name: 'Picture Frame',
     tags: ['frame', 'photo', 'home', 'gift'],
@@ -1269,6 +1477,7 @@ for (const t of templates) {
   if (t.verified) json.verified = true
   if (t.notes) json.notes = t.notes
   if (t.printInPlace) json.printInPlace = true
+  if (t.published === false) json.published = false
   json.zones = t.zones
   writeFileSync(`${dir}/template.json`, JSON.stringify(json, null, 2) + '\n')
   console.log(t.id.padEnd(18), String(tris).padStart(6), 'tris', Object.keys(solids).join(','))

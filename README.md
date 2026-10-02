@@ -27,7 +27,9 @@ below for what happens after you open the PR.
   whose `template.json` doesn't have `"published": false` into
   `/hdd2/mem3d/templates`, the directory the mem3d site's container
   actually mounts (read-only). Anything no longer published gets removed
-  from there too. `npm run sync`.
+  from there too. `npm run sync`; `npm run sync -- <id> [<id>…]` verifies
+  and publishes only those templates and leaves the rest of the live site alone.
+  Add `--no-verify` to skip the (slow) verify step.
 
 ## Workflow
 
