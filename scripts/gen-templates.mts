@@ -1176,12 +1176,13 @@ const templates: Tpl[] = [
     id: 'light-sign',
     name: 'Illuminated Sign',
     tags: ['sign', 'light', 'led', 'shop', 'wall'],
-    notes: 'A light-box sign: a black, light-tight box with one translucent front panel that slides in from the right — no screws, glue or hardware to change the text. Pull the panel out by its tab to change the lettering or reach the lights. The text is engraved 1.2 mm into a 2 mm panel, leaving a skin only 0.8 mm thick, so the letters glow brighter than the rest of the panel. Print the box on its back with the open front facing up, no supports; print the panel flat, text side up, no supports (its rim prints as a raised border). Box: black, with at least 4 walls (or 100% infill) — it must be dense enough that no light shines through the walls, and PLA or PETG both work. Panel: white or natural translucent filament, 2 walls, 100% infill, 0.2 mm layers; thin text areas pass the most light, so avoid hairline fonts. For lights, stick a USB or 5 V warm-white LED strip around the inside of the box, and feed the cable out through the 8 mm power hole in the back wall (bottom right) — wide enough for a USB-C or barrel-jack lead with its plug. Use LEDs only — a candle or tea light will soften the print. Small heat vents run through the top wall and both side walls; they are narrow slits, but if any light shows through, cover them on the inside with a dab of black paint or tape. To hang or fix the sign, four countersunk 3.6 mm holes go through the back panel; with the front panel slid out you can reach the screw heads from inside, so screw straight into the wall or a board. The panel has a raised rim along its top and bottom edges that sits on a ledge where the top and bottom walls stop short of the front, which keeps the box free of overhangs and thin lips and gives the sign a flush frame. It is held by a close sliding fit (about 0.2 mm of clearance) and its own weight, so if it works loose, a dab of removable putty or a strip of tape at the tab holds it; that gap also lets a little light seep at the edges, which black tape over the slot cures.',
-    // Box: 200 x 120 x 33, 3 mm walls, one open chamber. The top and bottom walls
-    // stop 3.6 mm short of the front (open rebate: no overhang, no thin lip). The
-    // panel's top and bottom edges carry a raised rim that sits on that ledge and
-    // finishes flush with the front; it enters through a slot in the right-hand wall.
-    // The panel is shown seated and prints flat, text face up.
+    notes: 'A light-box sign: a black, light-tight box with one translucent front panel that slides in from the right — no screws, glue or hardware to change the text. Its right-hand end is a flush end cap that completes the box end, so when it is in nothing sticks out; to change the lettering or reach the lights, work a fingernail or a thin blade into the seam at the end and slide the panel out. The text is engraved 1.2 mm into a 2 mm panel, leaving a skin only 0.8 mm thick, so the letters glow brighter than the rest of the panel. Print the box on its back with the open front facing up, no supports; print the panel flat, text side up, no supports. Box: black, with at least 4 walls (or 100% infill) — it must be dense enough that no light shines through the walls, and PLA or PETG both work. Panel: white or natural translucent filament, 2 walls, 100% infill, 0.2 mm layers; thin text areas pass the most light, so avoid hairline fonts. For lights, stick a USB or 5 V warm-white LED strip around the inside of the box, and feed the cable out through the 8 mm power hole in the back wall (bottom right) — wide enough for a USB-C or barrel-jack lead with its plug. Use LEDs only — a candle or tea light will soften the print. Small heat vents run through the top wall and both side walls; they are narrow slits, but if any light shows through, cover them on the inside with a dab of black paint or tape. To hang or fix the sign, four countersunk 3.6 mm holes go through the back panel; with the front panel slid out you can reach the screw heads from inside, so screw straight into the wall or a board. The panel is held by a close sliding fit (about 0.2 mm of clearance), so if it works loose a dab of removable putty at the end holds it; that gap also lets a little light seep at the edges, which black tape over the slot cures.',
+    // Box: 200 x 120 x 33, 3 mm walls, one open chamber. The panel's top and bottom
+    // edges enter 1.5 mm slits in the top and bottom walls, behind a 1.2 mm front lip.
+    // The front 3.6 mm of the right-hand end wall (curved corners included) is cut away
+    // and made part of the panel as an end cap, so the panel slides in from the right
+    // and finishes flush with the box, with nothing standing proud. The panel is shown
+    // seated and prints flat, text face up.
     parts: [
       { id: 'box', label: 'Box', colour: 0 },
       { id: 'lid', label: 'Front panel (translucent, slides in)', colour: 1 },
@@ -1195,16 +1196,13 @@ const templates: Tpl[] = [
 
       let box = Manifold.extrude(roundedRect(W, H, 6), D).translate(0, H / 2, 0)
         .subtract(slab(-IN, IN, WALL, H - WALL, WALL, D + 1))             // one open cavity, square inside corners
-      // Rebate: the front 3.6 mm of the top and bottom walls is cut away right through the wall
-      // (open to the front, so nothing overhangs and no thin lip is left standing). The panel's
-      // rim sits on the ledge it leaves and forms the front edge. The entry slot through the
-      // right-hand wall takes the plate and both rims.
+      // Rails: a slit in the top wall and in the bottom wall. The front 3.6 mm of the right-hand
+      // end wall is cut away, curved corners and all; the panel's end cap fills it again.
+      const SLIT = 1.5
       box = box
-        .subtract(slab(-IN, IN, H - WALL - 0.01, H + 1, Z0, D + 1))
-        .subtract(slab(-IN, IN, -1, WALL + 0.01, Z0, D + 1))
-        .subtract(slab(IN - 0.01, W / 2 + 1, -1, H + 1, Z0, Z1))
-        .subtract(slab(IN - 0.01, W / 2 + 1, H - WALL - 2.7, H + 1, Z0, D + 1))
-        .subtract(slab(IN - 0.01, W / 2 + 1, -1, WALL + 2.7, Z0, D + 1))
+        .subtract(slab(-IN, IN, H - WALL - 0.01, H - WALL + SLIT, Z0, Z1))
+        .subtract(slab(-IN, IN, WALL - SLIT, WALL + 0.01, Z0, Z1))
+        .subtract(slab(IN - 0.01, W / 2 + 1, -1, H + 1, Z0, D + 1))
         // Power: an 8 mm round hole through the back wall, low at the right-hand end.
         .subtract(Manifold.cylinder(WALL + 1.5, 4, 4, 48).translate(80, 12, -1))
       // Heat vents: ten 1.6 x 14 mm slots through the top wall, three through each side
@@ -1220,15 +1218,15 @@ const templates: Tpl[] = [
           .subtract(Manifold.cylinder(1.81, 1.8, 3.8, 32).translate(x, y, WALL - 1.8))
       }
 
-      // Panel: a 2 mm plate 0.2 mm clear of the rebate floor, full height of the sign (0.15 mm short
-      // of the outer faces), with a 5.35 mm wide rim along the top and bottom edges that stands up to
-      // the front face (z = D). The right-hand end sticks out 4 mm as a pull tab.
-      const PY0 = 0.15, PY1 = H - 0.15, PX0 = -IN + 0.2, PX1 = W / 2 + 4, RIM = 5.35
-      const lid = Manifold.union([
-        slab(PX0, PX1, PY0, PY1, Z0 + 0.2, Z1 - 0.2),
-        slab(PX0, PX1, PY1 - RIM, PY1, Z0 + 0.2, D),
-        slab(PX0, PX1, PY0, PY0 + RIM, Z0 + 0.2, D),
-      ])
+      // Panel: a 2 mm plate 0.2 mm clear of the rail slot and 0.15 mm short of the slit floors,
+      // joined at its right-hand end to an end cap: the box's own outline (rounded corners
+      // included), from the front face back to the plate's underside, 0.2 mm short of the
+      // end wall it sits on, flush with the box ends and front.
+      const PZ0 = Z0 + 0.2, PZ1 = Z1 - 0.2
+      const plate = slab(-IN + 0.2, IN + 1, WALL - SLIT + 0.15, H - WALL + SLIT - 0.15, PZ0, PZ1)
+      const cap = Manifold.extrude(roundedRect(W, H, 6), D - PZ0).translate(0, H / 2, PZ0)
+        .intersect(slab(IN + 0.2, W / 2 + 1, -1, H + 1, 0, D + 1))
+      const lid = Manifold.union([plate, cap])
       return { box, lid }
     },
     zones: [
