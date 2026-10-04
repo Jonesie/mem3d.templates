@@ -1176,7 +1176,7 @@ const templates: Tpl[] = [
     id: 'light-sign',
     name: 'Illuminated Sign',
     tags: ['sign', 'light', 'led', 'shop', 'wall'],
-    notes: 'A light-box sign: a black, light-tight box with a clear front panel that slides in from the right. Print a spare panel for each message (OPEN / CLOSED, VACANCY / NO VACANCY). Each is printed clear and painted black, so only the engraved letters glow.\n\n**Printing the parts**\n- **Box:** print on its back with the open front facing up, no supports. Black, with at least 4 walls (or 100% infill) so no light shines through the walls. PLA or PETG both work.\n- **Panel:** print flat, text side up, no supports, in clear PETG. Use 100% infill and 0.2 mm layers, and print slowly. It comes out frosted rather than glass-clear, which spreads the light nicely.\n- **End cap:** print flat, in the same colour as the box, separately from the panel. **Glue the cap on after printing:** put a little super glue or plastic cement on the tongue at the end of the panel and push it into the pocket in the cap, with both pieces lying flat so they line up. Do this before painting, and keep glue off the front face of the panel.\n\n**Painting the panel**\n1. Lightly scuff the front face.\n2. Roll or dab on matte black acrylic (or whatever dark colour matches your box) with a small foam roller or foam brush. It only touches the raised surface, so the engraved letters stay clear and glow.\n3. Two thin coats block the light better than one thick one.\n4. If paint gets into a letter, wipe it out with a cotton bud while it is wet. Spray paint works too if you mask the letters or wipe them clean afterwards.\n\n**Lights and power**\n- Use a low-heat LED strip, so the box and the clear panel stay cool and nothing softens. For example, [this strip on AliExpress](https://www.aliexpress.com/item/1005008569438382.html). Check its voltage and length before you order, and stick it around the inside of the box (the inside is 194 mm wide and 114 mm tall).\n- Feed the cable out through the 8 mm power hole in the back wall (bottom right), wide enough for a USB-C or barrel-jack lead with its plug.\n- Use LEDs only: a candle or tea light will soften the print.\n- Small heat vents run through the top wall and both side walls. They are narrow slits, but if any light shows through, cover them on the inside with a dab of black paint or tape.\n\n**Fixing the sign and changing the panel**\n- To hang or fix the sign, four countersunk 3.6 mm holes go through the back panel. With the front panel slid out you can reach the screw heads from inside, so screw straight into the wall or a board.\n- Print one panel for each message (for example OPEN and CLOSED, or VACANCY and NO VACANCY) and swap them in seconds. Every panel needs its own end cap, so print one cap per panel.\n- To change the lettering or reach the lights, work a fingernail or a thin blade into the seam at the right-hand end and slide the panel out. The end cap completes the box end, so when it is in nothing sticks out.\n- The panel is held by a close sliding fit (about 0.2 mm of clearance). If it works loose, a dab of removable putty at the end holds it. That gap also lets a little light seep at the edges; black tape over the slot cures it.',
+    notes: 'A light-box sign: a black, light-tight box with a clear front panel that slides in from the right. Print a spare panel for each message (OPEN / CLOSED, VACANCY / NO VACANCY). Each is printed clear and painted black, so only the engraved letters glow.\n\n**Printing the parts**\n- **Box:** print on its back with the open front facing up, in black, with at least 4 walls (or 100% infill) so no light shines through the walls. PLA or PETG both work. Turn supports on: the thin lip over each rail slot overhangs and is fragile, so it is worth supporting. The supports come off with a little care.\n- **Panel:** print flat, text side up, no supports, in clear PETG. Use 100% infill and 0.2 mm layers, and print slowly. It comes out frosted rather than glass-clear, which spreads the light nicely. The end of the panel is a cap that completes the end of the box, printed as part of the same piece.\n\n**Painting the panel**\n1. Lightly scuff the front face.\n2. Roll or dab on matte black acrylic (or whatever dark colour matches your box) with a small foam roller or foam brush. It only touches the raised surface, so the engraved letters stay clear and glow.\n3. Paint the end face of the cap (the right-hand end of the panel) black too, so the end of the sign matches the box.\n4. Two thin coats block the light better than one thick one.\n5. If paint gets into a letter, wipe it out with a cotton bud while it is wet. Spray paint works too if you mask the letters or wipe them clean afterwards.\n\n**Lights and power**\n- Use a low-heat LED strip, so the box and the clear panel stay cool and nothing softens. For example, [this strip on AliExpress](https://www.aliexpress.com/item/1005008569438382.html). Check its voltage and length before you order, and stick it around the inside of the box (the inside is 194 mm wide and 114 mm tall).\n- Feed the cable out through the 20 x 12 mm rectangular power hole in the back wall (bottom right), big enough for a USB-A plug to pass through.\n- Use LEDs only: a candle or tea light will soften the print.\n- Small heat vents run through the top wall and both side walls. They are narrow slits, but if any light shows through, cover them on the inside with a dab of black paint or tape.\n\n**Fixing the sign and changing the panel**\n- To hang or fix the sign, four countersunk 3.6 mm holes go through the back panel. With the front panel slid out you can reach the screw heads from inside, so screw straight into the wall or a board.\n- Print one panel for each message (for example OPEN and CLOSED, or VACANCY and NO VACANCY) and swap them in seconds.\n- To change the lettering or reach the lights, work a fingernail or a thin blade into the seam at the right-hand end and slide the panel out. The cap on the end of the panel completes the box end, so when it is in nothing sticks out.\n- The panel is held by a close sliding fit (about 0.2 mm of clearance). If it works loose, a dab of removable putty at the end holds it. That gap also lets a little light seep at the edges; black tape over the slot cures it.',
     // Box: 200 x 120 x 33, 3 mm walls, one open chamber. The panel's top and bottom
     // edges enter 1.5 mm slits in the top and bottom walls, behind a 1.2 mm front lip.
     // The front 3.6 mm of the right-hand end wall (curved corners included) is cut away
@@ -1186,7 +1186,6 @@ const templates: Tpl[] = [
     parts: [
       { id: 'box', label: 'Box', colour: 0 },
       { id: 'lid', label: 'Front panel (clear, slides in)', colour: 1 },
-      { id: 'cap', label: 'End cap (same colour as the box)', colour: 0 },
     ],
     colours: ['#1a1a1a', '#cfe6f2'],
     build: () => {
@@ -1198,14 +1197,15 @@ const templates: Tpl[] = [
       let box = Manifold.extrude(roundedRect(W, H, 6), D).translate(0, H / 2, 0)
         .subtract(slab(-IN, IN, WALL, H - WALL, WALL, D + 1))             // one open cavity, square inside corners
       // Rails: a slit in the top wall and in the bottom wall. The front 3.6 mm of the right-hand
-      // end wall is cut away, curved corners and all; the panel's end cap fills it again.
+      // end wall is cut away, curved corners and all; the panel's own end cap fills it again.
       const SLIT = 1.5
       box = box
         .subtract(slab(-IN, IN, H - WALL - 0.01, H - WALL + SLIT, Z0, Z1))
         .subtract(slab(-IN, IN, WALL - SLIT, WALL + 0.01, Z0, Z1))
         .subtract(slab(IN - 0.01, W / 2 + 1, -1, H + 1, Z0, D + 1))
-        // Power: an 8 mm round hole through the back wall, low at the right-hand end.
-        .subtract(Manifold.cylinder(WALL + 1.5, 4, 4, 48).translate(80, 12, -1))
+        // Power: a 20 x 12 mm rectangular hole through the back wall, low at the right-hand end,
+        // big enough for a USB-A plug to pass through.
+        .subtract(slab(70, 90, 6, 18, -1, WALL + 0.5))
       // Heat vents: ten 1.6 x 14 mm slots through the top wall, three through each side
       // wall high up. Small and out of the front view.
       for (let i = 0; i < 10; i++) box = box.subtract(slab(-81 + 18 * i - 0.8, -81 + 18 * i + 0.8, H - WALL - 1, H + 1, 9, 23))
@@ -1219,20 +1219,16 @@ const templates: Tpl[] = [
           .subtract(Manifold.cylinder(1.81, 1.8, 3.8, 32).translate(x, y, WALL - 1.8))
       }
 
-      // Panel: a 2 mm plate 0.2 mm clear of the rail slot and 0.15 mm short of the slit floors. At its
-      // right-hand end it ends in a tongue that fits exactly into a pocket in the end cap. The cap is
-      // the box's own outline (rounded corners included), from the front face back to the plate's
-      // underside, 0.2 mm short of the end wall it sits on, flush with the box ends and front. It is a
-      // separate part so it can print in the box colour; the tongue interlocks the two.
+      // Panel: a 2 mm plate 0.2 mm clear of the rail slot and 0.15 mm short of the slit floors, in one
+      // piece with an end cap at its right-hand end: the box's own outline (rounded corners included),
+      // from the front face back to the plate's underside, 0.2 mm short of the end wall it sits on,
+      // flush with the box ends and front.
       const PZ0 = Z0 + 0.2, PZ1 = Z1 - 0.2
-      const lid = Manifold.union([
-        slab(-IN + 0.2, IN + 0.2, WALL - SLIT + 0.15, H - WALL + SLIT - 0.15, PZ0, PZ1),
-        slab(IN + 0.2 - 0.01, IN + 1.2, 10, H - 10, PZ0, PZ1),            // tongue: 1 mm deep, middle 100 mm, leaves the cap thick walls
-      ])
+      const plate = slab(-IN + 0.2, IN + 1, WALL - SLIT + 0.15, H - WALL + SLIT - 0.15, PZ0, PZ1)
       const cap = Manifold.extrude(roundedRect(W, H, 6), D - PZ0).translate(0, H / 2, PZ0)
         .intersect(slab(IN + 0.2, W / 2 + 1, -1, H + 1, 0, D + 1))
-        .subtract(lid)
-      return { box, lid, cap }
+      const lid = Manifold.union([plate, cap])
+      return { box, lid }
     },
     zones: [
       // Front face of the panel (z = 31.6), viewed from the front: up = +y. Engraved 1.2 mm so the
