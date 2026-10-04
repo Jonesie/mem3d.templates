@@ -1173,6 +1173,77 @@ const templates: Tpl[] = [
     ],
   },
   {
+    id: 'light-sign',
+    name: 'Illuminated Sign',
+    tags: ['sign', 'light', 'led', 'shop', 'desk'],
+    notes: 'A light-box sign: a black, light-tight box with two translucent front plates that slide in on rails, so there are no screws, glue or hardware. The top line is one plate that slides in from the left; the main lid is a second plate that slides in from the right — pull either out by its tab to change the text or reach the lights. The text is engraved 1.2 mm into a 2 mm plate, leaving a skin only 0.8 mm thick, so the letters glow brighter than the rest of the plate. Print the box on its back with the open front facing up, no supports; print each plate flat, text side up, no supports. Box: black, with at least 4 walls (or 100% infill) — it must be dense enough that no light shines through the walls, and PLA or PETG both work. Plates: white or natural translucent filament, 2 walls, 100% infill, 0.2 mm layers; thin text areas pass the most light, so avoid hairline fonts. For lights, stick a USB or 5 V warm-white LED strip inside each chamber (the top-line chamber and the main chamber are separate), and feed the cable through the hole in the bulkhead and out the 8 mm power hole in the back wall (bottom right) — wide enough for a USB-C or barrel-jack lead with its plug. Small heat vents run through the top wall and both side walls; they are narrow slits, but if any light shows through, cover them on the inside with a dab of black paint or tape. To fix the sign down, four 2.8 mm pilot holes in the bottom (x = -70, -25, 25, 70 mm from the centre, 16 mm in from the back) take M3 self-tapping screws coming up through a base board or stand; open them to 3.4 mm with a drill for through-bolts. Use LEDs only — a candle or tea light will soften the print. The rails leave about 0.2 mm of clearance, so a little light can seep out at the plate edges; a strip of black tape over the slots cures it.',
+    // Box: 200 x 120 x 33, 3 mm walls, a 4.5 mm bulkhead splitting a 30 mm top-line
+    // chamber from the main chamber. Every plate edge enters a 1.5 mm slit in the
+    // wall or bulkhead, behind a 1.2 mm front lip; the top-line plate leaves through
+    // a slot in the left wall, the lid through one in the right. Plates are shown
+    // seated in the box and print flat, text face up.
+    parts: [
+      { id: 'box', label: 'Box', colour: 0 },
+      { id: 'lid', label: 'Lid (translucent)', colour: 1 },
+      { id: 'strip', label: 'Top line (slides in)', colour: 1 },
+    ],
+    colours: ['#1a1a1a', '#f4f4f0'],
+    build: () => {
+      const W = 200, H = 120, D = 33, WALL = 3, IN = W / 2 - WALL        // inner half-width 97
+      const BULK_Y0 = 82.5, BULK_Y1 = 87, SLIT = 1.5
+      const Z0 = 29.4, Z1 = 31.8                                         // rail slot, behind a 1.2 mm front lip
+      const slab = (x0: number, x1: number, y0: number, y1: number, z0: number, z1: number) =>
+        Manifold.cube([x1 - x0, y1 - y0, z1 - z0], false).translate(x0, y0, z0)
+
+      let box = Manifold.extrude(roundedRect(W, H, 6), D).translate(0, H / 2, 0)
+        .subtract(slab(-IN, IN, WALL, H - WALL, WALL, D + 1))             // one open cavity, square inside corners
+        .add(slab(-IN - 0.01, IN + 0.01, BULK_Y0, BULK_Y1, WALL - 0.01, D))
+      // Rails: a slit in the top wall, the bottom wall and both faces of the bulkhead.
+      box = box
+        .subtract(slab(-IN, IN, H - WALL - 0.01, H - WALL + SLIT, Z0, Z1))
+        .subtract(slab(-IN, IN, BULK_Y1 - SLIT, BULK_Y1 + 0.01, Z0, Z1))
+        .subtract(slab(-IN, IN, BULK_Y0 - 0.01, BULK_Y0 + SLIT, Z0, Z1))
+        .subtract(slab(-IN, IN, WALL - SLIT, WALL + 0.01, Z0, Z1))
+        // Entry slots: top line from the left, lid from the right.
+        .subtract(slab(-W / 2 - 1, -IN + 0.01, BULK_Y1 - SLIT, H - WALL + SLIT, Z0, Z1))
+        .subtract(slab(IN - 0.01, W / 2 + 1, WALL - SLIT, BULK_Y0 + SLIT, Z0, Z1))
+        // Power: a hole through the bulkhead (so one cable feeds both chambers) and a
+        // 8 mm round hole through the back wall, low at the right-hand end.
+        .subtract(slab(75, 87, BULK_Y0 - 1, BULK_Y1 + 1, WALL, 9))
+        .subtract(Manifold.cylinder(WALL + 1.5, 4, 4, 48).translate(80, 12, -1))
+      // Heat vents: ten 1.6 x 14 mm slots through the top wall (top-line chamber), three
+      // through each side wall high in the main chamber. Small and out of the front view.
+      for (let i = 0; i < 10; i++) box = box.subtract(slab(-81 + 18 * i - 0.8, -81 + 18 * i + 0.8, H - WALL - 1, H + 1, 9, 23))
+      for (const y of [62, 69, 76]) {
+        box = box.subtract(slab(-W / 2 - 1, -IN + 1, y - 0.8, y + 0.8, 9, 23)).subtract(slab(IN - 1, W / 2 + 1, y - 0.8, y + 0.8, 9, 23))
+      }
+      // Mounting: four bosses on the inside of the bottom wall, each with a 2.8 mm pilot
+      // hole from the bottom face for an M3 self-tapping screw coming up from a base.
+      for (const x of [-70, -25, 25, 70]) {
+        box = box.add(Manifold.cylinder(14 - WALL + 0.01, 4.5, 4.5, 40).rotate(-90, 0, 0).translate(x, WALL - 0.01, 16))
+          .subtract(Manifold.cylinder(12, 1.4, 1.4, 32).rotate(-90, 0, 0).translate(x, -1, 16)) // blind: stops 3 mm short of the boss top
+      }
+
+      // Plates: 2 mm, 0.2 mm clear of the rail slot, 0.15 mm short of the slit floor.
+      const PZ0 = Z0 + 0.2, PZ1 = Z1 - 0.2
+      const strip = slab(-W / 2 - 4, IN - 0.2, BULK_Y1 - SLIT + 0.15, H - WALL + SLIT - 0.15, PZ0, PZ1)
+      const lid = slab(-IN + 0.2, W / 2 + 4, WALL - SLIT + 0.15, BULK_Y0 + SLIT - 0.15, PZ0, PZ1)
+      return { box, lid, strip }
+    },
+    zones: [
+      // Front faces of the plates (z = 31.6), viewed from the front: up = +y. Engraved
+      // 1.2 mm so the skin left behind is 0.8 mm; no `colour`, so the text is part of the plate.
+      { id: 'top', label: 'Top line', part: 'strip', origin: [0, 102, 31.6], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 170, height: 22, mode: 'engrave', depth: 1.2, maxLines: 1, default: 'WELCOME', font: 'Anton' },
+      { id: 'line1', label: 'Name', part: 'lid', origin: [-28, 58, 31.6], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 120, height: 34, mode: 'engrave', depth: 1.2, maxLines: 1, default: 'COFFEE', font: 'Anton' },
+      { id: 'line2', label: 'Subtitle', part: 'lid', origin: [-28, 22, 31.6], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 120, height: 16, mode: 'engrave', depth: 1.2, maxLines: 2, default: 'open all day', font: 'Fredoka' },
+      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'lid', origin: [66, 40, 31.6], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 44, height: 44, mode: 'engrave', depth: 1.2, maxLines: 1, default: 'star' },
+    ],
+  },
+  {
     id: 'picture-frame',
     name: 'Picture Frame',
     tags: ['frame', 'photo', 'home', 'gift'],

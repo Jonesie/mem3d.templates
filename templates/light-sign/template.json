@@ -1,0 +1,148 @@
+{
+  "id": "light-sign",
+  "name": "Illuminated Sign",
+  "units": "mm",
+  "tags": [
+    "sign",
+    "light",
+    "led",
+    "shop",
+    "desk"
+  ],
+  "author": "Jonesie",
+  "parts": [
+    {
+      "id": "box",
+      "label": "Box",
+      "colour": 0,
+      "mesh": "box.glb"
+    },
+    {
+      "id": "lid",
+      "label": "Lid (translucent)",
+      "colour": 1,
+      "mesh": "lid.glb"
+    },
+    {
+      "id": "strip",
+      "label": "Top line (slides in)",
+      "colour": 1,
+      "mesh": "strip.glb"
+    }
+  ],
+  "colours": [
+    "#1a1a1a",
+    "#f4f4f0"
+  ],
+  "notes": "A light-box sign: a black, light-tight box with two translucent front plates that slide in on rails, so there are no screws, glue or hardware. The top line is one plate that slides in from the left; the main lid is a second plate that slides in from the right — pull either out by its tab to change the text or reach the lights. The text is engraved 1.2 mm into a 2 mm plate, leaving a skin only 0.8 mm thick, so the letters glow brighter than the rest of the plate. Print the box on its back with the open front facing up, no supports; print each plate flat, text side up, no supports. Box: black, with at least 4 walls (or 100% infill) — it must be dense enough that no light shines through the walls, and PLA or PETG both work. Plates: white or natural translucent filament, 2 walls, 100% infill, 0.2 mm layers; thin text areas pass the most light, so avoid hairline fonts. For lights, stick a USB or 5 V warm-white LED strip inside each chamber (the top-line chamber and the main chamber are separate), and feed the cable through the hole in the bulkhead and out the 8 mm power hole in the back wall (bottom right) — wide enough for a USB-C or barrel-jack lead with its plug. Small heat vents run through the top wall and both side walls; they are narrow slits, but if any light shows through, cover them on the inside with a dab of black paint or tape. To fix the sign down, four 2.8 mm pilot holes in the bottom (x = -70, -25, 25, 70 mm from the centre, 16 mm in from the back) take M3 self-tapping screws coming up through a base board or stand; open them to 3.4 mm with a drill for through-bolts. Use LEDs only — a candle or tea light will soften the print. The rails leave about 0.2 mm of clearance, so a little light can seep out at the plate edges; a strip of black tape over the slots cures it.",
+  "zones": [
+    {
+      "id": "top",
+      "label": "Top line",
+      "part": "strip",
+      "origin": [
+        0,
+        102,
+        31.6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 170,
+      "height": 22,
+      "mode": "engrave",
+      "depth": 1.2,
+      "maxLines": 1,
+      "default": "WELCOME",
+      "font": "Anton"
+    },
+    {
+      "id": "line1",
+      "label": "Name",
+      "part": "lid",
+      "origin": [
+        -28,
+        58,
+        31.6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 120,
+      "height": 34,
+      "mode": "engrave",
+      "depth": 1.2,
+      "maxLines": 1,
+      "default": "COFFEE",
+      "font": "Anton"
+    },
+    {
+      "id": "line2",
+      "label": "Subtitle",
+      "part": "lid",
+      "origin": [
+        -28,
+        22,
+        31.6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 120,
+      "height": 16,
+      "mode": "engrave",
+      "depth": 1.2,
+      "maxLines": 2,
+      "default": "open all day",
+      "font": "Fredoka"
+    },
+    {
+      "id": "icon",
+      "label": "Adornment",
+      "kind": "symbol",
+      "part": "lid",
+      "origin": [
+        66,
+        40,
+        31.6
+      ],
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "width": 44,
+      "height": 44,
+      "mode": "engrave",
+      "depth": 1.2,
+      "maxLines": 1,
+      "default": "star"
+    }
+  ]
+}
