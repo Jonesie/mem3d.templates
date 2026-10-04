@@ -1176,7 +1176,7 @@ const templates: Tpl[] = [
     id: 'light-sign',
     name: 'Illuminated Sign',
     tags: ['sign', 'light', 'led', 'shop', 'wall'],
-    notes: 'A light-box sign: a black, light-tight box with one translucent front panel that slides in from the right — no screws, glue or hardware to change the text. Its right-hand end is a flush end cap that completes the box end, so when it is in nothing sticks out; to change the lettering or reach the lights, work a fingernail or a thin blade into the seam at the end and slide the panel out. The text is engraved 1.2 mm into a 2 mm panel, leaving a skin only 0.8 mm thick, so the letters glow brighter than the rest of the panel. Print the box on its back with the open front facing up, no supports; print the panel flat, text side up, no supports. Box: black, with at least 4 walls (or 100% infill) — it must be dense enough that no light shines through the walls, and PLA or PETG both work. Panel: white or natural translucent filament, 2 walls, 100% infill, 0.2 mm layers; thin text areas pass the most light, so avoid hairline fonts. For lights, stick a USB or 5 V warm-white LED strip around the inside of the box, and feed the cable out through the 8 mm power hole in the back wall (bottom right) — wide enough for a USB-C or barrel-jack lead with its plug. Use LEDs only — a candle or tea light will soften the print. Small heat vents run through the top wall and both side walls; they are narrow slits, but if any light shows through, cover them on the inside with a dab of black paint or tape. To hang or fix the sign, four countersunk 3.6 mm holes go through the back panel; with the front panel slid out you can reach the screw heads from inside, so screw straight into the wall or a board. The panel is held by a close sliding fit (about 0.2 mm of clearance), so if it works loose a dab of removable putty at the end holds it; that gap also lets a little light seep at the edges, which black tape over the slot cures.',
+    notes: 'A light-box sign: a black, light-tight box with one translucent front panel that slides in from the right — no screws, glue or hardware to change the text. Its right-hand end is a flush end cap, in the same colour as the box, that completes the box end, so when it is in nothing sticks out; to change the lettering or reach the lights, work a fingernail or a thin blade into the seam at the end and slide the panel out. The text is engraved 1.2 mm into a 2 mm panel, leaving a skin only 0.8 mm thick, so the letters glow brighter than the rest of the panel. Print the box on its back with the open front facing up, no supports; print the panel and its end cap flat, text side up, no supports. The cap is a separate part so it prints in the box colour; a tongue on the panel locks into a pocket in the cap, so on a multi-colour printer they print together as one piece, and on a single-colour printer print them separately and glue the tongue into the cap. Box: black, with at least 4 walls (or 100% infill) — it must be dense enough that no light shines through the walls, and PLA or PETG both work. Panel: white or natural translucent filament, 2 walls, 100% infill, 0.2 mm layers; thin text areas pass the most light, so avoid hairline fonts. For lights, stick a USB or 5 V warm-white LED strip around the inside of the box, and feed the cable out through the 8 mm power hole in the back wall (bottom right) — wide enough for a USB-C or barrel-jack lead with its plug. Use LEDs only — a candle or tea light will soften the print. Small heat vents run through the top wall and both side walls; they are narrow slits, but if any light shows through, cover them on the inside with a dab of black paint or tape. To hang or fix the sign, four countersunk 3.6 mm holes go through the back panel; with the front panel slid out you can reach the screw heads from inside, so screw straight into the wall or a board. The panel is held by a close sliding fit (about 0.2 mm of clearance), so if it works loose a dab of removable putty at the end holds it; that gap also lets a little light seep at the edges, which black tape over the slot cures.',
     // Box: 200 x 120 x 33, 3 mm walls, one open chamber. The panel's top and bottom
     // edges enter 1.5 mm slits in the top and bottom walls, behind a 1.2 mm front lip.
     // The front 3.6 mm of the right-hand end wall (curved corners included) is cut away
@@ -1186,6 +1186,7 @@ const templates: Tpl[] = [
     parts: [
       { id: 'box', label: 'Box', colour: 0 },
       { id: 'lid', label: 'Front panel (translucent, slides in)', colour: 1 },
+      { id: 'cap', label: 'End cap (same colour as the box)', colour: 0 },
     ],
     colours: ['#1a1a1a', '#f4f4f0'],
     build: () => {
@@ -1218,16 +1219,20 @@ const templates: Tpl[] = [
           .subtract(Manifold.cylinder(1.81, 1.8, 3.8, 32).translate(x, y, WALL - 1.8))
       }
 
-      // Panel: a 2 mm plate 0.2 mm clear of the rail slot and 0.15 mm short of the slit floors,
-      // joined at its right-hand end to an end cap: the box's own outline (rounded corners
-      // included), from the front face back to the plate's underside, 0.2 mm short of the
-      // end wall it sits on, flush with the box ends and front.
+      // Panel: a 2 mm plate 0.2 mm clear of the rail slot and 0.15 mm short of the slit floors. At its
+      // right-hand end it ends in a tongue that fits exactly into a pocket in the end cap. The cap is
+      // the box's own outline (rounded corners included), from the front face back to the plate's
+      // underside, 0.2 mm short of the end wall it sits on, flush with the box ends and front. It is a
+      // separate part so it can print in the box colour; the tongue interlocks the two.
       const PZ0 = Z0 + 0.2, PZ1 = Z1 - 0.2
-      const plate = slab(-IN + 0.2, IN + 1, WALL - SLIT + 0.15, H - WALL + SLIT - 0.15, PZ0, PZ1)
+      const lid = Manifold.union([
+        slab(-IN + 0.2, IN + 0.2, WALL - SLIT + 0.15, H - WALL + SLIT - 0.15, PZ0, PZ1),
+        slab(IN + 0.2 - 0.01, IN + 1.2, 10, H - 10, PZ0, PZ1),            // tongue: 1 mm deep, middle 100 mm, leaves the cap thick walls
+      ])
       const cap = Manifold.extrude(roundedRect(W, H, 6), D - PZ0).translate(0, H / 2, PZ0)
         .intersect(slab(IN + 0.2, W / 2 + 1, -1, H + 1, 0, D + 1))
-      const lid = Manifold.union([plate, cap])
-      return { box, lid }
+        .subtract(lid)
+      return { box, lid, cap }
     },
     zones: [
       // Front face of the panel (z = 31.6), viewed from the front: up = +y. Engraved 1.2 mm so
