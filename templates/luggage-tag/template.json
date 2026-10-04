@@ -13,7 +13,7 @@
     "#e67e22",
     "#f4f4f0"
   ],
-  "notes": "Print flat as placed, no supports. The address is engraved into the bed face, so use a smooth plate for a clean underside. Thread a strap through the slot at the left end.",
+  "notes": "Print flat as placed, no supports.\n\n- The address is engraved into the bed face, so use a smooth plate for a clean underside.\n- Thread a strap through the slot at the left end.",
   "zones": [
     {
       "id": "icon",

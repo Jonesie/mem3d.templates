@@ -14,7 +14,7 @@
     "#f1c40f",
     "#222226"
   ],
-  "notes": "Print face up with supports OFF: the magnet pockets on the back are bridged over, and supports would fill them. Glue a Ø6 × 2 mm disc magnet into each pocket afterwards. For a smoother top, set Ironing to \"Top surface\" in your slicer.",
+  "notes": "Print face up with supports OFF.\n\n- The magnet pockets on the back are bridged over, and supports would fill them.\n- Glue a Ø6 × 2 mm disc magnet into each pocket afterwards.\n- For a smoother top, set Ironing to \"Top surface\" in your slicer.",
   "zones": [
     {
       "id": "line1",

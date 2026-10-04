@@ -26,7 +26,7 @@
     "#222226",
     "#d4a017"
   ],
-  "notes": "Print upright as placed with tree supports: the crossguard, shoulders, hands and chin overhang, and the blade is thin — 0.12 mm layers and a slow outer wall help. Load the 3MF for the black plinth and gold figure, or print the two STLs separately and glue the reel to the plinth.",
+  "notes": "A two-part statuette: a black plinth and a gold figure, printed upright as placed.\n\n**Printing**\n- Use tree supports: the crossguard, shoulders, hands and chin overhang.\n- The blade is thin, so 0.12 mm layers and a slow outer wall help.\n\n**Colours and assembly**\n- Load the 3MF for the black plinth and gold figure.\n- Or print the two STLs separately and glue the reel to the plinth.",
   "zones": [
     {
       "id": "title",

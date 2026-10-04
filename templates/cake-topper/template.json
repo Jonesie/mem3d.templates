@@ -13,7 +13,7 @@
     "#d4a017"
   ],
   "verified": true,
-  "notes": "Print flat as placed, no supports, 100 % infill for stiff prongs. The words and strip are one 2 mm piece; wash before use if it touches food, or wrap the prongs in cling film.",
+  "notes": "Print flat as placed, no supports.\n\n- Use 100 % infill for stiff prongs.\n- The words and strip are one 2 mm piece.\n- Wash before use if it touches food, or wrap the prongs in cling film.",
   "zones": [
     {
       "id": "text",

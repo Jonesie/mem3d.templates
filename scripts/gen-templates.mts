@@ -88,7 +88,7 @@ const templates: Tpl[] = [
     id: 'plaque-classic',
     name: 'Classic Plaque',
     tags: ['plaque', 'sign'],
-    notes: 'Print flat as placed, face up, no supports. The text is engraved; in a second colour it exports as a flush inlay, so load the 3MF for an AMS/MMU or print the merged STL in one colour.',
+    notes: 'Print flat as placed, face up, no supports.\n\n**Colours**\n- The text is engraved; in a second colour it exports as a flush inlay.\n- Load the 3MF for an AMS/MMU, or print the merged STL in one colour.',
     colours: ['#e6d9bd', '#2c3e50', '#c0392b'],
     // 100 × 50 × 4, rounded corners, text on top (+Z).
     build: () => Manifold.extrude(roundedRect(100, 50, 6), 4),
@@ -105,7 +105,7 @@ const templates: Tpl[] = [
     id: 'headstone-classic',
     name: 'Classic Headstone',
     tags: ['memorial', 'garden'],
-    notes: 'Two parts, printed separately then assembled by hand afterward: the headstone prints lying flat, engraved/embossed face up (no rotation needed, no supports) — stand it up and push its tenon into the base’s socket, a firm friction fit (add a dot of glue if you want it permanent). The base prints separately, as placed, no supports. Printing the headstone flat rather than standing also means a multi-colour (AMS/MMU) print only swaps filament within the top ~1–2 mm of engraving/emboss depth, not across the whole standing height.',
+    notes: 'A headstone and base: two parts, printed separately and assembled by hand.\n\n**Printing**\n- The headstone prints lying flat, engraved/embossed face up (no rotation needed, no supports).\n- The base prints separately, as placed, no supports.\n- Printing the headstone flat rather than standing also means a multi-colour (AMS/MMU) print only swaps filament within the top ~1–2 mm of engraving/emboss depth, not across the whole standing height.\n\n**Assembly**\n- Stand the headstone up and push its tenon into the base’s socket, a firm friction fit.\n- Add a dot of glue if you want it permanent.',
     colours: ['#8b8f98', '#f4f4f0'],
     verified: true,
     parts: [
@@ -171,7 +171,7 @@ const templates: Tpl[] = [
     id: 'keyring-tag',
     name: 'Keyring Tag',
     tags: ['keyring', 'tag'],
-    notes: 'Print flat as placed, no supports. The raised text is 1 mm proud; a 0.4 mm nozzle is fine. Fit a split ring through the hole.',
+    notes: 'Print flat as placed, no supports.\n\n- The raised text is 1 mm proud; a 0.4 mm nozzle is fine.\n- Fit a split ring through the hole.',
     colours: ['#2980b9', '#f4f4f0'],
     // 50 × 22 × 3 rounded, 4 mm hole at the left end. Text embossed on top.
     build: () => {
@@ -188,7 +188,7 @@ const templates: Tpl[] = [
     id: 'desk-wedge',
     name: 'Desk Name Plate',
     tags: ['name plate', 'desk'],
-    notes: 'Three prints, no glue. Print the face plate flat, text up, no supports — it is the whole reason this is split, so the name and title get a flat, crisp surface. The two triangular ends are laid on their outer faces (slot side up), so the slot is open to the top. The lip over the slot is a 40° overhang, so print with supports there or a slightly slow bridge. Assemble by sliding the plate down into the slots from the top edge until it stops on the bottom of the slots; it sits ~1 mm below the ends\' slope, held by a lip over each edge, and the two ends and plate lock into one rigid wedge at 40°. Snug fit — lift it back out the same way to swap the text.',
+    notes: 'A desk name wedge in three prints, no glue: a face plate and two triangular ends that lock into one rigid wedge at 40°.\n\n**Printing**\n- Print the face plate flat, text up, no supports. It is the whole reason this is split, so the name and title get a flat, crisp surface.\n- The two triangular ends are laid on their outer faces (slot side up), so the slot is open to the top.\n- The lip over the slot is a 40° overhang, so print with supports there or a slightly slow bridge.\n\n**Assembly**\n- Slide the plate down into the slots from the top edge until it stops on the bottom of the slots. It sits ~1 mm below the ends\' slope, held by a lip over each edge.\n- The two ends and plate lock into one rigid wedge at 40°. It is a snug fit; lift it back out the same way to swap the text.',
     parts: [
       { id: 'ends', label: 'Ends', colour: 0 },
       { id: 'plate', label: 'Face Plate', colour: 1 },
@@ -248,7 +248,7 @@ const templates: Tpl[] = [
     id: 'statue-trump',
     name: 'Trump Statue',
     tags: ['statue', 'novelty', 'plinth'],
-    notes: 'Print the figure upright as placed with tree supports on: the forward arm, thumb, chin and the hair sweep all overhang. The plinth base is a hollow shell, open front and top — print it upright, then print the top cap and the front nameplate separately (the nameplate flat, face up, for the cleanest engraving). Neither is glued: the nameplate slides down into a slot behind the base\'s open front, and the cap sits on a friction-fit locating spigot — so the name can be swapped later by lifting the (unglued) cap off. Load the 3MF so the colour parts stay registered; with one colour, print the merged STLs. 0.12 mm layers flatter the face.',
+    notes: 'A figure on a hollow plinth. Print the figure upright as placed with tree supports; the plinth base, top cap and front nameplate print separately.\n\n**Printing**\n- Print the figure upright as placed with tree supports on: the forward arm, thumb, chin and the hair sweep all overhang.\n- The plinth base is a hollow shell, open front and top. Print it upright.\n- Print the top cap and the front nameplate separately (the nameplate flat, face up, for the cleanest engraving).\n- 0.12 mm layers flatter the face.\n\n**Assembly**\n- Nothing is glued. The nameplate slides down into a slot behind the base\'s open front, and the cap sits on a friction-fit locating spigot, so the name can be swapped later by lifting the (unglued) cap off.\n\n**Colours**\n- Load the 3MF so the colour parts stay registered; with one colour, print the merged STLs.',
     // Stylised caricature (suit, long tie, hair swoop, thumbs-up) standing on
     // a 60 × 50 × 40 plinth. Z up, figure faces -Y. Text on the plinth front.
     // Plinth is 3 parts, none glued (issue #23): a hollow base shell
@@ -432,7 +432,7 @@ const templates: Tpl[] = [
     id: 'coffin',
     name: 'Coffin',
     tags: ['memorial', 'novelty', 'halloween'],
-    notes: 'Print the body as placed, open side up — it\'s a hollow shell now, no supports needed. The lid drops on by its own locating spigot, no glue: lift it off to reach the (empty) inside. The handles hang mid-air off the sides: printed together (3MF) they need supports; otherwise print the handles STL on its own — the six pieces lie flat — and glue them on.',
+    notes: 'A hollow coffin with a lift-off lid.\n\n**Printing**\n- Print the body as placed, open side up. It is a hollow shell, so no supports are needed.\n- The handles hang mid-air off the sides: printed together (3MF) they need supports.\n- Otherwise print the handles STL on its own (the six pieces lie flat) and glue them on.\n\n**Lid**\n- The lid drops on by its own locating spigot, no glue. Lift it off to reach the (empty) inside.',
     // Classic six-sided toe-pincher, lying flat, head at -X. 90 long, 40 at
     // the shoulders, 22 tall: a hollow shell with an open top, and a
     // separate bevelled lid that registers on a locating spigot (issue #26,
@@ -514,7 +514,7 @@ const templates: Tpl[] = [
     id: 'phone-stand',
     name: 'Phone Stand',
     tags: ['desk', 'phone', 'gift'],
-    notes: 'Print as placed, base on the bed, no supports: the backrest leans 25° and the cable slot under the lip bridges. The raised adornments on the lip face are 1 mm proud and print fine on the vertical face.',
+    notes: 'Print as placed, base on the bed, no supports.\n\n- The backrest leans 25° and the cable slot under the lip bridges.\n- The raised adornments on the lip face are 1 mm proud and print fine on the vertical face.',
     colours: ['#2c3e50', '#f4f4f0', '#c0392b'],
     // Desk stand: 70 wide base with a front lip (cable slot underneath) and a
     // backrest leaning 25° back. Phone sits on the base against the backrest.
@@ -559,7 +559,7 @@ const templates: Tpl[] = [
     id: 'fish-plaque',
     name: 'Fishing Trophy Plaque',
     tags: ['plaque', 'fishing', 'trophy'],
-    notes: 'Print flat as placed, face up, no supports. The fish stands 3.5 mm proud and the engraved lines below it are flush inlays in their own colours, so load the 3MF for an AMS/MMU; the merged STL prints fine in one colour.',
+    notes: 'Print flat as placed, face up, no supports.\n\n**Colours**\n- The fish stands 3.5 mm proud, and the engraved lines below it are flush inlays in their own colours.\n- Load the 3MF for an AMS/MMU; the merged STL prints fine in one colour.',
     colours: ['#7b4a2d', '#d4a017', '#222226'],
     // Oval 120 × 80 × 5 with a raised rim; a big fish across the top half,
     // title and caption below. The fish is a symbol zone, so it can be
@@ -583,7 +583,7 @@ const templates: Tpl[] = [
     id: 'casino-chip',
     name: 'Casino Chip',
     tags: ['chip', 'novelty', 'game'],
-    notes: 'Print flat as placed, no supports. Three colours: load the 3MF and assign a filament to body, edge spots and inlay — all three are flush, so a single-colour print of the merged STL works too. The curved text is only 0.5 mm deep; 0.12 mm layers keep it crisp.',
+    notes: 'Print flat as placed, no supports.\n\n**Colours**\n- Three colours: load the 3MF and assign a filament to body, edge spots and inlay.\n- All three are flush, so a single-colour print of the merged STL works too.\n\n**Quality**\n- The curved text is only 0.5 mm deep; 0.12 mm layers keep it crisp.',
     // 40 mm poker chip, 3.3 thick, three colours like the real thing: the
     // body, eight full-height edge spots set into the rim, and a flush
     // centre inlay. Curved text around the face on the body, in the r
@@ -621,7 +621,7 @@ const templates: Tpl[] = [
     id: 'cat-tag',
     name: 'Cat Tag',
     tags: ['pet', 'tag', 'cat'],
-    notes: 'Print flat as placed, no supports. The phone number is engraved into the face on the bed, so use a smooth plate for a clean underside. Fit a split ring through the hole between the ears.',
+    notes: 'Print flat as placed, no supports.\n\n- The phone number is engraved into the face on the bed, so use a smooth plate for a clean underside.\n- Fit a split ring through the hole between the ears.',
     // Cat-head pet tag: oval face (wider than tall) with two small ears and
     // a hanging hole between them. Name across the face, phone on the back.
     colours: ['#8e44ad', '#f1c40f'],
@@ -652,7 +652,7 @@ const templates: Tpl[] = [
     id: 'coaster',
     name: 'Coaster',
     tags: ['coaster', 'kitchen', 'gift'],
-    notes: 'Print flat as placed, no supports. The rim is a separate part standing 1.2 mm above the face: print the merged STL in one colour, or pause at 4 mm and swap filament for a two-tone rim without an AMS. The curved text and icon are engraved 0.8 mm.',
+    notes: 'Print flat as placed, no supports.\n\n**Colours**\n- The rim is a separate part standing 1.2 mm above the face.\n- Print the merged STL in one colour, or pause at 4 mm and swap filament for a two-tone rim without an AMS.\n\n**Text**\n- The curved text and icon are engraved 0.8 mm.',
     // 90 mm round coaster, 4 thick, with a raised rim in a second colour.
     // Curved text top and bottom, a symbol in the middle.
     parts: [
@@ -680,7 +680,7 @@ const templates: Tpl[] = [
     id: 'luggage-tag',
     name: 'Luggage Tag',
     tags: ['tag', 'travel', 'luggage'],
-    notes: 'Print flat as placed, no supports. The address is engraved into the bed face, so use a smooth plate for a clean underside. Thread a strap through the slot at the left end.',
+    notes: 'Print flat as placed, no supports.\n\n- The address is engraved into the bed face, so use a smooth plate for a clean underside.\n- Thread a strap through the slot at the left end.',
     // 80 × 50 × 3 rounded tag with a strap slot at the left end. Name and
     // phone on the front, address on the back, an adornment by the slot.
     colours: ['#e67e22', '#f4f4f0'],
@@ -705,7 +705,7 @@ const templates: Tpl[] = [
     name: 'Cake Topper',
     tags: ['cake', 'party', 'celebration'],
     verified: true,
-    notes: 'Print flat as placed, no supports, 100 % infill for stiff prongs. The words and strip are one 2 mm piece; wash before use if it touches food, or wrap the prongs in cling film.',
+    notes: 'Print flat as placed, no supports.\n\n- Use 100 % infill for stiff prongs.\n- The words and strip are one 2 mm piece.\n- Wash before use if it touches food, or wrap the prongs in cling film.',
     // Printed flat: a banner strip with two prongs; the words are the model,
     // embossed 2 mm (the strip's own thickness) so they merge into one flat
     // piece. Letters overlap the strip along their bottom edge.
@@ -725,7 +725,7 @@ const templates: Tpl[] = [
     id: 'valentine-heart',
     name: 'Valentine Heart',
     tags: ['love', 'valentine', 'gift'],
-    notes: 'Print flat as placed, no supports. The arrow lies on the bed and runs under the heart’s top skin, so load the 3MF for two colours; a single-colour print of the merged STL works too. The filleted edge is stacked layers, so 0.12 mm layers smooth it.',
+    notes: 'Print flat as placed, no supports.\n\n**Colours**\n- The arrow lies on the bed and runs under the heart’s top skin, so load the 3MF for two colours.\n- A single-colour print of the merged STL works too.\n\n**Quality**\n- The filleted edge is stacked layers, so 0.12 mm layers smooth it.',
     // A 45 mm heart, 6 thick, with rounded (filleted) edges all round, shot
     // through by a flat cupid's arrow that lies on the bed and passes under
     // the heart's top skin. Initials on each lobe, a symbol below.
@@ -777,7 +777,7 @@ const templates: Tpl[] = [
     id: 'award-statuette',
     name: 'Award Statuette',
     tags: ['award', 'trophy', 'novelty'],
-    notes: 'Print upright as placed with tree supports: the crossguard, shoulders, hands and chin overhang, and the blade is thin — 0.12 mm layers and a slow outer wall help. Load the 3MF for the black plinth and gold figure, or print the two STLs separately and glue the reel to the plinth.',
+    notes: 'A two-part statuette: a black plinth and a gold figure, printed upright as placed.\n\n**Printing**\n- Use tree supports: the crossguard, shoulders, hands and chin overhang.\n- The blade is thin, so 0.12 mm layers and a slow outer wall help.\n\n**Colours and assembly**\n- Load the 3MF for the black plinth and gold figure.\n- Or print the two STLs separately and glue the reel to the plinth.',
     // Art-deco award figure: a smooth stylised knight with a featureless
     // head, broad shoulders and a narrow waist, both hands on a crusader's
     // sword held point-down between his feet, standing on a five-hole film
@@ -849,7 +849,7 @@ const templates: Tpl[] = [
     id: 'magnet-box',
     name: 'Magnetic Box',
     tags: ['box', 'gift', 'storage'],
-    notes: 'Two trays that close over each other, held shut by 2.5 mm round magnets in the four corners of each half — no hinge. Print both halves as placed, no supports. Glue a magnet into each corner recess (8 in all), every one the same way round: keep the same face up in every recess, and since the lid flips over to close, its magnets then meet the base\'s opposite poles and attract. Check with the lid before the glue sets. Flip the lid over onto the base to close it. The lid text is on the outside of the lid, which prints face down on the bed: the engraving is a recess open to the bed, so nothing needs supporting, and with a second colour it prints as a flush inlay.',
+    notes: 'Two trays that close over each other, held shut by 2.5 mm round magnets in the four corners of each half — no hinge.\n\n**Printing**\n- Print both halves as placed, no supports.\n- The lid text is on the outside of the lid, which prints face down on the bed. The engraving is a recess open to the bed, so nothing needs supporting, and with a second colour it prints as a flush inlay.\n\n**Magnets**\n- Glue a magnet into each corner recess (8 in all), every one the same way round: keep the same face up in every recess.\n- The lid flips over to close, so its magnets then meet the base\'s opposite poles and attract. Check with the lid before the glue sets.\n\n**Closing**\n- Flip the lid over onto the base to close it.',
     // Two identical 70 x 50 x 17 trays with a 2 mm rim rebate (inner lip on
     // the base, outer lip on the lid) so they locate on each other. Each has
     // a half-round corner post up to the rebate step carrying a Ø3.5 magnet
@@ -962,7 +962,7 @@ const templates: Tpl[] = [
     id: 'lunch-box',
     name: 'Lunch Box',
     tags: ['lunch', 'box', 'school', 'storage'],
-    notes: 'A 170 x 115 x 50 mm lunch box with a divider wall and a friction-fit lid — no hinge, no hardware. Print both parts as placed, no supports. The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it as part of the same object, so there is nothing to swap or paint. Underneath is a solid plug that drops inside the box walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support; the chamfer seats on the box rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way. Food safety: best for dry, cold food (sandwiches, fruit, crackers, snacks) — it is not watertight and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup. Print in PETG (PLA softens in a hot car or dishwasher); look for a filament that states it is food-contact safe, and use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead. Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.',
+    notes: 'A 170 x 115 x 50 mm lunch box with a divider wall and a friction-fit lid — no hinge, no hardware.\n\n**Printing**\n- Print both parts as placed, no supports.\n- The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it as part of the same object, so there is nothing to swap or paint.\n- Underneath is a solid plug that drops inside the box walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support. The chamfer seats on the box rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way.\n\n**Food safety**\n- Best for dry, cold food (sandwiches, fruit, crackers, snacks). It is not watertight, and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup.\n- Print in PETG (PLA softens in a hot car or dishwasher). Look for a filament that states it is food-contact safe.\n- Use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead.\n- Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.',
     // Base: rounded tray with a divider 30 mm left of centre, 5 mm short of
     // the rim so the lid plug clears it. Lid: solid plug, 45 degree chamfer
     // and a thin flange, printed face up, placed behind the base.
@@ -1012,7 +1012,7 @@ const templates: Tpl[] = [
     id: 'bento-box',
     name: 'Bento Box',
     tags: ['lunch', 'bento', 'box', 'school', 'storage'],
-    notes: 'A 190 x 120 x 40 mm bento box: a black outer shell and lid with a subtle seigaiha (wave) pattern engraved around the outside, and four removable white inserts — one large compartment on the left and three small ones stacked on the right. Print the shell and lid in black and the inserts in white. Everything prints as placed, no supports. The inserts are shown seated in the shell; each prints on its own (flat on the bed) and drops in with 0.3 mm clearance, standing well below the rim so the lid clears them. The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it, as part of the same object, so the text is the same colour as the lid. Underneath is a solid plug that drops inside the shell walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support; the chamfer seats on the shell rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way. Food safety: best for dry, cold food (sandwiches, fruit, crackers, snacks) — it is not watertight and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup. Print in PETG (PLA softens in a hot car or dishwasher); look for a filament that states it is food-contact safe, and use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead. Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.',
+    notes: 'A 190 x 120 x 40 mm bento box: a black shell and lid with a subtle wave pattern engraved around the outside, and four removable white inserts — one large compartment and three small ones. Friction-fit lid, no hardware.\n\n**Printing**\n- Print the shell and lid in black and the inserts in white. Everything prints as placed, no supports.\n- The inserts are shown seated in the shell; each prints on its own, flat on the bed, and drops in with 0.3 mm clearance. They stand well below the rim so the lid clears them.\n- The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it as part of the same object, so the text is the same colour as the lid.\n- Underneath is a solid plug that drops inside the shell walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support. The chamfer seats on the shell rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way.\n\n**Food safety**\n- Best for dry, cold food (sandwiches, fruit, crackers, snacks). It is not watertight, and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup.\n- Print in PETG (PLA softens in a hot car or dishwasher). Look for a filament that states it is food-contact safe.\n- Use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead.\n- Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.',
     // Shell: plain tray. Inserts: thin-walled open boxes that tile the cavity
     // (large on the left, three small in a column on the right), each
     // clipped to the shell's rounded cavity so the corners nest.
@@ -1113,7 +1113,7 @@ const templates: Tpl[] = [
     id: 'toolbox',
     name: 'Toolbox',
     tags: ['toolbox', 'tools', 'storage', 'workshop'],
-    notes: 'An open carry-all tray with a tall tent-shaped plate at each end and a long front compartment plus three small ones behind it. The handle is a separate round bar that snaps into a hole at the top of each end plate — no nuts, glue or hardware — and it can swing freely on those two pins, so the box hangs level whichever way you pick it up. Print the box as placed, no supports. Print the handle as placed too, lying on its side: the flat on its underside is the bed contact, and the split pins at each end print with their layers running along them, which is the strong direction. Use PETG or tougher; PLA pins can crack when you snap them in. To fit, push each pin into its hole until the barb clicks through, one end at a time. To remove, squeeze the two halves of a pin together with pliers and pull. The pins carry the full weight of the box, so keep loads reasonable (a few kilos of hand tools is fine, not a bag of bricks). The name and adornment are engraved into the front wall; fill them with a second colour for an inlay.',
+    notes: 'An open carry-all tray with a tall tent-shaped plate at each end, a long front compartment and three small ones behind it. The handle snaps into the end plates — no nuts, glue or hardware — and swings freely, so the box hangs level.\n\n**Printing**\n- Print the box as placed, no supports.\n- Print the handle as placed too, lying on its side: the flat on its underside is the bed contact, and the split pins at each end print with their layers running along them, which is the strong direction.\n- Use PETG or tougher; PLA pins can crack when you snap them in.\n\n**Fitting the handle**\n- Push each pin into its hole until the barb clicks through, one end at a time.\n- To remove, squeeze the two halves of a pin together with pliers and pull.\n- The pins carry the full weight of the box, so keep loads reasonable (a few kilos of hand tools is fine, not a bag of bricks).\n\n**Text and colour**\n- The name and adornment are engraved into the front wall; fill them with a second colour for an inlay.',
     parts: [
       { id: 'base', label: 'Box', colour: 0 },
       { id: 'handle', label: 'Handle', colour: 1 },
@@ -1252,7 +1252,7 @@ const templates: Tpl[] = [
     id: 'picture-frame',
     name: 'Picture Frame',
     tags: ['frame', 'photo', 'home', 'gift'],
-    notes: 'Three parts, shown assembled but printed one at a time — the STL zip has a file per part. Frame and stand print as placed with no supports; flip the back panel so the keyhole recess faces up. A 6 x 4" (152 x 102 mm) photo drops into the rebate, then the panel holds it in; the stand clips onto the bottom rail, or hang it on a screw through the keyhole.',
+    notes: 'Three parts, shown assembled but printed one at a time — the STL zip has a file per part.\n\n**Printing**\n- Frame and stand print as placed with no supports.\n- Flip the back panel so the keyhole recess faces up.\n\n**Assembly**\n- A 6 x 4" (152 x 102 mm) photo drops into the rebate, then the panel holds it in.\n- The stand clips onto the bottom rail, or hang it on a screw through the keyhole.',
     // 6 x 4" photo in a 176 x 126 x 10 frame with a 15 mm border: text top
     // and bottom, three adornments repeating around the border. The back
     // panel fills the rebate and carries a keyhole hanger; the desk stand
@@ -1325,7 +1325,7 @@ const templates: Tpl[] = [
     name: 'Beer Can Mug',
     tags: ['mug', 'beer', 'drink', 'novelty'],
     verified: true,
-    notes: 'Prints upright as placed. The body needs no supports, but the handle does — turn on tree supports (from the build plate is enough) or the underside of the handle will droop. A 355 ml can (66 mm) drops into the sleeve with 2 mm clearance all round; most slim bottles (up to ~74 mm) fit too, but a wide stubby will not. Text and adornments are engraved into the outside wall, and they sit in two short bands rather than spread up the whole mug, so a two-colour AMS print only swaps filament across those few layers. To cut the purge waste further: in Orca/Bambu Studio, turn on "Flush into objects\' infill" (Print Settings > Others) so the purged filament goes into the mug\'s own infill instead of a waste tower — or skip the swap altogether and print the merged STL in one colour, which leaves the engraving open with no purge at all.',
+    notes: 'A beer-can mug that prints upright as placed, with a sleeve for a can or slim bottle.\n\n**Printing**\n- The body needs no supports, but the handle does: turn on tree supports (from the build plate is enough) or the underside of the handle will droop.\n\n**What fits**\n- A 355 ml can (66 mm) drops into the sleeve with 2 mm clearance all round.\n- Most slim bottles (up to ~74 mm) fit too, but a wide stubby will not.\n\n**Colour**\n- Text and adornments are engraved into the outside wall, in two short bands rather than up the whole mug, so a two-colour AMS print only swaps filament across those few layers.\n- To cut the purge waste further, in Orca/Bambu Studio turn on "Flush into objects\' infill" (Print Settings > Others), so the purged filament goes into the mug\'s own infill instead of a waste tower.\n- Or skip the swap altogether and print the merged STL in one colour, which leaves the engraving open with no purge at all.',
     // A sleeve most cans and slim bottles drop into: 82 outside, 74 bore,
     // 115 tall on a 4 mm base (4 mm wall). Text wraps right around the body
     // opposite the handle and an adornment repeats eight times round the
@@ -1382,7 +1382,7 @@ const templates: Tpl[] = [
     name: 'Keycap',
     tags: ['keyboard', 'keycap', 'desk', 'gadget'],
     verified: true,
-    notes: 'Cherry MX fit: a 1u cap, 18 mm at the base and 9 mm tall, with a 4.2 x 1.35 mm cross socket. Print upside down — top face on the plate, skirt and stem upward — so it needs no supports and the legend comes out crisp off a smooth plate. Keep the legend engraved: embossed text would have to print into the bed. 0.12 mm layers; if the switch is tight, file the cross rather than reprinting.',
+    notes: 'Cherry MX fit: a 1u cap, 18 mm at the base and 9 mm tall, with a 4.2 x 1.35 mm cross socket.\n\n**Printing**\n- Print upside down: top face on the plate, skirt and stem upward. It needs no supports, and the legend comes out crisp off a smooth plate.\n- Keep the legend engraved: embossed text would have to print into the bed.\n- Use 0.12 mm layers.\n\n**Fit**\n- If the switch is tight, file the cross rather than reprinting.',
     // 1u keycap: a tapered hollow shell (18 -> 14 over 9 mm) on a central
     // Cherry cross stem that runs up to the underside of the top so the
     // legend sits on solid material. One legend zone, text or adornment.
@@ -1526,7 +1526,7 @@ const templates: Tpl[] = [
         zones: [icon(-20, 0, 10, 'moon'), tz('line1', 'Line 1', 6, 3, 36, 10, 'DREAM'), tz('line2', 'Line 2', 4, -7, 40, 6, 'big')],
       },
     ]
-    const notes = 'Print face up with supports OFF: the magnet pockets on the back are bridged over, and supports would fill them. Glue a Ø6 × 2 mm disc magnet into each pocket afterwards. For a smoother top, set Ironing to "Top surface" in your slicer.'
+    const notes = 'Print face up with supports OFF.\n\n- The magnet pockets on the back are bridged over, and supports would fill them.\n- Glue a Ø6 × 2 mm disc magnet into each pocket afterwards.\n- For a smoother top, set Ironing to "Top surface" in your slicer.'
     return list.map((t) => ({ ...t, notes }))
   })(),
 ]

@@ -27,7 +27,7 @@
     "#d4a017",
     "#f4f4f0"
   ],
-  "notes": "Print flat as placed, no supports. The arrow lies on the bed and runs under the heart’s top skin, so load the 3MF for two colours; a single-colour print of the merged STL works too. The filleted edge is stacked layers, so 0.12 mm layers smooth it.",
+  "notes": "Print flat as placed, no supports.\n\n**Colours**\n- The arrow lies on the bed and runs under the heart’s top skin, so load the 3MF for two colours.\n- A single-colour print of the merged STL works too.\n\n**Quality**\n- The filleted edge is stacked layers, so 0.12 mm layers smooth it.",
   "zones": [
     {
       "id": "left",

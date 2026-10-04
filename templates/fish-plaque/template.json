@@ -14,7 +14,7 @@
     "#d4a017",
     "#222226"
   ],
-  "notes": "Print flat as placed, face up, no supports. The fish stands 3.5 mm proud and the engraved lines below it are flush inlays in their own colours, so load the 3MF for an AMS/MMU; the merged STL prints fine in one colour.",
+  "notes": "Print flat as placed, face up, no supports.\n\n**Colours**\n- The fish stands 3.5 mm proud, and the engraved lines below it are flush inlays in their own colours.\n- Load the 3MF for an AMS/MMU; the merged STL prints fine in one colour.",
   "zones": [
     {
       "id": "fish",

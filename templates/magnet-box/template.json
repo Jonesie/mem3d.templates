@@ -27,7 +27,7 @@
     "#d4a017",
     "#f4f4f0"
   ],
-  "notes": "Two trays that close over each other, held shut by 2.5 mm round magnets in the four corners of each half — no hinge. Print both halves as placed, no supports. Glue a magnet into each corner recess (8 in all), every one the same way round: keep the same face up in every recess, and since the lid flips over to close, its magnets then meet the base's opposite poles and attract. Check with the lid before the glue sets. Flip the lid over onto the base to close it. The lid text is on the outside of the lid, which prints face down on the bed: the engraving is a recess open to the bed, so nothing needs supporting, and with a second colour it prints as a flush inlay.",
+  "notes": "Two trays that close over each other, held shut by 2.5 mm round magnets in the four corners of each half — no hinge.\n\n**Printing**\n- Print both halves as placed, no supports.\n- The lid text is on the outside of the lid, which prints face down on the bed. The engraving is a recess open to the bed, so nothing needs supporting, and with a second colour it prints as a flush inlay.\n\n**Magnets**\n- Glue a magnet into each corner recess (8 in all), every one the same way round: keep the same face up in every recess.\n- The lid flips over to close, so its magnets then meet the base's opposite poles and attract. Check with the lid before the glue sets.\n\n**Closing**\n- Flip the lid over onto the base to close it.",
   "zones": [
     {
       "id": "line1",

@@ -13,7 +13,7 @@
     "#2c3e50",
     "#c0392b"
   ],
-  "notes": "Print flat as placed, face up, no supports. The text is engraved; in a second colour it exports as a flush inlay, so load the 3MF for an AMS/MMU or print the merged STL in one colour.",
+  "notes": "Print flat as placed, face up, no supports.\n\n**Colours**\n- The text is engraved; in a second colour it exports as a flush inlay.\n- Load the 3MF for an AMS/MMU, or print the merged STL in one colour.",
   "zones": [
     {
       "id": "icon",
