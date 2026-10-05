@@ -57,7 +57,7 @@
       "mode": "engrave",
       "depth": 0.8,
       "maxLines": 1,
-      "default": "star"
+      "default": "cookie"
     },
     {
       "id": "line1",
@@ -84,7 +84,7 @@
       "mode": "engrave",
       "depth": 0.8,
       "maxLines": 1,
-      "default": "COFFEE",
+      "default": "Baker Street",
       "font": "Anton"
     },
     {
@@ -112,7 +112,7 @@
       "mode": "engrave",
       "depth": 0.8,
       "maxLines": 2,
-      "default": "open all day",
+      "default": "Fresh Donuts 24/7",
       "font": "Fredoka"
     }
   ]
