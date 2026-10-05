@@ -57,7 +57,7 @@
       "mode": "engrave",
       "depth": 0.8,
       "maxLines": 1,
-      "default": "cookie"
+      "default": "trout"
     },
     {
       "id": "line1",
@@ -84,8 +84,8 @@
       "mode": "engrave",
       "depth": 0.8,
       "maxLines": 1,
-      "default": "Baker Street",
-      "font": "Anton"
+      "default": "Pescatorio",
+      "font": "Pacifico"
     },
     {
       "id": "line2",
@@ -112,7 +112,7 @@
       "mode": "engrave",
       "depth": 0.8,
       "maxLines": 2,
-      "default": "Fresh Donuts 24/7",
+      "default": "Fresh fish and seafood daily",
       "font": "Fredoka"
     }
   ]

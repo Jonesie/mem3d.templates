@@ -1297,11 +1297,11 @@ const templates: Tpl[] = [
     zones: [
       // Front face (z = 60), viewed from the front: up = +y. Engraved 0.8 mm by default (the editor can emboss instead); the dark text is a colour-change region.
       { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'face', colour: 1, origin: [0, 104, 60], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 40, height: 40, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'cookie' },
+        width: 40, height: 40, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'trout' },
       { id: 'line1', label: 'Name', part: 'face', colour: 1, origin: [0, 62, 60], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 132, height: 36, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'Baker Street', font: 'Anton' },
+        width: 132, height: 36, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'Pescatorio', font: 'Pacifico' },
       { id: 'line2', label: 'Subtitle', part: 'face', colour: 1, origin: [0, 28, 60], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 120, height: 24, mode: 'engrave', depth: 0.8, maxLines: 2, default: 'Fresh Donuts 24/7', font: 'Fredoka' },
+        width: 120, height: 24, mode: 'engrave', depth: 0.8, maxLines: 2, default: 'Fresh fish and seafood daily', font: 'Fredoka' },
     ],
   },
   {
