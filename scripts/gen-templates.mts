@@ -1250,18 +1250,23 @@ const templates: Tpl[] = [
     id: 'led-box-sign',
     name: 'LED Box Sign',
     tags: ['sign', 'light', 'led', 'shop', 'wall', 'bedroom'],
-    notes: 'A wall-hanging light box in the style of a commercial acrylic LED sign: a deep, squarish translucent shell with a lettered front face and an **open back**, so a light strip fits inside and the whole box glows. The lettering is dark against the lit background.\n\n**Printing**\n- Print front face down, open back facing up, with no supports. The walls are plain verticals and the lugs sit flat at the open rim, so nothing overhangs. Rotate the model in your slicer if it shows the front facing up.\n- Use natural or white translucent PETG (or PLA) so light passes through the thin walls. Print slowly with 0.2 mm layers, 100% infill and 4 or more perimeters. The walls are 2 mm, so they are effectively solid.\n- The lettering is engraved 0.8 mm into the front face. Pause or change filament to black at the layer where the lettering starts, so the letters print as a dark, opaque region. Make the front face about 2.4 mm so there is still 1.6 mm of translucent filament behind the dark letters.\n- Keep the lettering bold: a heavy font on a shorter line of text reads best when lit.\n\n**Hanging**\n- Two keyhole lugs are built into the back rim, inside the top wall, so the box sits flat against the wall with nothing visible. Mark two screw positions 90 mm apart, on a level line, and drive in screws for 4 mm shanks with heads up to 8 mm across (a no. 6 or M4 pan head is about right), leaving about 3 mm of shank clear of the wall.\n- Lift the box, drop the large end of each keyhole over its screw head, then let the box slide down so the screws lock into the narrow slots.\n- The lugs are 4 mm thick plates printed flat, so layer lines run along the load and they hold the weight of the box and light strip. For a heavier fit, use a wall anchor at each screw and add a third fixing.\n\n**Lights and power**\n- Use a low-heat LED strip, stuck around the inside of the walls, so nothing softens. The inside is 156 mm wide, 136 mm tall and 56 mm deep. A frosted diffuser or a strip that faces the walls avoids hot spots on the face.\n- Use LEDs only: a candle or tea light will soften the print.\n- The power lead leaves through a 14 x 9 mm notch in the bottom wall, open to the back rim, so a USB or barrel plug can be fitted from behind before the box goes on the wall. The wall closes the notch once the box is hung. Plug the lead in and fit the strip first, then hang the box.',
-    // Open-backed box 160 x 140 x 60 (depth 3/8 of the width), 2 mm walls all round so the sides glow too. The
-    // back opens at z = 0; the front face at z = 60 is 2.4 mm thick. Two keyhole lugs are plates flush with the back
-    // rim, fused into the top wall, so the box hangs flat. A 14 x 9 mm notch in the bottom wall, open to the rim,
-    // takes the power lead.
+    notes: 'A wall-hanging light box in the style of a commercial acrylic LED sign: a deep, squarish translucent shell with a lettered front face and an **open back**, so a light strip fits inside and the whole box glows. It prints in two parts, the shell and the front face, and the face is glued on after printing. The lettering is dark against the lit background.\n\n**Printing the parts (no supports needed)**\n- **Shell:** print standing on its back rim, with the open front facing up. The rim sits flat on the bed, so the hanging lugs print flat on the bed and the walls print straight up. Use natural or white translucent PETG (or PLA), 0.2 mm layers, and 4 or more perimeters. The walls are 2 mm, so they are effectively solid. The small power notch in the bottom wall is a short 14 mm bridge, which prints cleanly.\n- **Front face:** print flat, lettering side up. You can choose engraved or embossed lettering in the editor, and either prints face up with no supports. Use natural or white translucent filament, 0.2 mm layers and 100% infill. For dark lettering, change filament to black at the layer where the lettering starts, so the letters are an opaque dark region. Engraved letters are 0.8 mm deep into a 2.4 mm face, so 1.6 mm of translucent filament stays behind the dark letters.\n- Keep the lettering bold: a heavy font on a short line of text reads best when lit.\n\n**Assembly**\n- Dry-fit the face first. A ring on its back sits just inside the shell walls and locates it.\n- Fit the light strip and feed the power lead out through the notch before you glue the face on, since the face closes the box.\n- Glue the face to the front rim with a thin bead of cyanoacrylate or PETG-safe adhesive, and clamp or tape it while it sets.\n\n**Hanging**\n- Two keyhole lugs are built into the back rim, inside the top wall, so the box sits flat against the wall with nothing visible. Mark two screw positions 90 mm apart, on a level line, and drive in screws for 4 mm shanks with heads up to 8 mm across (a no. 6 or M4 pan head is about right), leaving about 3 mm of shank clear of the wall.\n- Lift the box, drop the large end of each keyhole over its screw head, then let the box slide down so the screws lock into the narrow slots.\n- The lugs are 4 mm thick plates printed flat, so layer lines run along the load and they hold the weight of the box and light strip. For a heavier fit, use a wall anchor at each screw.\n\n**Lights and power**\n- Use a low-heat LED strip, stuck around the inside of the walls, so nothing softens. The inside is 156 mm wide, 136 mm tall and 57.6 mm deep. A frosted diffuser or a strip that faces the walls avoids hot spots on the face.\n- Use LEDs only: a candle or tea light will soften the print.\n- The power lead leaves through a 14 x 9 mm notch in the bottom wall, open to the back rim, so a USB or barrel plug can be fitted from behind. The wall closes the notch once the box is hung. Fit the strip and lead first, then glue the face on and hang the box.',
+    // Box 160 x 140 x 60 (depth 3/8 of the width), 2 mm walls all round so the sides glow too. Two parts: the shell is open
+    // at the back (z = 0) AND the front, and prints back rim down; the 2.4 mm front face plate (z 57.6 to 60) prints face up and
+    // glues on, with a locating ring that sits just inside the walls. Two keyhole lugs are plates flush with the back rim,
+    // fused into the top wall, so the box hangs flat and they print flat on the bed. A 14 x 9 mm notch in the bottom wall,
+    // open to the rim, takes the power lead.
+    parts: [
+      { id: 'shell', label: 'Shell (back rim down)', colour: 0 },
+      { id: 'face', label: 'Front face (glue on, print face up)', colour: 0 },
+    ],
     colours: ['#f4f4f0', '#1a1a1a'],
     build: () => {
       const W = 160, H = 140, D = 60, WALL = 2, FRONT = 2.4
       const slab = (x0: number, x1: number, y0: number, y1: number, z0: number, z1: number) =>
         Manifold.cube([x1 - x0, y1 - y0, z1 - z0], false).translate(x0, y0, z0)
-      const outer = Manifold.extrude(roundedRect(W, H, 8), D).translate(0, H / 2, 0)
-      const cavity = Manifold.extrude(roundedRect(W - 2 * WALL, H - 2 * WALL, 6), D - FRONT + 1).translate(0, H / 2, -1)
+      const outer = Manifold.extrude(roundedRect(W, H, 8), D - FRONT).translate(0, H / 2, 0)   // the face plate sits on the rim
+      const cavity = Manifold.extrude(roundedRect(W - 2 * WALL, H - 2 * WALL, 6), D + 2).translate(0, H / 2, -1)
       // Keyhole lugs: a 4 mm plate flush with the back rim, hanging 24 mm below the top wall, burying itself
       // 1 mm into it. The 9 mm head hole sits 16 mm below the wall; the 4.4 mm slot runs up from it.
       const lug = (x: number) => {
@@ -1274,15 +1279,21 @@ const templates: Tpl[] = [
         return plate.subtract(key)
       }
       const lugs = Manifold.union([lug(-45), lug(45)])
-      return Manifold.union([outer.subtract(cavity), lugs]).subtract(slab(43, 57, -1, WALL + 1, -1, 9))
+      const shell = Manifold.union([outer.subtract(cavity), lugs]).subtract(slab(43, 57, -1, WALL + 1, -1, 9))
+      // Face: the plate in the box's own outline, plus a 1.6 mm ring 3 mm deep that sits 0.3 mm inside the walls.
+      const plate = Manifold.extrude(roundedRect(W, H, 8), FRONT).translate(0, H / 2, D - FRONT)
+      const ringOut = roundedRect(W - 2 * WALL - 0.6, H - 2 * WALL - 0.6, 5.7)
+      const ring = Manifold.extrude(ringOut.subtract(ringOut.offset(-1.6, 'Round', 2, 32)), 3.01)
+        .translate(0, H / 2, D - FRONT - 3)
+      return { shell, face: Manifold.union([plate, ring]) }
     },
     zones: [
-      // Front face (z = 60), viewed from the front: up = +y. Engraved 0.8 mm; the dark text is a colour-change region.
-      { id: 'icon', label: 'Adornment', kind: 'symbol', colour: 1, origin: [0, 104, 60], normal: [0, 0, 1], up: [0, 1, 0],
+      // Front face (z = 60), viewed from the front: up = +y. Engraved 0.8 mm by default (the editor can emboss instead); the dark text is a colour-change region.
+      { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'face', colour: 1, origin: [0, 104, 60], normal: [0, 0, 1], up: [0, 1, 0],
         width: 40, height: 40, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'star' },
-      { id: 'line1', label: 'Name', colour: 1, origin: [0, 62, 60], normal: [0, 0, 1], up: [0, 1, 0],
+      { id: 'line1', label: 'Name', part: 'face', colour: 1, origin: [0, 62, 60], normal: [0, 0, 1], up: [0, 1, 0],
         width: 132, height: 36, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'COFFEE', font: 'Anton' },
-      { id: 'line2', label: 'Subtitle', colour: 1, origin: [0, 28, 60], normal: [0, 0, 1], up: [0, 1, 0],
+      { id: 'line2', label: 'Subtitle', part: 'face', colour: 1, origin: [0, 28, 60], normal: [0, 0, 1], up: [0, 1, 0],
         width: 120, height: 24, mode: 'engrave', depth: 0.8, maxLines: 2, default: 'open all day', font: 'Fredoka' },
     ],
   },
