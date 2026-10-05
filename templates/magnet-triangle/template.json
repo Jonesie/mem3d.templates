@@ -37,8 +37,8 @@
       ],
       "width": 12,
       "height": 12,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "star"
     },
@@ -63,8 +63,8 @@
       ],
       "width": 40,
       "height": 11,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "WOW"
     },
@@ -89,8 +89,8 @@
       ],
       "width": 54,
       "height": 7,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "you did it"
     }

@@ -1250,7 +1250,7 @@ const templates: Tpl[] = [
     id: 'led-box-sign',
     name: 'LED Box Sign',
     tags: ['sign', 'light', 'led', 'shop', 'wall', 'bedroom'],
-    notes: 'A wall-hanging light box in the style of a commercial acrylic LED sign: a deep, squarish translucent shell with a lettered front face and an **open back**, so a light strip fits inside and the whole box glows. It prints in two parts, the shell and the front face, and the face is glued on after printing. The lettering is dark against the lit background.\n\n**Printing the parts**\n- **Shell:** print standing on its back rim, with the open front facing up. The rim sits flat on the bed, so the hanging lugs print flat on the bed and the walls print straight up. Neither part needs supports. Use natural or white translucent PETG (or PLA), 0.2 mm layers, and 4 or more perimeters. The walls are 2 mm, so they are effectively solid. The small power notch in the bottom wall is a short 14 mm bridge, which prints cleanly.\n- **Front face:** print flat, lettering side up. You can choose engraved or embossed lettering in the editor, and either prints face up with no supports. Use natural or white translucent filament, 0.2 mm layers and 100% infill. For dark lettering, change filament to black at the layer where the lettering starts, so the letters are an opaque dark region. Engraved letters are 0.8 mm deep into a 2.4 mm face, so 1.6 mm of translucent filament stays behind the dark letters.\n- Keep the lettering bold: a heavy font on a short line of text reads best when lit.\n\n**Assembly**\n- A thin ring on the back of the face drops just inside the shell walls and holds the face in position, so dry-fit it first and check it seats evenly. Glue the face to the front rim of the shell.\n- Fit the light strip and feed the power lead out through the notch before you glue the face on, since the face closes the box.\n- Glue the face to the front rim with a thin bead of cyanoacrylate or PETG-safe adhesive along the whole rim, and clamp or tape it while it sets.\n\n**Hanging**\n- A 6 mm wide, 4 mm thick flange runs round the inside of the back rim. It stiffens the walls and gives the box a wide, flat surface against the wall. Two keyhole lugs are built into the same rim, inside the top wall, so the box sits flat against the wall with nothing visible. Mark two screw positions 90 mm apart, on a level line, and drive in screws for 4 mm shanks with heads up to 8 mm across (a no. 6 or M4 pan head is about right), leaving about 3 mm of shank clear of the wall.\n- Lift the box, drop the large end of each keyhole over its screw head, then let the box slide down so the screws lock into the narrow slots.\n- The lugs are 4 mm thick plates printed flat, so layer lines run along the load and they hold the weight of the box and light strip. For a heavier fit, use a wall anchor at each screw.\n\n**Lights and power**\n- Use a low-heat LED strip, stuck around the inside of the walls, so nothing softens. The inside is 156 mm wide, 136 mm tall and 57.6 mm deep above the 4 mm back flange, which narrows the back opening to 144 x 124 mm, so fit the strip through the back before you hang the box. A frosted diffuser or a strip that faces the walls avoids hot spots on the face.\n- Use LEDs only: a candle or tea light will soften the print.\n- The power lead leaves through a 14 x 9 mm notch in the bottom wall, open to the back rim, so a USB or barrel plug can be fitted from behind. The wall closes the notch once the box is hung. Fit the strip and lead first, then glue the face on and hang the box.',
+    notes: 'A wall-hanging light box in the style of a commercial acrylic LED sign: a deep, squarish translucent shell with a lettered front face and an **open back**, so a light strip fits inside and the whole box glows. It prints in two parts, the shell and the front face, and the face is glued on after printing. The raised lettering is dark against the lit background.\n\n**Printing the parts**\n- **Shell:** print standing on its back rim, with the open front facing up. The rim sits flat on the bed, so the hanging lugs print flat on the bed and the walls print straight up. Neither part needs supports. A cross of two 10 mm wide ribs runs corner to corner across the open back, 2 mm thick, and prints flat on the bed with the rest of the rim. Use natural or white translucent PETG (or PLA), 0.2 mm layers, and 4 or more perimeters. The walls are 2 mm, so they are effectively solid. The small power notch in the bottom wall is a short 14 mm bridge, which prints cleanly.\n- **Front face:** print flat, lettering side up. The lettering and adornment are embossed 1 mm, raised from the face, and print face up with no supports. (You can switch them to engraved in the editor; that prints face up too.) Use natural or white translucent filament, 0.2 mm layers and 100% infill. For dark lettering, change filament to black at the layer where the lettering starts, 2.4 mm up, so the raised letters are an opaque dark region on the translucent face.\n- Keep the lettering bold: a heavy font on a short line of text reads best when lit.\n\n**Assembly**\n- A thin ring on the back of the face drops just inside the shell walls and holds the face in position, so dry-fit it first and check it seats evenly. Glue the face to the front rim of the shell.\n- Fit the light strip and feed the power lead out through the notch before you glue the face on, since the face closes the box.\n- Glue the face to the front rim with a thin bead of cyanoacrylate or PETG-safe adhesive along the whole rim, and clamp or tape it while it sets.\n\n**Hanging**\n- A 6 mm wide, 4 mm thick flange runs round the inside of the back rim. It stiffens the walls and gives the box a wide, flat surface against the wall. Two keyhole lugs are built into the same rim, inside the top wall, so the box sits flat against the wall with nothing visible. Mark two screw positions 90 mm apart, on a level line, and drive in screws for 4 mm shanks with heads up to 8 mm across (a no. 6 or M4 pan head is about right), leaving about 3 mm of shank clear of the wall.\n- Lift the box, drop the large end of each keyhole over its screw head, then let the box slide down so the screws lock into the narrow slots.\n- The lugs are 4 mm thick plates printed flat, so layer lines run along the load and they hold the weight of the box and light strip. For a heavier fit, use a wall anchor at each screw.\n\n**Lights and power**\n- **Mounting the lights:** the corner-to-corner cross across the open back is there to hold a central light. It has a 24 mm round pad where the ribs cross, 2 mm thick, so you can stick or screw a light or LED module to it, or run a strip along the ribs. If you are hanging the box over a wall fitting light, cut the cross out with a craft knife or snips, which takes a minute since it is only 2 mm thick, and the back is then open to the fitting. The 4 mm flange round the rim is what holds the box stiff, so leave it.\n- Use a low-heat LED strip, stuck around the inside of the walls or along the cross, so nothing softens. The inside is 156 mm wide, 136 mm tall and 57.6 mm deep above the 4 mm back flange, which narrows the back opening to 144 x 124 mm, so fit the strip and light through the back before you hang the box. A frosted diffuser or a strip that faces the walls avoids hot spots on the face.\n- Use LEDs only: a candle or tea light will soften the print.\n- The power lead leaves through a 14 x 9 mm notch in the bottom wall, open to the back rim, so a USB or barrel plug can be fitted from behind. The wall closes the notch once the box is hung. Fit the strip and lead first, then glue the face on and hang the box.',
     // Box 160 x 140 x 60 (depth 3/8 of the width), 2 mm walls all round so the sides glow too. Two parts: the shell is open
     // at the back (z = 0) AND the front, and prints back rim down; the 2.4 mm front face plate (z 57.6 to 60) prints face up and
     // glues on, with a locating ring on its back, and glues onto the shell's front rim. Two keyhole lugs are plates flush with the back rim,
@@ -1284,7 +1284,13 @@ const templates: Tpl[] = [
       // Back flange: a 6 mm x 4 mm band round the inside of the back rim, flat on the bed, so it needs no supports.
       // It stiffens the walls, gives the sign a wide face to sit on the wall, and joins the lugs.
       const back = Manifold.extrude(hole.subtract(hole.offset(-6, 'Round', 2, 32)), 4).translate(0, H / 2, 0)
-      const shell = Manifold.union([outer.subtract(cavity), lugs, back]).subtract(slab(43, 57, -1, WALL + 7, -1, 9))
+      // Light mount: two 10 mm ribs corner to corner across the back, 2 mm thick (half the flange), with a 24 mm
+      // pad where they cross. They join the flange at the corners and can be cut out for a wall fitting light.
+      const IW = W - 2 * WALL, IH = H - 2 * WALL, ang = Math.atan2(IH, IW) * 180 / Math.PI
+      const rib = (a: number) => Manifold.cube([Math.hypot(IW, IH) + 10, 10, 2], true).rotate(0, 0, a).translate(0, H / 2, 1)
+      const cross = Manifold.union([rib(ang), rib(-ang), Manifold.cylinder(2, 12, 12, 48).translate(0, H / 2, 0)])
+        .intersect(Manifold.extrude(hole, 2).translate(0, H / 2, 0))
+      const shell = Manifold.union([outer.subtract(cavity), lugs, back, cross]).subtract(slab(43, 57, -1, WALL + 7, -1, 9))
       // Face: the plate in the box's outline, plus a 1.6 mm locating ring on its back that drops inside
       // the shell walls with 0.3 mm to spare, so the face seats itself before gluing.
       const plate = Manifold.extrude(roundedRect(W, H, 8), FRONT).translate(0, H / 2, D - FRONT)
@@ -1295,13 +1301,13 @@ const templates: Tpl[] = [
       return { shell, face }
     },
     zones: [
-      // Front face (z = 60), viewed from the front: up = +y. Engraved 0.8 mm by default (the editor can emboss instead); the dark text is a colour-change region.
+      // Front face (z = 60), viewed from the front: up = +y. Embossed 1 mm by default (the editor can engrave instead); the raised dark text is a colour-change region.
       { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'face', colour: 1, origin: [0, 104, 60], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 40, height: 40, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'trout' },
+        width: 40, height: 40, mode: 'emboss', depth: 1, maxLines: 1, default: 'trout' },
       { id: 'line1', label: 'Name', part: 'face', colour: 1, origin: [0, 62, 60], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 132, height: 36, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'Pescatorio', font: 'Pacifico' },
+        width: 132, height: 36, mode: 'emboss', depth: 1, maxLines: 1, default: 'Pescatorio', font: 'Pacifico' },
       { id: 'line2', label: 'Subtitle', part: 'face', colour: 1, origin: [0, 28, 60], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 120, height: 24, mode: 'engrave', depth: 0.8, maxLines: 2, default: 'Fresh fish and seafood daily', font: 'Fredoka' },
+        width: 120, height: 24, mode: 'emboss', depth: 1, maxLines: 2, default: 'Fresh fish and seafood daily', font: 'Fredoka' },
     ],
   },
   {
@@ -1428,7 +1434,7 @@ const templates: Tpl[] = [
         { id: 'text', label: 'Wrap-around text', colour: 1, origin: [-RO, 0, 72], ...face,
           width: 170, height: 34, mode: 'engrave', depth: 1, maxLines: 2, default: 'CHEERS', font: 'Anton', wrap },
         { id: 'band', label: 'Adornment (repeats around the foot)', kind: 'symbol', colour: 1, origin: [-RO, 0, 12], ...face,
-          width: 14, height: 14, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'star', wrap,
+          width: 14, height: 14, mode: 'emboss', depth: 1, maxLines: 1, default: 'star', wrap,
           repeat: [1, 2, 3, 4, 5, 6, 7].map((i): Vec3 => [(i * C) / 8, 0, 0]) },
       ] as Zone[]
     })(),
@@ -1461,9 +1467,9 @@ const templates: Tpl[] = [
     },
     zones: [
       { id: 'legend', label: 'Legend', origin: [0, 0, 9], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 10, height: 10, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'A', font: 'Anton', colour: 1 },
+        width: 10, height: 10, mode: 'emboss', depth: 1, maxLines: 1, default: 'A', font: 'Anton', colour: 1 },
       { id: 'icon', label: 'Adornment (instead of the legend)', kind: 'symbol', origin: [0, 0, 9], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 10, height: 10, mode: 'engrave', depth: 0.8, maxLines: 1, default: '', colour: 1 },
+        width: 10, height: 10, mode: 'emboss', depth: 1, maxLines: 1, default: '', colour: 1 },
     ],
   },
   // ---- Fridge magnets: 3 mm plates with Ø6.2 × 2 mm recesses on the back
@@ -1481,11 +1487,11 @@ const templates: Tpl[] = [
         pockets.map(([x, y]) => Manifold.cylinder(2.01, 3.1, 3.1, 48).translate(x, y, -0.01))))
     const tz = (id: string, label: string, x: number, y: number, w: number, h: number, text: string, lines = 1, extra: Partial<Zone> = {}): Zone => ({
       id, label, colour: 1, origin: [x, y, zTop], normal: [0, 0, 1], up: [0, 1, 0],
-      width: w, height: h, mode: 'engrave', depth: 0.8, maxLines: lines, default: text, ...extra,
+      width: w, height: h, mode: 'emboss', depth: 1, maxLines: lines, default: text, ...extra,
     })
     const icon = (x: number, y: number, size: number, symbol: string, extra: Partial<Zone> = {}): Zone => ({
       id: 'icon', label: 'Adornment', kind: 'symbol', colour: 1, origin: [x, y, zTop], normal: [0, 0, 1], up: [0, 1, 0],
-      width: size, height: size, mode: 'engrave', depth: 0.8, maxLines: 1, default: symbol, ...extra,
+      width: size, height: size, mode: 'emboss', depth: 1, maxLines: 1, default: symbol, ...extra,
     })
     const poly = (pts: [number, number][]) => CrossSection.ofPolygons([pts])
     const rect = (w: number, h: number, x = 0, y = 0) => CrossSection.square([w, h], true).translate(x, y)

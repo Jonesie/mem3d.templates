@@ -37,8 +37,8 @@
       ],
       "width": 10,
       "height": 10,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "moon"
     },
@@ -63,8 +63,8 @@
       ],
       "width": 36,
       "height": 10,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "DREAM"
     },
@@ -89,8 +89,8 @@
       ],
       "width": 40,
       "height": 6,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "big"
     }

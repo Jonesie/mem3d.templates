@@ -37,8 +37,8 @@
       ],
       "width": 56,
       "height": 13,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "HAULAGE"
     },
@@ -63,8 +63,8 @@
       ],
       "width": 56,
       "height": 6,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "we deliver"
     },
@@ -90,8 +90,8 @@
       ],
       "width": 8,
       "height": 8,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "anchor"
     }

@@ -37,8 +37,8 @@
       ],
       "width": 72,
       "height": 7,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "SCHOOL BUS"
     },
@@ -63,8 +63,8 @@
       ],
       "width": 40,
       "height": 4.5,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "route 66"
     },
@@ -90,8 +90,8 @@
       ],
       "width": 9,
       "height": 9,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "sun"
     }

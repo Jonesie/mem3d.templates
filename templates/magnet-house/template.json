@@ -36,8 +36,8 @@
       ],
       "width": 30,
       "height": 8,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "THE JONESES"
     },
@@ -62,8 +62,8 @@
       ],
       "width": 48,
       "height": 9,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "est. 1999"
     },
@@ -89,8 +89,8 @@
       ],
       "width": 9,
       "height": 9,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "house"
     }

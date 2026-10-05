@@ -37,8 +37,8 @@
       ],
       "width": 16,
       "height": 16,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "heart"
     },
@@ -63,8 +63,8 @@
       ],
       "width": 46,
       "height": 12,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "MUM"
     },
@@ -89,8 +89,8 @@
       ],
       "width": 40,
       "height": 7,
-      "mode": "engrave",
-      "depth": 0.8,
+      "mode": "emboss",
+      "depth": 1,
       "maxLines": 1,
       "default": "best in the world"
     }
