@@ -1311,6 +1311,43 @@ const templates: Tpl[] = [
     ],
   },
   {
+    id: 'notice-board',
+    name: 'Notice Board',
+    tags: ['sign', 'notice', 'rules', 'list', 'wall', 'fridge', 'home'],
+    notes: 'An A5 (148 x 210 mm) notice sheet for a list: house rules, a to-do list, a safety notice. It has a header with an optional adornment at each end, a longer list in the body, and a footer. The defaults are a humorous "Rules of the House".\n\n**Printing**\n- Print flat as placed, face up, no supports. The sheet is 4 mm thick, with a 2 mm wide rim standing 1 mm proud round the edge. The text is embossed 1 mm, so the rim and the lettering are the same height.\n- **Colours:** dark blue sheet, yellow rim and text. The rim is its own part, sitting on the sheet, so a multi-colour (AMS/MMU) print takes both parts from the 3MF. On a single extruder, change filament at 4 mm (the layer where the rim and lettering start); one change gives yellow rim, text and adornments.\n- Use the editor to change any colour, or to engrave the text instead.\n\n**The list**\n- The body is a multi-line text box: put one rule on each line, and long lines wrap. It has no automatic bullets or numbering, so type "1." or "-" at the start of a line if you want them. The text shrinks as you add more, and you can align it left, centre or right.\n- The header has room for two lines. Each adornment is chosen from the icon library, or left blank; the header text keeps the same width either way.\n\n**Mounting**\n- There is a round recess in each rear corner, 5.2 mm across and 2 mm deep, for a **5 mm round magnet** (glue it in), so the sheet sticks to a fridge or a steel door.\n- Or drill a recess out through the sheet with a drill bit and use it as a screw hole to hang the notice on a wall. Leave the other corners alone, or drill all four. A pan or round head up to 5 mm across will sit in the recess.',
+    colours: ['#1b2a5e', '#f5c400'],
+    // A5 portrait, 148 x 210 x 4, rounded corners. Two parts so the rim previews and prints yellow: the sheet (blue) and a 2 mm wide, 1 mm tall rim sitting on its top face (z = 4 to 5).
+    // Four 5.2 mm x 2 mm recesses in the corners of the back (z = 0), open to the bed so they print without supports.
+    parts: [
+      { id: 'sheet', label: 'Sheet', colour: 0 },
+      { id: 'rim', label: 'Rim', colour: 1 },
+    ],
+    build: () => {
+      const W = 148, H = 210, T = 4, R = 6
+      const outline = roundedRect(W, H, R)
+      const pockets = Manifold.union(
+        [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([sx, sy]) =>
+          Manifold.cylinder(2 + 1, 2.6, 2.6, 48).translate(sx * 65, sy * 96, -1)))
+      const sheet = Manifold.extrude(outline, T).subtract(pockets)
+      const rim = Manifold.extrude(outline.subtract(outline.offset(-2, 'Round', 2, 32)), 1).translate(0, 0, T)
+      return { sheet, rim }
+    },
+    zones: [
+      // Top face, z = 4, viewed from the front: up = +y. Header at the top with an adornment at each end, the list body, then the footer. All inside the rim (inner edge at x = +/-72, y = +/-103).
+      { id: 'iconLeft', label: 'Left adornment', kind: 'symbol', part: 'sheet', colour: 1, origin: [-57, 84, 4], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 22, height: 22, mode: 'emboss', depth: 1, maxLines: 1, default: 'people-roof' },
+      { id: 'iconRight', label: 'Right adornment', kind: 'symbol', part: 'sheet', colour: 1, origin: [57, 84, 4], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 22, height: 22, mode: 'emboss', depth: 1, maxLines: 1, default: 'radiation' },
+      { id: 'header', label: 'Header', part: 'sheet', colour: 1, origin: [0, 84, 4], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 84, height: 28, mode: 'emboss', depth: 1, maxLines: 2, default: 'Rules of the House', font: 'Fredoka' },
+      { id: 'body', label: 'List', kind: 'richtext', align: 'left', part: 'sheet', colour: 1, origin: [0, -6, 4], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 128, height: 132, mode: 'emboss', depth: 1, maxLines: 10, font: 'Fredoka',
+        default: '1. Wipe your feet. And your mess.\n2. If you open it, close it.\n3. If you drop it, pick it up.\n4. If you break it, own it and tell someone.\n5. Respect each other, and the last slice of pizza.\n6. No shoes on the couch. The couch has feelings.\n7. The dishwasher is not decoration. Load it.' },
+      { id: 'footer', label: 'Footer', part: 'sheet', colour: 1, origin: [0, -88, 4], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 120, height: 14, mode: 'emboss', depth: 1, maxLines: 1, default: 'By Order of the Management', font: 'Fredoka' },
+    ],
+  },
+  {
     id: 'picture-frame',
     name: 'Picture Frame',
     tags: ['frame', 'photo', 'home', 'gift'],

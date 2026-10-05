@@ -7,7 +7,9 @@
 // refuses to publish if it fails.
 //
 // Pass template ids to check just those:  npm run verify -- bento-box toolbox
-// (the checks run against a temporary copy holding only those templates).
+// (the checks run against a temporary copy holding only those templates, and the main
+// repo's slow symbol-library and multi-colour sweeps are skipped; a plain `npm run verify`
+// with no ids still runs them).
 //
 // The main repo is private, so this can't run in public CI. Set MEM3D_REPO
 // if it isn't at ~/dev/mem3d.  Run: npm run verify
@@ -42,7 +44,7 @@ if (!existsSync(`${client}/scripts/stl-check.mts`)) {
 
 function step(title: string, cmd: string, args: string[], cwd = process.cwd()) {
   console.log(`\n== ${title}`)
-  const r = spawnSync(cmd, args, { cwd, stdio: 'inherit', env: { ...process.env, MEM3D_TEMPLATES_DIR: templates } })
+  const r = spawnSync(cmd, args, { cwd, stdio: 'inherit', env: { ...process.env, MEM3D_TEMPLATES_DIR: templates, ...(ids.length ? { MEM3D_SKIP_SWEEPS: '1' } : {}) } })
   if (r.status !== 0) {
     console.error(`\nverify: FAILED at "${title}"`)
     if (scratch) rmSync(scratch, { recursive: true, force: true })
