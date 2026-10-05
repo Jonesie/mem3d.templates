@@ -67,7 +67,9 @@ function check(id: string): string[] {
     if (zoneIds.has(zid)) errs.push(`duplicate zone id "${zid}"`)
     zoneIds.add(zid)
     if (!isStr(z.label)) errs.push(`${at} label required`)
-    if (z.kind !== undefined && z.kind !== 'text' && z.kind !== 'symbol') errs.push(`${at} kind must be "text" or "symbol"`)
+    if (z.kind !== undefined && z.kind !== 'text' && z.kind !== 'symbol' && z.kind !== 'richtext') errs.push(`${at} kind must be "text", "richtext" or "symbol"`)
+    if (z.align !== undefined && z.align !== 'left' && z.align !== 'center' && z.align !== 'right') errs.push(`${at} align must be "left", "center" or "right"`)
+    if (z.kind === 'richtext' && z.arc) errs.push(`${at} a richtext zone can't also have arc`)
     if (z.mode !== 'emboss' && z.mode !== 'engrave') errs.push(`${at} mode must be "emboss" or "engrave"`)
     for (const k of ['origin', 'normal', 'up']) if (!isVec3(z[k])) errs.push(`${at} ${k} must be [x, y, z] numbers`)
     if (isVec3(z.normal) && isVec3(z.up)) {

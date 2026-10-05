@@ -17,7 +17,7 @@ const { Manifold, CrossSection } = wasm
 
 type Vec3 = [number, number, number]
 interface Zone {
-  id: string; label: string; kind?: 'text' | 'symbol'; origin: Vec3; normal: Vec3; up: Vec3
+  id: string; label: string; kind?: 'text' | 'richtext' | 'symbol'; align?: 'left' | 'center' | 'right'; origin: Vec3; normal: Vec3; up: Vec3
   width: number; height: number; mode: 'emboss' | 'engrave'; depth: number
   maxLines: number; default: string; font?: string; part?: string; colour?: number
   backing?: { offset: number; height: number }

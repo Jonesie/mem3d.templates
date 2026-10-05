@@ -74,7 +74,7 @@ draft is always safe to push and iterate on in a PR.
     {
       "id": "name",
       "label": "Name",
-      "kind": "text",              // or "symbol" for an adornment/icon
+      "kind": "text",              // "richtext" for multi-line wrapping text, or "symbol" for an icon
       "part": "body",               // which part this zone sits on (multi-part only)
       "origin": [0, 0, 0],          // zone centre, mm
       "normal": [0, 0, 1],          // out of the solid
@@ -82,7 +82,8 @@ draft is always safe to push and iterate on in a PR.
       "width": 40, "height": 12,
       "mode": "engrave",            // or "emboss"
       "depth": 0.8,
-      "maxLines": 1,
+      "maxLines": 1,                // richtext: most wrapped lines before the text shrinks
+      "align": "center",            // richtext only: "left" | "center" | "right", the starting alignment
       "default": "Wolfie",
       "font": "OpenSans",           // optional, defaults to the site's own default
       "colour": 1,                  // optional palette index
@@ -99,6 +100,16 @@ draft is always safe to push and iterate on in a PR.
 PR. It's how mem3d attributes the model to you and, until it's verified,
 scopes the unverified preview to your account only (see
 [Review & publishing](README.md#review--publishing)).
+
+**Zone kinds.** `text` is one short line (or up to `maxLines` lines, split
+only where the user presses Enter), centred, edited inline. `richtext` is for
+longer text such as an epitaph or a message: the user edits it in a dialog,
+it wraps at `width`, and it is sized as large as it can be while the wrapped
+block fits `height` and `maxLines` lines (so more text means smaller text).
+`align` sets the starting alignment, which the user can change. Give it a
+generous `height` and a `maxLines` that matches what you'd want to print; set
+`default` to a realistic sample, as stl-check builds it. A richtext zone can't
+also have `arc`. `symbol` is an icon from the library.
 
 `normal` and `up` must be unit vectors and mutually perpendicular; `up`
 is what "upright" text on that zone means. Look at a few existing
