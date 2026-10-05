@@ -1247,6 +1247,47 @@ const templates: Tpl[] = [
     ],
   },
   {
+    id: 'led-box-sign',
+    name: 'LED Box Sign',
+    published: false,
+    tags: ['sign', 'light', 'led', 'shop', 'wall', 'bedroom'],
+    notes: 'A wall-hanging light box in the style of a commercial acrylic LED sign: a deep, squarish translucent shell with a lettered front face and an **open back**, so a light strip fits inside and the whole box glows. The lettering is dark against the lit background.\n\n**Printing**\n- Print front face down, open back facing up, with no supports. The walls are plain verticals and the lugs sit flat at the open rim, so nothing overhangs. Rotate the model in your slicer if it shows the front facing up.\n- Use natural or white translucent PETG (or PLA) so light passes through the thin walls. Print slowly with 0.2 mm layers, 100% infill and 4 or more perimeters. The walls are 2 mm, so they are effectively solid.\n- The lettering is engraved 0.8 mm into the front face. Pause or change filament to black at the layer where the lettering starts, so the letters print as a dark, opaque region. Make the front face about 2.4 mm so there is still 1.6 mm of translucent filament behind the dark letters.\n- Keep the lettering bold: a heavy font on a shorter line of text reads best when lit.\n\n**Hanging**\n- Two keyhole lugs are built into the back rim, inside the top wall, so the box sits flat against the wall with nothing visible. Mark two screw positions 90 mm apart, on a level line, and drive in screws for 4 mm shanks with heads up to 8 mm across (a no. 6 or M4 pan head is about right), leaving about 3 mm of shank clear of the wall.\n- Lift the box, drop the large end of each keyhole over its screw head, then let the box slide down so the screws lock into the narrow slots.\n- The lugs are 4 mm thick plates printed flat, so layer lines run along the load and they hold the weight of the box and light strip. For a heavier fit, use a wall anchor at each screw and add a third fixing.\n\n**Lights and power**\n- Use a low-heat LED strip, stuck around the inside of the walls, so nothing softens. The inside is 156 mm wide, 136 mm tall and 56 mm deep. A frosted diffuser or a strip that faces the walls avoids hot spots on the face.\n- Use LEDs only: a candle or tea light will soften the print.\n- The power lead leaves through a 14 x 9 mm notch in the bottom wall, open to the back rim, so a USB or barrel plug can be fitted from behind before the box goes on the wall. The wall closes the notch once the box is hung. Plug the lead in and fit the strip first, then hang the box.',
+    // Open-backed box 160 x 140 x 60 (depth 3/8 of the width), 2 mm walls all round so the sides glow too. The
+    // back opens at z = 0; the front face at z = 60 is 2.4 mm thick. Two keyhole lugs are plates flush with the back
+    // rim, fused into the top wall, so the box hangs flat. A 14 x 9 mm notch in the bottom wall, open to the rim,
+    // takes the power lead.
+    colours: ['#f4f4f0', '#1a1a1a'],
+    build: () => {
+      const W = 160, H = 140, D = 60, WALL = 2, FRONT = 2.4
+      const slab = (x0: number, x1: number, y0: number, y1: number, z0: number, z1: number) =>
+        Manifold.cube([x1 - x0, y1 - y0, z1 - z0], false).translate(x0, y0, z0)
+      const outer = Manifold.extrude(roundedRect(W, H, 8), D).translate(0, H / 2, 0)
+      const cavity = Manifold.extrude(roundedRect(W - 2 * WALL, H - 2 * WALL, 6), D - FRONT + 1).translate(0, H / 2, -1)
+      // Keyhole lugs: a 4 mm plate flush with the back rim, hanging 24 mm below the top wall, burying itself
+      // 1 mm into it. The 9 mm head hole sits 16 mm below the wall; the 4.4 mm slot runs up from it.
+      const lug = (x: number) => {
+        const top = H - WALL
+        const plate = slab(x - 9, x + 9, top - 24, top + 1, 0, 4)
+        const key = Manifold.union([
+          Manifold.cylinder(6, 4.5, 4.5, 40).translate(x, top - 16, -1),
+          slab(x - 2.2, x + 2.2, top - 16, top - 6, -1, 5),
+        ])
+        return plate.subtract(key)
+      }
+      const lugs = Manifold.union([lug(-45), lug(45)])
+      return Manifold.union([outer.subtract(cavity), lugs]).subtract(slab(43, 57, -1, WALL + 1, -1, 9))
+    },
+    zones: [
+      // Front face (z = 60), viewed from the front: up = +y. Engraved 0.8 mm; the dark text is a colour-change region.
+      { id: 'icon', label: 'Adornment', kind: 'symbol', colour: 1, origin: [0, 104, 60], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 40, height: 40, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'star' },
+      { id: 'line1', label: 'Name', colour: 1, origin: [0, 62, 60], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 132, height: 36, mode: 'engrave', depth: 0.8, maxLines: 1, default: 'COFFEE', font: 'Anton' },
+      { id: 'line2', label: 'Subtitle', colour: 1, origin: [0, 28, 60], normal: [0, 0, 1], up: [0, 1, 0],
+        width: 120, height: 24, mode: 'engrave', depth: 0.8, maxLines: 2, default: 'open all day', font: 'Fredoka' },
+    ],
+  },
+  {
     id: 'picture-frame',
     name: 'Picture Frame',
     tags: ['frame', 'photo', 'home', 'gift'],
