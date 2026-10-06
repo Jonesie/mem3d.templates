@@ -23,13 +23,6 @@ below for what happens after you open the PR.
 - `tools/freecad_export_template.py` — exports a FreeCAD document to
   `templates/<id>/` (`template.json` + mesh `.glb`), same as `gen` does for
   the procedural ones. Run inside FreeCAD or via FreeCADCmd.
-- `scripts/sync-published.mts` — **publishing**. Mirrors every template
-  whose `template.json` doesn't have `"published": false` into
-  `/hdd2/mem3d/templates`, the directory the mem3d site's container
-  actually mounts (read-only). Anything no longer published gets removed
-  from there too. `npm run sync`; `npm run sync -- <id> [<id>…]` verifies
-  and publishes only those templates and leaves the rest of the live site alone.
-  Add `--no-verify` to skip the (slow) verify step.
 
 ## Workflow
 
@@ -37,7 +30,7 @@ below for what happens after you open the PR.
    the FreeCAD export tool, or by hand) or a whole new template.
 2. Leave `"published": false` in its `template.json` while it's a draft —
    editing files here never touches the live site by itself.
-3. When it's ready: remove that flag (or set it `true`) and `npm run sync`.
+3. When it's ready: remove that flag (or set it `true`); the maintainer publishes it.
    No site rebuild, no container restart — the site's own
    `TemplateCatalogue` rescans on file mtime.
 4. Commit. This repo is the history of what's been published and when,
@@ -48,9 +41,8 @@ below for what happens after you open the PR.
 New templates and fixes come in as pull requests from forks — see
 [CONTRIBUTING.md](CONTRIBUTING.md) for the `template.json` format, the
 three ways to author one (procedural/Manifold, FreeCAD, or by hand), and
-how to check your work before opening a PR. `npm run sync` is a
-maintainer-only step (it writes to a path on the live host) — don't run
-it yourself; just leave `"published": false` and open the PR.
+how to check your work before opening a PR. Publishing
+is maintainer-only; just leave `"published": false` and open the PR.
 
 ## Review & publishing
 
@@ -74,14 +66,13 @@ Checks at each stage:
   `npm run verify`. It runs the above plus the main mem3d repo's full
   `stl-check` (default text on every zone, every symbol, stroke
   printability) against this checkout. Set `MEM3D_REPO` if the main repo
-  isn't at `~/dev/mem3d`. `npm run sync` runs `verify` first and won't
-  publish if it fails.
+  isn't at `~/dev/mem3d`.
 
 1. **PR opened.** One template (or one focused fix) per PR, `"published": false`.
 2. **Review.** I read through the PR — geometry, zone placement, notes —
    the same way I'd review any of my own additions, and merge it into
    `main` once it looks right (or ask for changes first).
-3. **Unverified publish.** After merging, I `npm run sync` it to the live
+3. **Unverified publish.** After merging, I publish it to the live
    site as unverified (`"verified"` unset/`false`). At this stage it's
    visible only to the GitHub account in the template's `"author"` field,
    not in the public gallery, so they can check it renders and exports

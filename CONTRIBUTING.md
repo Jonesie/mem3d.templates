@@ -148,5 +148,3 @@ locally:
 - Keep `"published": false` unless you're only editing an already-live
   template's metadata (notes, tags) — geometry changes should land as a
   draft first.
-- Don't run `npm run sync` yourself — that step mirrors templates onto
-  the maintainer's own machine and isn't meaningful from a fork.

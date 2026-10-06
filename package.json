@@ -6,8 +6,7 @@
     "gen": "tsx scripts/gen-templates.mts",
     "stl-check": "tsx scripts/stl-check.mts",
     "check-schema": "tsx scripts/check-schema.mts",
-    "verify": "tsx scripts/verify.mts",
-    "sync": "tsx scripts/sync-published.mts"
+    "verify": "tsx scripts/verify.mts"
   },
   "dependencies": {
     "manifold-3d": "^3.5.3",

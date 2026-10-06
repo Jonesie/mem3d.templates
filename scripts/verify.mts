@@ -3,7 +3,7 @@
 //   2. the main mem3d repo's stl-check (default text on every zone, every
 //      symbol through an icon zone, stroke printability) pointed at this
 //      repo's templates/ via MEM3D_TEMPLATES_DIR
-// Nothing here touches the live site. `npm run sync` runs this first and
+// Nothing here touches the live site. The maintainer's publish tool (mem3d repo) runs this first and
 // refuses to publish if it fails.
 //
 // Pass template ids to check just those:  npm run verify -- bento-box toolbox
