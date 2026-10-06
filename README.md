@@ -28,11 +28,14 @@ below for what happens after you open the PR.
 
 1. Author or edit a template under `templates/<id>/` (via `npm run gen`,
    the FreeCAD export tool, or by hand) or a whole new template.
-2. Leave `"published": false` in its `template.json` while it's a draft —
-   editing files here never touches the live site by itself.
-3. When it's ready: remove that flag (or set it `true`); the maintainer publishes it.
-   No site rebuild, no container restart — the site's own
-   `TemplateCatalogue` rescans on file mtime.
+2. Leave `"published": false` in its `template.json` while it's a draft.
+   The flag is only the author's note that it's ready or not: the
+   maintainer's sync copies every template to the site either way, and the
+   site decides visibility (it hides `"published": false` by default, and the
+   admin's published setting in the site's database overrides that).
+3. When it's ready: remove that flag (or set it `true`). No site rebuild,
+   no container restart — the site's own `TemplateCatalogue` rescans on
+   file mtime.
 4. Commit. This repo is the history of what's been published and when,
    independent of the mem3d app's own commit history.
 

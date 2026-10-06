@@ -44,9 +44,9 @@ Pick whichever fits what you're making:
    printing notes) without re-exporting the mesh.
 
 Whichever route you use, leave `"published": false` in your
-`template.json` while you work — nothing under `templates/` reaches the
-live site until a maintainer runs the publish step (see README), so a
-draft is always safe to push and iterate on in a PR.
+`template.json` while you work. The flag is just your note that it isn't
+ready; the site hides such templates by default (an admin can override
+that), so a draft is safe to push and iterate on in a PR.
 
 ## `template.json` schema
 

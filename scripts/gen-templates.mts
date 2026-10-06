@@ -1486,7 +1486,7 @@ const templates: Tpl[] = [
       { id: 'flame', label: 'Flame', colour: 1 },
       { id: 'mount', label: 'Wall mount', colour: 0 },
     ],
-    notes: 'A torch in the style of the Statue of Liberty\'s: a hollow handle with your text round the balcony rim, a spiral flame that lights up, and a wall plate with a hoop to hang it from. Three parts, printed separately and shown side by side as printed.\n\n**Printing**\n- **Handle:** print upright as placed, no supports. It is hollow right through, with a floor 3 mm thick at the bottom.\n- **Flame:** print upright as placed (point up), no supports. It is hollow and open at the base; use a translucent or light filament and few walls if you want the light to glow through.\n- **Wall mount:** print lying on its back as placed, in **PETG or a stronger filament such as carbon-fibre PETG/nylon**, not PLA. Use tree supports under the hoop, 4+ walls and 40%+ infill. The hoop carries the whole torch on a lever, so keep the plate and gussets solid.\n\n**Light**\n- Made for a **cool LED** (a USB LED strip wrapped on a rod, or a puck light); nothing here is vented. Don\'t use a bulb that gets hot.\n- Stand the light on the handle floor so it shines up through the 41 mm opening in the balcony into the flame.\n\n**Cable**\n- The cable leaves through a slot 1/3 of the way up the handle, 16 x 8 mm, big enough for a USB-A plug with its moulded boot. Feed the plug out of the slot from the inside, pull the lead through, then fit the light.\n- Turn the handle in the hoop so the slot faces the wall; the lead then runs down the wall to the socket.\n\n**Assembly**\n- Set the flame on the balcony: its base slips over the collar on top.\n- Screw the plate to the wall with four screws (up to 4 mm shank, countersunk).\n- Drop the handle bottom-first through the hoop until its knob rests in the hoop\'s cone seat.',
+    notes: 'A torch in the style of the Statue of Liberty\'s: a hollow handle in a Greek style (fluted shaft, Greek-key band, bead rings and a dentil course) with your text round the balcony rim, a spiky spiral flame that lights up, and a wall plate with a hoop to hang it from. Three parts, printed separately and shown side by side as printed.\n\n**Printing**\n- **Handle:** print upright as placed, no supports. The bead rings, key band and dentils are fine detail: a 0.4 mm nozzle and 0.12 to 0.16 mm layers show them best. It is hollow right through, with a floor 3 mm thick at the bottom.\n- **Flame:** print upright as placed (point up), no supports. It is hollow and open at the base; use a translucent or light filament and few walls if you want the light to glow through.\n- **Wall mount:** print lying on its back as placed, in **PETG or a stronger filament such as carbon-fibre PETG/nylon**, not PLA. Use tree supports under the hoop, 4+ walls and 40%+ infill. The hoop carries the whole torch on a lever, so keep the plate and gussets solid.\n\n**Light**\n- Made for a **cool LED** (a USB LED strip wrapped on a rod, or a puck light); nothing here is vented. Don\'t use a bulb that gets hot.\n- Stand the light on the handle floor so it shines up through the 41 mm opening in the balcony into the flame.\n\n**Cable**\n- The cable leaves through a slot 1/3 of the way up the handle, 16 x 8 mm, big enough for a USB-A plug with its moulded boot. Feed the plug out of the slot from the inside, pull the lead through, then fit the light.\n- Turn the handle in the hoop so the slot faces the wall; the lead then runs down the wall to the socket.\n\n**Assembly**\n- Set the flame on the balcony: its base slips over the collar on top.\n- Screw the plate to the wall with four screws (up to 4 mm shank, countersunk).\n- Drop the handle bottom-first through the hoop until its knob rests in the hoop\'s cone seat.',
     // Handle: a revolved profile, hollowed 2.4 mm in from the outside. From the
     // bottom: a 32 mm stub (it goes through the mount's hoop), a knob that is
     // the stop on the hoop, a grip that widens to the balcony, a 45 degree flare
@@ -1517,21 +1517,64 @@ const templates: Tpl[] = [
       // USB-A slot: 16 wide (round the handle) x 8 tall, a third of the way up.
       const slotZ = H_DECK / 3
       const slot = Manifold.extrude(roundedRect(16, 8, 4), 30).rotate(-90, 0, 0).translate(0, 0, slotZ)
+
+      // Greek ornament. The grip is a slightly tapered column (r 17 at z 49 to 20
+      // at z 130): bead rings, a fluted shaft, and a Greek-key (meander) band
+      // between rails. Under the rim, a dentil course. All sits within the wall
+      // (2.4 mm) and clear of the cable slot (z 53 to 61) and the rim text.
+      const gripR = (z: number) => 17 + (3 * (z - 49)) / 81
+      const at = (m: M, deg: number) => m.rotate(0, 0, deg)
+      const beads = (z: number, n = 36, rad = 1.5) => Manifold.union(
+        Array.from({ length: n }, (_, i) => at(Manifold.sphere(rad, 16).translate(gripR(z) + 0.2, 0, z), (360 * i) / n)))
+      // Flutes: 12 round-bottomed grooves 1.1 mm deep, flat-ended, widening up the taper.
+      const F0 = 69, F1 = 101, NF = 12
+      const flute0 = gripR(F0)
+      const flutes = Manifold.extrude(
+        CrossSection.compose(Array.from({ length: NF }, (_, i) => {
+          const a = (2 * Math.PI * i) / NF
+          return CrossSection.circle(2, 24).translate((flute0 + 0.9) * Math.cos(a), (flute0 + 0.9) * Math.sin(a))
+        })), F1 - F0, 1, 0, [gripR(F1) / flute0, gripR(F1) / flute0]).translate(0, 0, F0)
+      // Meander: rails at lattice v = 0 and 8, and in each of 10 units a spiral hook
+      // (0,0) (0,6) (6,6) (6,2) (2,2) (2,4) (4,4), bars one lattice unit wide with
+      // one-unit gaps. 1 lattice unit = a, about 1.5 mm; the band is 9a tall.
+      const NK = 10, KZ = 108
+      const KR = gripR(KZ + 7)
+      const a = (2 * Math.PI * KR) / NK / 8
+      const KIN = KR - 1.2, KOUT = KR + 0.8
+      const degPer = 360 / NK / 8
+      const vbar = (x: number, v0: number, v1: number) =>
+        at(Manifold.cube([KOUT - KIN, a, (v1 - v0 + 1) * a], false).translate(KIN, -a / 2, KZ + (v0 - 0.5) * a), x * degPer)
+      const hbar = (v: number, x0: number, x1: number) => at(
+        Manifold.revolve(CrossSection.square([KOUT - KIN, a], false).translate(KIN, KZ + (v - 0.5) * a), 24, (x1 - x0 + 1) * degPer),
+        (x0 - 0.5) * degPer)
+      const rail = (v: number) => Manifold.revolve(CrossSection.square([KOUT - KIN, a], false).translate(KIN, KZ + (v - 0.5) * a), 120)
+      const key: M[] = [rail(0), rail(8)]
+      for (let u = 0; u < NK; u++) {
+        const o = u * 8
+        key.push(vbar(o, 0, 6), hbar(6, o, o + 6), vbar(o + 6, 2, 6), hbar(2, o + 2, o + 6), vbar(o + 2, 2, 4), hbar(4, o + 2, o + 4))
+      }
+      // Dentils: 40 blocks 3 mm wide, 1.4 mm proud, in the last 3 mm below the deck.
+      const dentils = Manifold.union(Array.from({ length: 40 }, (_, i) =>
+        at(Manifold.cube([2.4, 3, H_DECK - 169], false).translate(RO - 1, -1.5, 169), (360 * i) / 40)))
+      handle = handle.subtract(flutes)
+        .add(beads(65)).add(beads(104)).add(beads(125))
+        .add(Manifold.union(key)).add(dentils)
       handle = handle.subtract(slot)
 
-      // Flame: a 3-lobed shape twisting 300 degrees as it narrows to a point,
+      // Flame: a 5-spiked shape twisting 300 degrees as it narrows to a point,
       // hollowed by a smaller copy of itself so the light shows through, with a
       // 7 mm socket in the base that fits over the handle's collar.
       const FH = 120, FR = 33, TWIST = 300, TOP = 0.04
-      const lobed = (r: number, n = 144) => {
+      const lobed = (r: number, n = 200) => {
         const pts: [number, number][] = []
         for (let i = 0; i < n; i++) {
-          const a = (2 * Math.PI * i) / n, rr = r * (1 + 0.12 * Math.cos(3 * a))
+          // 5 spikes: a triangle wave with sharp tips and rounded valleys.
+          const a = (2 * Math.PI * i) / n, rr = r * (0.76 + 0.34 * Math.pow(1 - Math.abs(Math.sin((5 * a) / 2)), 1.4))
           pts.push([rr * Math.cos(a), rr * Math.sin(a)])
         }
         return CrossSection.ofPolygons([pts])
       }
-      const solid = Manifold.extrude(lobed(FR), FH, 90, TWIST, [TOP, TOP])
+      const solid = Manifold.extrude(lobed(FR), FH, 120, TWIST, [TOP, TOP])
       const CAV_F = 0.88, CAV_TOP = 0.097
       const inner = Manifold.extrude(lobed(FR * 0.9), FH * CAV_F, 80, TWIST * CAV_F, [CAV_TOP, CAV_TOP]).translate(0, 0, -0.01)
       const socket = Manifold.cylinder(7, 24, 24, 96).translate(0, 0, -0.01)
