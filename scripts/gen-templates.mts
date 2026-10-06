@@ -1012,7 +1012,7 @@ const templates: Tpl[] = [
     id: 'bento-box',
     name: 'Bento Box',
     tags: ['lunch', 'bento', 'box', 'school', 'storage'],
-    notes: 'A 190 x 120 x 40 mm bento box: a black shell and lid with a subtle wave pattern engraved around the outside, and four removable white inserts — one large compartment and three small ones. Friction-fit lid, no hardware.\n\n**Printing**\n- Print the shell and lid in black and the inserts in white. Everything prints as placed, no supports.\n- The inserts are shown seated in the shell; each prints on its own, flat on the bed, and drops in with 0.3 mm clearance. They stand well below the rim so the lid clears them.\n- The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it as part of the same object, so the text is the same colour as the lid.\n- Underneath is a solid plug that drops inside the shell walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support. The chamfer seats on the shell rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way.\n\n**Food safety**\n- Best for dry, cold food (sandwiches, fruit, crackers, snacks). It is not watertight, and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup.\n- Print in PETG (PLA softens in a hot car or dishwasher). Look for a filament that states it is food-contact safe.\n- Use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead.\n- Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.',
+    notes: 'A 190 x 120 x 40 mm bento box: a black shell and lid with a subtle wave pattern engraved around the outside, and four removable white inserts — one large compartment and three small ones. Friction-fit lid, no hardware.\n\n**Printing**\n- Print the shell and lid in black and the inserts in white. Everything prints as placed, no supports.\n- The inserts are shown seated in the shell; each prints on its own, flat on the bed, and drops in with 0.3 mm clearance. They stand well below the rim so the lid clears them.\n- The lid prints face up: its flat top is the finished face, with the name and adornment embossed 0.8 mm proud of it in white, so print the name and adornment in white (a colour change, or a second object).\n- Underneath is a solid plug that drops inside the shell walls with 0.25 mm clearance, through a 45-degree chamfer so there is no overhang to support. The chamfer seats on the shell rim and centres the lid. If the plug is too tight or too loose, scale the lid by a percent either way.\n\n**Food safety**\n- Best for dry, cold food (sandwiches, fruit, crackers, snacks). It is not watertight, and 3D-printed layer lines can trap moisture and bacteria, so keep wet or hot food out, or put it in a silicone cup.\n- Print in PETG (PLA softens in a hot car or dishwasher). Look for a filament that states it is food-contact safe.\n- Use a stainless-steel nozzle rather than the standard brass one, since brass can contain lead.\n- Hand-wash only, dry thoroughly, and replace the box if the surface becomes scratched or stained. Lining it with baking paper helps keep it clean.',
     // Shell: plain tray. Inserts: thin-walled open boxes that tile the cavity
     // (large on the left, three small in a column on the right), each
     // clipped to the shell's rounded cavity so the corners nest.
@@ -1098,15 +1098,15 @@ const templates: Tpl[] = [
     },
     zones: [
       // Lid top face (z = 7.65, face up), centred on y = 130 (D + 10). Embossed: it
-      // stands 0.8 mm proud of the flange, with no `colour` so it is part of the lid
-      // object (same black as the lid). Fredoka rather than the default
+      // stands 0.8 mm proud of the flange, in colour 1 (white), so it prints as a separate
+      // white object on the black lid. Fredoka rather than the default
       // serif so thin strokes stay printable.
       { id: 'line1', label: 'Name', part: 'lid', origin: [-25, 144, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 105, height: 30, mode: 'emboss', depth: 0.8, maxLines: 1, default: 'Charlie', font: 'Fredoka' },
+        width: 105, height: 30, colour: 1, mode: 'emboss', depth: 0.8, maxLines: 1, default: 'Charlie', font: 'Fredoka' },
       { id: 'line2', label: 'Subtitle', part: 'lid', origin: [-25, 116, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 105, height: 16, mode: 'emboss', depth: 0.8, maxLines: 2, default: 'bento time', font: 'Fredoka' },
+        width: 105, height: 16, colour: 1, mode: 'emboss', depth: 0.8, maxLines: 2, default: 'bento time', font: 'Fredoka' },
       { id: 'icon', label: 'Adornment', kind: 'symbol', part: 'lid', origin: [60, 130, 7.65], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 40, height: 40, mode: 'emboss', depth: 0.8, maxLines: 1, default: 'star' },
+        width: 40, height: 40, colour: 1, mode: 'emboss', depth: 0.8, maxLines: 1, default: 'trout' },
     ],
   },
   {
