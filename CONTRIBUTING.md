@@ -106,7 +106,11 @@ only where the user presses Enter), centred, edited inline. `richtext` is for
 longer text such as an epitaph or a message: the user edits it in a dialog,
 it wraps at `width`, and it is sized as large as it can be while the wrapped
 block fits `height` and `maxLines` lines (so more text means smaller text).
-`align` sets the starting alignment, which the user can change. Give it a
+`align` sets the starting alignment, which the user can change. The text
+(and your `default`) can use a little markdown: `**bold**`, `*italic*`,
+`__underline__`. There is one font face, so bold and italic are synthesised
+(thickened and slanted): use a font with solid strokes, and keep the text large
+enough that bold doesn't close up the counters. Give it a
 generous `height` and a `maxLines` that matches what you'd want to print; set
 `default` to a realistic sample, as stl-check builds it. A richtext zone can't
 also have `arc`. `symbol` is an icon from the library.
