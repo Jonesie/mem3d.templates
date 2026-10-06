@@ -1480,7 +1480,6 @@ const templates: Tpl[] = [
     id: 'liberty-torch',
     name: 'Liberty Torch',
     tags: ['torch', 'lamp', 'light', 'wall', 'novelty'],
-    published: false,
     colours: ['#b5651d', '#f2c230'],
     parts: [
       { id: 'handle', label: 'Handle', colour: 0 },
