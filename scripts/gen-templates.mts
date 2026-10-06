@@ -1477,6 +1477,105 @@ const templates: Tpl[] = [
     })(),
   },
   {
+    id: 'liberty-torch',
+    name: 'Liberty Torch',
+    tags: ['torch', 'lamp', 'light', 'wall', 'novelty'],
+    published: false,
+    colours: ['#b5651d', '#f2c230'],
+    parts: [
+      { id: 'handle', label: 'Handle', colour: 0 },
+      { id: 'flame', label: 'Flame', colour: 1 },
+      { id: 'mount', label: 'Wall mount', colour: 0 },
+    ],
+    notes: 'A torch in the style of the Statue of Liberty\'s: a hollow handle with your text round the balcony rim, a spiral flame that lights up, and a wall plate with a hoop to hang it from. Three parts, printed separately and shown side by side as printed.\n\n**Printing**\n- **Handle:** print upright as placed, no supports. It is hollow right through, with a floor 3 mm thick at the bottom.\n- **Flame:** print upright as placed (point up), no supports. It is hollow and open at the base; use a translucent or light filament and few walls if you want the light to glow through.\n- **Wall mount:** print lying on its back as placed, in **PETG or a stronger filament such as carbon-fibre PETG/nylon**, not PLA. Use tree supports under the hoop, 4+ walls and 40%+ infill. The hoop carries the whole torch on a lever, so keep the plate and gussets solid.\n\n**Light**\n- Made for a **cool LED** (a USB LED strip wrapped on a rod, or a puck light); nothing here is vented. Don\'t use a bulb that gets hot.\n- Stand the light on the handle floor so it shines up through the 41 mm opening in the balcony into the flame.\n\n**Cable**\n- The cable leaves through a slot 1/3 of the way up the handle, 16 x 8 mm, big enough for a USB-A plug with its moulded boot. Feed the plug out of the slot from the inside, pull the lead through, then fit the light.\n- Turn the handle in the hoop so the slot faces the wall; the lead then runs down the wall to the socket.\n\n**Assembly**\n- Set the flame on the balcony: its base slips over the collar on top.\n- Screw the plate to the wall with four screws (up to 4 mm shank, countersunk).\n- Drop the handle bottom-first through the hoop until its knob rests in the hoop\'s cone seat.',
+    // Handle: a revolved profile, hollowed 2.4 mm in from the outside. From the
+    // bottom: a 32 mm stub (it goes through the mount's hoop), a knob that is
+    // the stop on the hoop, a grip that widens to the balcony, a 45 degree flare
+    // out to the rim (a true cylinder, so the text can wrap on it), and a deck
+    // with a collar the flame fits over. The USB slot is cut through the +Y wall.
+    // Mount: the plate stands in the XZ plane (wall at y = 0), and the hoop
+    // leans 40 degrees from vertical, away from the wall, so the torch leans out.
+    build: () => {
+      const WALL = 2.4
+      const RO = 38              // rim radius
+      const H_DECK = 172         // top of the balcony deck
+      const COLLAR_R = 23.5, COLLAR_H = 6
+      const HOLE_R = 20.5        // light opening through the deck
+      const outer: [number, number][] = [
+        [0, 0], [16, 0], [16, 30], [24, 38], [24, 41], [17, 49], [20, 130],
+        [RO, 148], [RO, H_DECK], [0, H_DECK],
+      ]
+      const profile = CrossSection.ofPolygons([outer])
+      // Offset a mirrored copy so the cavity reaches the axis (a one-sided offset leaves a rod down the middle); the floor is 3 mm.
+      const cavity = profile.add(profile.mirror([1, 0])).offset(-WALL, 'Round', 2, 32)
+        .intersect(CrossSection.square([100, 400], false).translate(0, 3))
+      const revolve = (cs: CrossSection) => Manifold.revolve(cs, 96)
+      let handle = revolve(profile).subtract(revolve(cavity))
+      // Flame collar and the light opening through the deck.
+      handle = handle.add(Manifold.cylinder(COLLAR_H, COLLAR_R, COLLAR_R, 96).translate(0, 0, H_DECK - 0.01)
+        .subtract(Manifold.cylinder(COLLAR_H + 2, HOLE_R, HOLE_R, 96).translate(0, 0, H_DECK - 1)))
+      handle = handle.subtract(Manifold.cylinder(WALL * 3, HOLE_R, HOLE_R, 96).translate(0, 0, H_DECK - WALL * 2))
+      // USB-A slot: 16 wide (round the handle) x 8 tall, a third of the way up.
+      const slotZ = H_DECK / 3
+      const slot = Manifold.extrude(roundedRect(16, 8, 4), 30).rotate(-90, 0, 0).translate(0, 0, slotZ)
+      handle = handle.subtract(slot)
+
+      // Flame: a 3-lobed shape twisting 300 degrees as it narrows to a point,
+      // hollowed by a smaller copy of itself so the light shows through, with a
+      // 7 mm socket in the base that fits over the handle's collar.
+      const FH = 120, FR = 33, TWIST = 300, TOP = 0.04
+      const lobed = (r: number, n = 144) => {
+        const pts: [number, number][] = []
+        for (let i = 0; i < n; i++) {
+          const a = (2 * Math.PI * i) / n, rr = r * (1 + 0.12 * Math.cos(3 * a))
+          pts.push([rr * Math.cos(a), rr * Math.sin(a)])
+        }
+        return CrossSection.ofPolygons([pts])
+      }
+      const solid = Manifold.extrude(lobed(FR), FH, 90, TWIST, [TOP, TOP])
+      const CAV_F = 0.88, CAV_TOP = 0.097
+      const inner = Manifold.extrude(lobed(FR * 0.9), FH * CAV_F, 80, TWIST * CAV_F, [CAV_TOP, CAV_TOP]).translate(0, 0, -0.01)
+      const socket = Manifold.cylinder(7, 24, 24, 96).translate(0, 0, -0.01)
+      const flame = solid.subtract(inner).subtract(socket)
+
+      // Mount.
+      const T = 5, PW = 90, PH = 110
+      const top: Vec3 = [0, 48, 65]               // centre of the hoop's top face
+      const RING_R = 31, RING_L = 28, BORE = 16.35, SEAT_R = 24.35, SEAT_D = 8
+      // Local +Z of `m` becomes the hoop axis, with the origin at the top face.
+      const place = (m: M) => m.rotate(-40, 0, 0).translate(top[0], top[1], top[2])
+      const hoopOuter = place(Manifold.cylinder(RING_L, RING_R, RING_R, 96).translate(0, 0, -RING_L))
+      const bore = place(Manifold.union(
+        Manifold.cylinder(RING_L + 2, BORE, BORE, 96).translate(0, 0, -RING_L - 1),
+        Manifold.cylinder(SEAT_D + 0.01, BORE, SEAT_R, 96).translate(0, 0, -SEAT_D)))
+      // Two gussets, one each side of the bore, joining the ring to the plate.
+      const slab = (x0: number, x1: number) => Manifold.cube([x1 - x0, 400, 400], false).translate(x0, -200, -200)
+      const gusset = (x0: number, x1: number) => Manifold.hull([
+        hoopOuter.intersect(slab(x0, x1)),
+        Manifold.cube([x1 - x0, 10, 70], false).translate(x0, 0, 25),
+      ])
+      const plate = Manifold.extrude(roundedRect(PW, PH, 8), T).rotate(90, 0, 0).translate(0, T, PH / 2)
+      const holes = [[-35, 10], [35, 10], [-35, 100], [35, 100]].map(([x, z]) =>
+        Manifold.union(
+          Manifold.cylinder(T + 2, 2.2, 2.2, 32).rotate(-90, 0, 0).translate(x, -1, z),
+          Manifold.cylinder(2.4, 2.2, 4.6, 32).rotate(-90, 0, 0).translate(x, T - 2.4 + 0.01, z)))
+      const mount = Manifold.union([plate, hoopOuter, gusset(20, 30), gusset(-30, -20)])
+        .subtract(bore).subtract(Manifold.union(holes))
+
+      // Side by side, as printed: handle at the origin, flame to the right,
+      // the mount to the left lying on its back (wall face down).
+      return {
+        handle,
+        flame: flame.translate(95, 0, 0),
+        mount: mount.rotate(90, 0, 0).translate(-100, PH / 2, 0),
+      }
+    },
+    zones: [
+      { id: 'rim', label: 'Rim text (round the balcony)', part: 'handle', colour: 1, origin: [0, -38, 160], normal: [0, -1, 0], up: [0, 0, 1],
+        width: 150, height: 16, mode: 'engrave', depth: 1, maxLines: 1, default: 'LIBERTY', font: 'Anton', wrap: { radius: 38 } },
+    ],
+  },
+  {
     id: 'keycap',
     name: 'Keycap',
     tags: ['keyboard', 'keycap', 'desk', 'gadget'],
