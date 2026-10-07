@@ -1341,7 +1341,7 @@ const templates: Tpl[] = [
       { id: 'header', label: 'Header', part: 'sheet', colour: 1, origin: [0, 84, 4], normal: [0, 0, 1], up: [0, 1, 0],
         width: 84, height: 28, mode: 'emboss', depth: 1, maxLines: 2, default: 'Rules of the House', font: 'Fredoka' },
       { id: 'body', label: 'List', kind: 'richtext', align: 'left', part: 'sheet', colour: 1, origin: [0, -6, 4], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 128, height: 132, mode: 'emboss', depth: 1, maxLines: 10, font: 'Fredoka',
+        width: 128, height: 132, mode: 'emboss', depth: 1, maxLines: 12, font: 'Fredoka',
         default: '1. Wipe your feet. And your mess.\n2. If you open it, close it.\n3. If you drop it, pick it up.\n4. If you break it, own it and tell someone.\n5. Respect each other, and the last slice of pizza.\n6. No shoes on the couch. The couch has feelings.\n7. The dishwasher is not decoration. Load it.' },
       { id: 'footer', label: 'Footer', part: 'sheet', colour: 1, origin: [0, -88, 4], normal: [0, 0, 1], up: [0, 1, 0],
         width: 120, height: 14, mode: 'emboss', depth: 1, maxLines: 1, default: 'By Order of the Management', font: 'Fredoka' },
