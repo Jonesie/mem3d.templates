@@ -12,7 +12,8 @@
     "#2980b9",
     "#f4f4f0"
   ],
-  "notes": "Print flat as placed, no supports.\n\n- The raised text is 1 mm proud; a 0.4 mm nozzle is fine.\n- Fit a split ring through the hole.",
+  "notes": "A keyring tag with a line of raised text and a hole for a split ring.",
+  "printInstructions": "Print flat as placed, no supports.\n\n- The raised text is 1 mm proud; a 0.4 mm nozzle is fine.\n- Fit a split ring through the hole.",
   "zones": [
     {
       "id": "text",

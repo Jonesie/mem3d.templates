@@ -13,7 +13,8 @@
     "#d4a017"
   ],
   "verified": true,
-  "notes": "Print flat as placed, no supports.\n\n- Use 100 % infill for stiff prongs.\n- The words and strip are one 2 mm piece.\n- Wash before use if it touches food, or wrap the prongs in cling film.",
+  "notes": "A cake topper: your words on a strip, with prongs that push into the cake.",
+  "printInstructions": "Print flat as placed, no supports.\n\n- Use 100 % infill for stiff prongs.\n- The words and strip are one 2 mm piece.\n- Wash before use if it touches food, or wrap the prongs in cling film.",
   "zones": [
     {
       "id": "text",

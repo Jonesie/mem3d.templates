@@ -25,7 +25,8 @@
     "#222226",
     "#d4a017"
   ],
-  "notes": "A desk name wedge in three prints, no glue: a face plate and two triangular ends that lock into one rigid wedge at 40°.\n\n**Printing**\n- Print the face plate flat, text up, no supports. It is the whole reason this is split, so the name and title get a flat, crisp surface.\n- The two triangular ends are laid on their outer faces (slot side up), so the slot is open to the top.\n- The lip over the slot is a 40° overhang, so print with supports there or a slightly slow bridge.\n\n**Assembly**\n- Slide the plate down into the slots from the top edge until it stops on the bottom of the slots. It sits ~1 mm below the ends' slope, held by a lip over each edge.\n- The two ends and plate lock into one rigid wedge at 40°. It is a snug fit; lift it back out the same way to swap the text.",
+  "notes": "A desk name wedge in three prints, no glue: a face plate and two triangular ends that lock into one rigid wedge at 40°.",
+  "printInstructions": "**Printing**\n- Print the face plate flat, text up, no supports. It is the whole reason this is split, so the name and title get a flat, crisp surface.\n- The two triangular ends are laid on their outer faces (slot side up), so the slot is open to the top.\n- The lip over the slot is a 40° overhang, so print with supports there or a slightly slow bridge.\n\n**Assembly**\n- Slide the plate down into the slots from the top edge until it stops on the bottom of the slots. It sits ~1 mm below the ends' slope, held by a lip over each edge.\n- The two ends and plate lock into one rigid wedge at 40°. It is a snug fit; lift it back out the same way to swap the text.",
   "zones": [
     {
       "id": "name",

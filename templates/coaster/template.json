@@ -26,7 +26,8 @@
     "#2c3e50",
     "#d4a017"
   ],
-  "notes": "Print flat as placed, no supports.\n\n**Colours**\n- The rim is a separate part standing 1.2 mm above the face.\n- Print the merged STL in one colour, or pause at 4 mm and swap filament for a two-tone rim without an AMS.\n\n**Text**\n- The curved text and icon are engraved 0.8 mm.",
+  "notes": "A round coaster with text curved round the top and bottom, an adornment in the middle and a raised rim.",
+  "printInstructions": "Print flat as placed, no supports.\n\n**Colours**\n- The rim is a separate part standing 1.2 mm above the face.\n- Print the merged STL in one colour, or pause at 4 mm and swap filament for a two-tone rim without an AMS.\n\n**Text**\n- The curved text and icon are engraved 0.8 mm.",
   "zones": [
     {
       "id": "top",

@@ -59,7 +59,8 @@ def _main_cli():
     ap.add_argument("--tags", default="", help="comma-separated tags")
     ap.add_argument("--draft", action="store_true", help='write "published": false')
     ap.add_argument("--verified", action="store_true", help='write "verified": true (a real print has been checked)')
-    ap.add_argument("--notes", default="", help="printing / assembly notes shown in the editor")
+    ap.add_argument("--notes", default="", help="a short description of the model, shown in the editor")
+    ap.add_argument("--print-instructions", default="", help="Markdown print / assembly instructions (the editor's Print instructions dialog and the zip README)")
     ap.add_argument("--colours", default="", help="suggested palette, comma-separated hex (multi-part templates)")
     ap.add_argument("--deflection", type=float, default=0.05, help="mesh linear deflection, mm")
     a = ap.parse_args()
@@ -74,6 +75,7 @@ def _main_cli():
                MEM3D_DRAFT="1" if a.draft else "",
                MEM3D_VERIFIED="1" if a.verified else "",
                MEM3D_NOTES=a.notes,
+               MEM3D_PRINT_INSTRUCTIONS=a.print_instructions,
                MEM3D_COLOURS=a.colours,
                MEM3D_DEFLECTION=str(a.deflection))
 
@@ -184,6 +186,8 @@ def export(doc, out_root, tid, name, author, tags, draft, deflection, colours=()
         tpl["verified"] = True
     if os.environ.get("MEM3D_NOTES"):
         tpl["notes"] = os.environ["MEM3D_NOTES"]
+    if os.environ.get("MEM3D_PRINT_INSTRUCTIONS"):
+        tpl["printInstructions"] = os.environ["MEM3D_PRINT_INSTRUCTIONS"]
     with open(os.path.join(out_dir, "template.json"), "w") as f:
         json.dump(tpl, f, indent=2)
         f.write("\n")

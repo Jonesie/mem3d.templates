@@ -26,7 +26,8 @@
     "#f4f4f0"
   ],
   "verified": true,
-  "notes": "A headstone and base: two parts, printed separately and assembled by hand.\n\n**Printing**\n- The headstone prints lying flat, engraved/embossed face up (no rotation needed, no supports).\n- The base prints separately, as placed, no supports.\n- Printing the headstone flat rather than standing also means a multi-colour (AMS/MMU) print only swaps filament within the top ~1–2 mm of engraving/emboss depth, not across the whole standing height.\n\n**Assembly**\n- Stand the headstone up and push its tenon into the base’s socket, a firm friction fit.\n- Add a dot of glue if you want it permanent.",
+  "notes": "A headstone and base: two parts, printed separately and assembled by hand.",
+  "printInstructions": "**Printing**\n- The headstone prints lying flat, engraved/embossed face up (no rotation needed, no supports).\n- The base prints separately, as placed, no supports.\n- Printing the headstone flat rather than standing also means a multi-colour (AMS/MMU) print only swaps filament within the top ~1–2 mm of engraving/emboss depth, not across the whole standing height.\n\n**Assembly**\n- Stand the headstone up and push its tenon into the base’s socket, a firm friction fit.\n- Add a dot of glue if you want it permanent.",
   "zones": [
     {
       "id": "icon",

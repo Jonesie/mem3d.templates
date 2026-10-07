@@ -33,7 +33,8 @@
     "#f4f4f0",
     "#e6d9bd"
   ],
-  "notes": "Print flat as placed, no supports.\n\n**Colours**\n- Three colours: load the 3MF and assign a filament to body, edge spots and inlay.\n- All three are flush, so a single-colour print of the merged STL works too.\n\n**Quality**\n- The curved text is only 0.5 mm deep; 0.12 mm layers keep it crisp.",
+  "notes": "A casino-style chip with text curved round the top and bottom and a denomination in the middle, with coloured edge spots.",
+  "printInstructions": "Print flat as placed, no supports.\n\n**Colours**\n- Three colours: load the 3MF and assign a filament to body, edge spots and inlay.\n- All three are flush, so a single-colour print of the merged STL works too.\n\n**Quality**\n- The curved text is only 0.5 mm deep; 0.12 mm layers keep it crisp.",
   "zones": [
     {
       "id": "top",

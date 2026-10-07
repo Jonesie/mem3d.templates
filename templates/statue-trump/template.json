@@ -72,7 +72,8 @@
     "#f4f4f0",
     "#2c3e50"
   ],
-  "notes": "A figure on a hollow plinth. Print the figure upright as placed with tree supports; the plinth base, top cap and front nameplate print separately.\n\n**Printing**\n- Print the figure upright as placed with tree supports on: the forward arm, thumb, chin and the hair sweep all overhang.\n- The plinth base is a hollow shell, open front and top. Print it upright.\n- Print the top cap and the front nameplate separately (the nameplate flat, face up, for the cleanest engraving).\n- 0.12 mm layers flatter the face.\n\n**Assembly**\n- Nothing is glued. The nameplate slides down into a slot behind the base's open front, and the cap sits on a friction-fit locating spigot, so the name can be swapped later by lifting the (unglued) cap off.\n\n**Colours**\n- Load the 3MF so the colour parts stay registered; with one colour, print the merged STLs.",
+  "notes": "A figure on a hollow plinth, with a name and a caption on the nameplate.",
+  "printInstructions": "A figure on a hollow plinth. Print the figure upright as placed with tree supports; the plinth base, top cap and front nameplate print separately.\n\n**Printing**\n- Print the figure upright as placed with tree supports on: the forward arm, thumb, chin and the hair sweep all overhang.\n- The plinth base is a hollow shell, open front and top. Print it upright.\n- Print the top cap and the front nameplate separately (the nameplate flat, face up, for the cleanest engraving).\n- 0.12 mm layers flatter the face.\n\n**Assembly**\n- Nothing is glued. The nameplate slides down into a slot behind the base's open front, and the cap sits on a friction-fit locating spigot, so the name can be swapped later by lifting the (unglued) cap off.\n\n**Colours**\n- Load the 3MF so the colour parts stay registered; with one colour, print the merged STLs.",
   "zones": [
     {
       "id": "name",

@@ -13,7 +13,8 @@
     "#8e44ad",
     "#f1c40f"
   ],
-  "notes": "Print flat as placed, no supports.\n\n- The phone number is engraved into the face on the bed, so use a smooth plate for a clean underside.\n- Fit a split ring through the hole between the ears.",
+  "notes": "A cat tag with a name and a phone number or message, and a hole between the ears for a split ring.",
+  "printInstructions": "Print flat as placed, no supports.\n\n- The phone number is engraved into the face on the bed, so use a smooth plate for a clean underside.\n- Fit a split ring through the hole between the ears.",
   "zones": [
     {
       "id": "name",

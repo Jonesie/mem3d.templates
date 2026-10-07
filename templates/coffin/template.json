@@ -32,7 +32,8 @@
     "#7b4a2d",
     "#d4a017"
   ],
-  "notes": "A hollow coffin with a lift-off lid.\n\n**Printing**\n- Print the body as placed, open side up. It is a hollow shell, so no supports are needed.\n- The handles hang mid-air off the sides: printed together (3MF) they need supports.\n- Otherwise print the handles STL on its own (the six pieces lie flat) and glue them on.\n\n**Lid**\n- The lid drops on by its own locating spigot, no glue. Lift it off to reach the (empty) inside.",
+  "notes": "A hollow coffin with a lift-off lid.",
+  "printInstructions": "**Printing**\n- Print the body as placed, open side up. It is a hollow shell, so no supports are needed.\n- The handles hang mid-air off the sides: printed together (3MF) they need supports.\n- Otherwise print the handles STL on its own (the six pieces lie flat) and glue them on.\n\n**Lid**\n- The lid drops on by its own locating spigot, no glue. Lift it off to reach the (empty) inside.",
   "zones": [
     {
       "id": "icon",

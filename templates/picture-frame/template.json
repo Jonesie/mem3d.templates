@@ -33,7 +33,8 @@
     "#2c3e50",
     "#d4a017"
   ],
-  "notes": "Three parts, shown assembled but printed one at a time — the STL zip has a file per part.\n\n**Printing**\n- Frame and stand print as placed with no supports.\n- Flip the back panel so the keyhole recess faces up.\n\n**Assembly**\n- A 6 x 4\" (152 x 102 mm) photo drops into the rebate, then the panel holds it in.\n- The stand clips onto the bottom rail, or hang it on a screw through the keyhole.",
+  "notes": "A frame for a 6 x 4\" (152 x 102 mm) photo, with a stand, a line of text above and below the photo and adornments on the corners, sides and edge.",
+  "printInstructions": "Three parts, shown assembled but printed one at a time — the STL zip has a file per part.\n\n**Printing**\n- Frame and stand print as placed with no supports.\n- Flip the back panel so the keyhole recess faces up.\n\n**Assembly**\n- A 6 x 4\" (152 x 102 mm) photo drops into the rebate, then the panel holds it in.\n- The stand clips onto the bottom rail, or hang it on a screw through the keyhole.",
   "zones": [
     {
       "id": "top",

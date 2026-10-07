@@ -14,7 +14,8 @@
     "#f4f4f0",
     "#c0392b"
   ],
-  "notes": "Print as placed, base on the bed, no supports.\n\n- The backrest leans 25° and the cable slot under the lip bridges.\n- The raised adornments on the lip face are 1 mm proud and print fine on the vertical face.",
+  "notes": "A desk stand for a phone, with a name on the base, text on the front and back of the upright and an adornment at each side.",
+  "printInstructions": "Print as placed, base on the bed, no supports.\n\n- The backrest leans 25° and the cable slot under the lip bridges.\n- The raised adornments on the lip face are 1 mm proud and print fine on the vertical face.",
   "zones": [
     {
       "id": "name",
