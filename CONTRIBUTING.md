@@ -57,7 +57,8 @@ that), so a draft is safe to push and iterate on in a PR.
   "units": "mm",
   "tags": ["tag1", "tag2"],
   "author": "your-github-username", // your GitHub username/id — mem3d links to it from the model page
-  "notes": "Printing/assembly notes shown in the editor.",
+  "notes": "A short description, shown in the editor.",
+  "printInstructions": "**Printing**\n- Orientation, supports, colours, assembly (Markdown, optional).",
   "published": false,             // omit or `true` once ready to go live
   "verified": false,               // maintainer sets this after a real print
   "colours": ["#2980b9", "#d4a017"], // suggested palette (hex), optional
@@ -139,9 +140,14 @@ locally:
   actually sit on the face you intend, and that `width`/`height` don't
   overrun the part.
 - **`template.json` is valid JSON** and matches the schema above.
-- Include printing/assembly **`notes`**: orientation, whether supports
-  are needed, multi-colour/AMS guidance, glue vs. friction-fit, etc. —
-  see existing templates for the level of detail expected.
+- Give a short **`notes`** description of the model, and put the printing
+  and assembly advice in **`printInstructions`** (Markdown): orientation,
+  whether supports are needed, multi-colour/AMS guidance, glue vs.
+  friction-fit, etc. — see existing templates for the level of detail
+  expected. The description shows in the editor; the print instructions are
+  behind its "Print instructions…" link (under the download buttons) and in
+  the README inside the STL zip. If you leave `printInstructions` out, the
+  link shows `notes` instead, as it used to.
 
 ## Opening the PR
 
