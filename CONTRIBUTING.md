@@ -108,7 +108,8 @@ it wraps at `width`, and it is sized as large as it can be while the wrapped
 block fits `height` and `maxLines` lines (so more text means smaller text).
 `align` sets the starting alignment, which the user can change. The text
 (and your `default`) can use a little markdown: `**bold**`, `*italic*`,
-`__underline__`. There is one font face, so bold and italic are synthesised
+`__underline__`, and lists (`- item`, `1. item`, two spaces to nest; wrapped
+items hang under their text). There is one font face, so bold and italic are synthesised
 (thickened and slanted): use a font with solid strokes, and keep the text large
 enough that bold doesn't close up the counters. Give it a
 generous `height` and a `maxLines` that matches what you'd want to print; set
