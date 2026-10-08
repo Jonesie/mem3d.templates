@@ -1512,7 +1512,7 @@ const templates: Tpl[] = [
       { id: 'flame', label: 'Flame', colour: 1 },
       { id: 'mount', label: 'Wall mount', colour: 0 },
     ],
-    notes: 'A torch in the style of the Statue of Liberty\'s: a hollow handle in a Greek style (fluted shaft, Greek-key band, bead rings and a dentil course) with your text round the balcony rim, a spiky spiral flame that lights up, and a wall plate with a hoop to hang it from. Three parts, printed separately and shown side by side as printed.',
+    notes: 'A torch in the style of the Statue of Liberty\'s: a hollow handle in a Greek style (fluted shaft, Greek-key band, bead rings and a dentil course) with your text round the balcony rim, a flickering flame, with curling tongues, that lights up, and a wall plate with a hoop to hang it from. Three parts, printed separately and shown side by side as printed.',
     printInstructions: '**Printing**\n- **Handle:** print upright as placed, no supports. The bead rings, key band and dentils are fine detail: a 0.4 mm nozzle and 0.12 to 0.16 mm layers show them best. It is hollow right through, with a floor 3 mm thick at the bottom.\n- **Flame:** print upright as placed (point up), no supports. It is hollow, with a round skirt at the base that has an internal thread. Use a translucent or light filament and few walls if you want the light to glow through. Print the thread at 0.2 mm layers or finer.\n- **Wall mount:** print lying on its back as placed, in **PETG or a stronger filament such as carbon-fibre PETG/nylon**, not PLA. Use tree supports under the hoop, 4+ walls and 40%+ infill. The hoop carries the whole torch on a lever, so keep the plate and gussets solid.\n\n**Light**\n- Made for a **large (maxi) LED tea light**, about 58 mm across and up to 25 mm tall. With the flame off, drop it through the 61 mm opening in the deck: it settles on the sloping inside of the balcony, centred, with its top below the deck. Use an LED one; nothing here is vented, so don\'t use a wax candle.\n- A USB LED strip or puck light also works in the same space.\n\n**Cable**\n- The cable leaves through a slot 1/3 of the way up the handle, 16 x 8 mm, big enough for a USB-A plug with its moulded boot. Feed the plug out of the slot from the inside, pull the lead through, then fit the light.\n- Turn the handle in the hoop so the slot faces the wall; the lead then runs down the wall to the socket.\n\n**Assembly**\n- Screw the flame onto the threaded collar on the deck: turn it clockwise (right-hand thread, pitch 5 mm, about three turns) until the skirt sits on the deck. To change the tea light, unscrew the flame.\n- Screw the plate to the wall with four screws (up to 4 mm shank, countersunk).\n- Drop the handle bottom-first through the hoop until its knob rests in the hoop\'s cone seat.',
     // Handle: a revolved profile, hollowed 2.4 mm in from the outside. From the
     // bottom: a 32 mm stub (it goes through the mount's hoop), a knob that is
@@ -1608,29 +1608,41 @@ const templates: Tpl[] = [
       handle = handle.subtract(slot)
 
       // Flame: a round skirt with an internal thread that screws onto the
-      // handle's collar, a 45 degree shoulder, then a 5-spiked shape twisting 300
-      // degrees as it narrows to a point. The whole thing is hollow (the spiky
-      // part by a smaller copy of itself) so the light shows through.
-      const FH = 120, FR = 33, TWIST = 300, TOP = 0.04
+      // handle's collar, a 45 degree shoulder, then a teardrop body that swells
+      // above the skirt, narrows to a tip that sways in an S, and five curling
+      // tongues licking up its sides. Every part is a chain of hulled discs
+      // (a smooth frustum between each pair of slices), so nothing leans more
+      // than about 30 degrees and it prints upright with no supports. The body
+      // is hollow (a copy 2.4 mm smaller all round) so the light shows through;
+      // the tongues are solid.
       const SK_R = 42.5, SK_H = 13, BODY_Z = 18
-      const lobed = (r: number, n = 200) => {
-        const pts: [number, number][] = []
-        for (let i = 0; i < n; i++) {
-          // 5 spikes: a triangle wave with sharp tips and rounded valleys.
-          const a = (2 * Math.PI * i) / n, rr = r * (0.76 + 0.34 * Math.pow(1 - Math.abs(Math.sin((5 * a) / 2)), 1.4))
-          pts.push([rr * Math.cos(a), rr * Math.sin(a)])
+      type Slice = { x: number; y: number; z: number; r: number }
+      const disc = (p: Slice) => Manifold.cylinder(0.05, Math.max(p.r, 0.4), Math.max(p.r, 0.4), 48).translate(p.x, p.y, p.z)
+      const sweep = (pts: Slice[]) => Manifold.union(pts.slice(1).map((p, i) => Manifold.hull([disc(pts[i]), disc(p)])))
+      const FLAME_H = 125, R0 = 32, NS = 40
+      const bodyAt = (t: number): Slice => ({
+        x: 18 * t * t + 5 * Math.sin(2 * Math.PI * t) * t, y: 0, z: BODY_Z + t * FLAME_H,
+        r: Math.max(0.6, R0 * Math.pow(1 - t, 1.15) * (1 + 0.18 * Math.sin(Math.PI * t))),
+      })
+      const bodyPts = Array.from({ length: NS + 1 }, (_, i) => bodyAt(i / NS))
+      const WALL_F = 2.4
+      const cavPts = bodyPts.filter((q) => q.r - WALL_F > 1.2).map((q) => ({ ...q, r: q.r - WALL_F }))
+      const tongues = [[12, 70], [84, 88], [156, 56], [228, 78], [300, 64]].map(([deg, h]) => {
+        const pts: Slice[] = []
+        for (let j = 0; j <= 16; j++) {
+          const u = j / 16
+          const rho = 13 + 17 * Math.pow(u, 1.4), ang = ((deg + 30 * u) * Math.PI) / 180
+          pts.push({ x: rho * Math.cos(ang), y: rho * Math.sin(ang), z: BODY_Z + 4 + u * h,
+            r: Math.max(0.6, 12 * Math.pow(1 - u, 1.1) * (1 + 0.15 * Math.sin(Math.PI * u))) })
         }
-        return CrossSection.ofPolygons([pts])
-      }
-      const spiky = Manifold.extrude(lobed(FR), FH, 120, TWIST, [TOP, TOP]).translate(0, 0, BODY_Z)
+        return sweep(pts)
+      })
       const skirt = Manifold.revolve(CrossSection.ofPolygons([[[0, 0], [SK_R, 0], [SK_R, SK_H], [SK_R - 12.5, SK_H + 12.5], [0, SK_H + 12.5]]]), 96)
-      const CAV_F = 0.88, CAV_TOP = 0.097
-      const inner = Manifold.extrude(lobed(FR * 0.9), FH * CAV_F, 80, TWIST * CAV_F, [CAV_TOP, CAV_TOP]).translate(0, 0, BODY_Z)
       const CLR = 0.35
       const femaleH = THR_H + 1.5
       const female = threadSolid(THR_RN + CLR, THR_RM + CLR, 3.6 + 0.7, 1.2 + 0.7, femaleH).translate(0, 0, -0.01)
       const roof = Manifold.revolve(CrossSection.ofPolygons([[[0, femaleH - 1], [THR_RN + 0.5, femaleH - 1], [THR_RN + 0.5, femaleH], [24, femaleH + THR_RN + 0.5 - 24], [0, femaleH + THR_RN + 0.5 - 24]]]), 96)
-      const flame = Manifold.union(skirt, spiky).subtract(inner).subtract(female).subtract(roof)
+      const flame = Manifold.union([skirt, sweep(bodyPts), ...tongues]).subtract(sweep(cavPts)).subtract(female).subtract(roof)
 
       // Mount.
       const T = 5, PW = 90, PH = 110
@@ -1665,8 +1677,8 @@ const templates: Tpl[] = [
       }
     },
     zones: [
-      { id: 'rim', label: 'Rim text (round the balcony)', part: 'handle', colour: 1, origin: [0, -46, 168], normal: [0, -1, 0], up: [0, 0, 1],
-        width: 170, height: 16, mode: 'engrave', depth: 1, maxLines: 1, default: 'LIBERTY', font: 'Anton', wrap: { radius: 46 } },
+      { id: 'rim', label: 'Rim text (raised, round the balcony)', part: 'handle', colour: 1, origin: [0, -46, 167], normal: [0, -1, 0], up: [0, 0, 1],
+        width: 170, height: 18, mode: 'emboss', depth: 1.2, maxLines: 1, default: 'LIBERTY', font: 'Anton', wrap: { radius: 46 } },
     ],
   },
   {
