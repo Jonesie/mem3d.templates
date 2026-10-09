@@ -1,7 +1,7 @@
 /**
  * Generates the starter templates procedurally with Manifold and writes
  * templates/<id>/{template.json,mesh.glb} (this repo's own copy — the
- * source of truth; the mem3d site never sees it directly, see README).
+ * source of truth; the threedeeforge site never sees it directly, see README).
  * Real templates come from FreeCAD (freecad-src/); these exercise the
  * zone transform code with faces at various orientations.
  *
@@ -36,7 +36,7 @@ interface Tpl {
   colours?: string[]
   /** Set once a real print has been checked; shows a badge in the gallery. */
   verified?: boolean
-  /** GitHub username of the author; mem3d links to it. Defaults to DEFAULT_AUTHOR below. */
+  /** GitHub username of the author; threedeeforge links to it. Defaults to DEFAULT_AUTHOR below. */
   author?: string
   /** Shown in the editor: a short description of the model. */
   notes?: string
@@ -53,7 +53,7 @@ const DEFAULT_AUTHOR = 'Jonesie'
 const AUTHOR_FULL = 'Peter Jones (Jonesie)'
 const LICENSE_ID = 'CC-BY-NC-SA-4.0'
 const LICENSE_URL = 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
-const REPO_URL = 'https://github.com/Jonesie/mem3d.templates'
+const REPO_URL = 'https://github.com/Jonesie/threedeeforge.templates'
 
 const roundedRect = (w: number, h: number, r: number) =>
   CrossSection.square([w - 2 * r, h - 2 * r], true).offset(r, 'Round', 2, 32)
@@ -619,7 +619,7 @@ const templates: Tpl[] = [
     },
     zones: [
       { id: 'top', label: 'Top arc', colour: 1, origin: [0, 0, 3.3], normal: [0, 0, 1], up: [0, 1, 0],
-        width: 0, height: 4, mode: 'engrave', depth: 0.5, maxLines: 1, default: 'MEM3D CASINO', font: 'Anton',
+        width: 0, height: 4, mode: 'engrave', depth: 0.5, maxLines: 1, default: 'FORGE CASINO', font: 'Anton',
         arc: { radius: 12.9, sweep: 170, side: 'top' } },
       { id: 'bottom', label: 'Bottom arc', colour: 1, origin: [0, 0, 3.3], normal: [0, 0, 1], up: [0, 1, 0],
         width: 0, height: 4, mode: 'engrave', depth: 0.5, maxLines: 1, default: 'NO CASH VALUE', font: 'Anton',

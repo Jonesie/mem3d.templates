@@ -56,7 +56,7 @@ that), so a draft is safe to push and iterate on in a PR.
   "name": "Display Name",
   "units": "mm",
   "tags": ["tag1", "tag2"],
-  "author": "your-github-username", // your GitHub username/id — mem3d links to it from the model page
+  "author": "your-github-username", // your GitHub username/id — threedeeforge links to it from the model page
   "notes": "A short description, shown in the editor.",
   "printInstructions": "**Printing**\n- Orientation, supports, colours, assembly (Markdown, optional).",
   "published": false,             // omit or `true` once ready to go live
@@ -98,7 +98,7 @@ that), so a draft is safe to push and iterate on in a PR.
 ```
 
 `author` must be your own GitHub username/id — the one that opened the
-PR. It's how mem3d attributes the model to you and, until it's verified,
+PR. It's how threedeeforge attributes the model to you and, until it's verified,
 scopes the unverified preview to your account only (see
 [Review & publishing](README.md#review--publishing)).
 
@@ -125,7 +125,7 @@ unclear.
 
 ## Checking your work before opening a PR
 
-There's no live preview in this repo — the mem3d site only sees what a
+There's no live preview in this repo — the threedeeforge site only sees what a
 maintainer explicitly publishes (see README) — so check what you can
 locally:
 

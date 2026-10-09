@@ -60,7 +60,7 @@
       "mode": "engrave",
       "depth": 0.5,
       "maxLines": 1,
-      "default": "MEM3D CASINO",
+      "default": "FORGE CASINO",
       "font": "Anton",
       "arc": {
         "radius": 12.9,

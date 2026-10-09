@@ -3,7 +3,7 @@
 // of a multi-part template must not intersect. Exits non-zero on any FAIL.
 // Run: npm run stl-check
 //
-// The fuller check in the main mem3d repo (default text on every zone, every
+// The fuller check in the main threedeeforge repo (default text on every zone, every
 // symbol extruding cleanly) needs that repo's client code, so it isn't here.
 import { readdirSync, readFileSync } from 'node:fs'
 import Module from 'manifold-3d'
@@ -13,7 +13,7 @@ type Mesh = ReturnType<typeof readGlb>
 type Part = { id: string; mesh: string }
 type Tpl = { id: string; mesh?: string; parts?: Part[] }
 
-const templatesDir = process.env.MEM3D_TEMPLATES_DIR ?? 'templates'
+const templatesDir = process.env.THREEDEEFORGE_TEMPLATES_DIR ?? 'templates'
 
 /** Edges not shared by exactly two triangles. */
 function nonManifoldEdges(m: Mesh): number {
