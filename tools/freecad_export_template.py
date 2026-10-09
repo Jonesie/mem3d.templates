@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Export a FreeCAD model as a mem3d template: mesh.glb + template.json.
+Export a FreeCAD model as a threedeeforge template: mesh.glb + template.json.
 
 Author the part in FreeCAD, then for every text zone add a flat rectangle
 (Part::Plane is easiest) lying on the target face and give it a Label of
@@ -30,9 +30,9 @@ index) on a body, and --colours "#hex,#hex,#hex" for the palette.
 Usage (any of):
   python3 tools/freecad_export_template.py model.FCStd --out templates \
       --author your-github-username [--id pet-tag] [--name "Pet Tag"] [--tags pet,tag] [--draft]
-  FreeCADCmd tools/freecad_export_template.py      (with MEM3D_MODEL / MEM3D_OUT / MEM3D_AUTHOR env)
+  FreeCADCmd tools/freecad_export_template.py      (with THREEDEEFORGE_MODEL / THREEDEEFORGE_OUT / THREEDEEFORGE_AUTHOR env)
   Run as a macro inside FreeCAD on the active document (writes next to it;
-  set MEM3D_AUTHOR in the environment first).
+  set THREEDEEFORGE_AUTHOR in the environment first).
 """
 import json
 import math
@@ -55,7 +55,7 @@ def _main_cli():
     ap.add_argument("--out", required=True, help="templates root; writes <out>/<id>/")
     ap.add_argument("--id", help="template id (default: file stem, slugified)")
     ap.add_argument("--name", help="display name (default: from id)")
-    ap.add_argument("--author", required=True, help="your GitHub username/id; mem3d links to it")
+    ap.add_argument("--author", required=True, help="your GitHub username/id; threedeeforge links to it")
     ap.add_argument("--tags", default="", help="comma-separated tags")
     ap.add_argument("--draft", action="store_true", help='write "published": false')
     ap.add_argument("--verified", action="store_true", help='write "verified": true (a real print has been checked)')
@@ -66,18 +66,18 @@ def _main_cli():
     a = ap.parse_args()
 
     env = dict(os.environ,
-               MEM3D_MODEL=os.path.abspath(a.model),
-               MEM3D_OUT=os.path.abspath(a.out),
-               MEM3D_ID=a.id or "",
-               MEM3D_NAME=a.name or "",
-               MEM3D_AUTHOR=a.author,
-               MEM3D_TAGS=a.tags,
-               MEM3D_DRAFT="1" if a.draft else "",
-               MEM3D_VERIFIED="1" if a.verified else "",
-               MEM3D_NOTES=a.notes,
-               MEM3D_PRINT_INSTRUCTIONS=a.print_instructions,
-               MEM3D_COLOURS=a.colours,
-               MEM3D_DEFLECTION=str(a.deflection))
+               THREEDEEFORGE_MODEL=os.path.abspath(a.model),
+               THREEDEEFORGE_OUT=os.path.abspath(a.out),
+               THREEDEEFORGE_ID=a.id or "",
+               THREEDEEFORGE_NAME=a.name or "",
+               THREEDEEFORGE_AUTHOR=a.author,
+               THREEDEEFORGE_TAGS=a.tags,
+               THREEDEEFORGE_DRAFT="1" if a.draft else "",
+               THREEDEEFORGE_VERIFIED="1" if a.verified else "",
+               THREEDEEFORGE_NOTES=a.notes,
+               THREEDEEFORGE_PRINT_INSTRUCTIONS=a.print_instructions,
+               THREEDEEFORGE_COLOURS=a.colours,
+               THREEDEEFORGE_DEFLECTION=str(a.deflection))
 
     for cmd in ("FreeCADCmd", "freecadcmd", "freecad-cmd"):
         if shutil.which(cmd):
@@ -182,12 +182,12 @@ def export(doc, out_root, tid, name, author, tags, draft, deflection, colours=()
     tpl["zones"] = zones
     if draft:
         tpl["published"] = False
-    if os.environ.get("MEM3D_VERIFIED"):
+    if os.environ.get("THREEDEEFORGE_VERIFIED"):
         tpl["verified"] = True
-    if os.environ.get("MEM3D_NOTES"):
-        tpl["notes"] = os.environ["MEM3D_NOTES"]
-    if os.environ.get("MEM3D_PRINT_INSTRUCTIONS"):
-        tpl["printInstructions"] = os.environ["MEM3D_PRINT_INSTRUCTIONS"]
+    if os.environ.get("THREEDEEFORGE_NOTES"):
+        tpl["notes"] = os.environ["THREEDEEFORGE_NOTES"]
+    if os.environ.get("THREEDEEFORGE_PRINT_INSTRUCTIONS"):
+        tpl["printInstructions"] = os.environ["THREEDEEFORGE_PRINT_INSTRUCTIONS"]
     with open(os.path.join(out_dir, "template.json"), "w") as f:
         json.dump(tpl, f, indent=2)
         f.write("\n")
@@ -279,10 +279,10 @@ def write_glb(points, facets, tid="", author=""):
     mx = [max(p.x for p in points), max(p.y for p in points), max(p.z for p in points)]
     gltf = {
         "asset": {
-            "version": "2.0", "generator": "mem3d freecad_export_template",
+            "version": "2.0", "generator": "threedeeforge freecad_export_template",
             "copyright": "\u00a9 %s. CC-BY-NC-SA-4.0 (noncommercial, share-alike) \u2014 https://creativecommons.org/licenses/by-nc-sa/4.0/" % author,
             "extras": {"license": "CC-BY-NC-SA-4.0", "author": author,
-                       "source": "https://github.com/Jonesie/mem3d.templates/tree/main/templates/%s" % tid},
+                       "source": "https://github.com/Jonesie/threedeeforge.templates/tree/main/templates/%s" % tid},
         },
         "scene": 0, "scenes": [{"nodes": [0]}], "nodes": [{"mesh": 0}],
         "meshes": [{"primitives": [{"attributes": {"POSITION": 0}, "indices": 1}]}],
@@ -308,10 +308,10 @@ def write_glb(points, facets, tid="", author=""):
 def _main_freecad():
     import FreeCAD
 
-    model = os.environ.get("MEM3D_MODEL")
+    model = os.environ.get("THREEDEEFORGE_MODEL")
     if model:
         doc = FreeCAD.openDocument(model)
-        out = os.environ["MEM3D_OUT"]
+        out = os.environ["THREEDEEFORGE_OUT"]
     elif FreeCAD.ActiveDocument and FreeCAD.ActiveDocument.FileName:
         doc = FreeCAD.ActiveDocument
         model = doc.FileName
@@ -320,15 +320,15 @@ def _main_freecad():
         raise SystemExit("save the document first, or run via the CLI")
 
     stem = os.path.splitext(os.path.basename(model))[0]
-    tid = os.environ.get("MEM3D_ID") or slug(stem)
-    name = os.environ.get("MEM3D_NAME") or stem.replace("-", " ").replace("_", " ").title()
-    author = os.environ.get("MEM3D_AUTHOR")
+    tid = os.environ.get("THREEDEEFORGE_ID") or slug(stem)
+    name = os.environ.get("THREEDEEFORGE_NAME") or stem.replace("-", " ").replace("_", " ").title()
+    author = os.environ.get("THREEDEEFORGE_AUTHOR")
     if not author:
         raise SystemExit("--author is required (your GitHub username/id)")
-    tags = [t.strip() for t in os.environ.get("MEM3D_TAGS", "").split(",") if t.strip()]
-    draft = bool(os.environ.get("MEM3D_DRAFT"))
-    deflection = float(os.environ.get("MEM3D_DEFLECTION", "0.05"))
-    colours = [c.strip() for c in os.environ.get("MEM3D_COLOURS", "").split(",") if c.strip()]
+    tags = [t.strip() for t in os.environ.get("THREEDEEFORGE_TAGS", "").split(",") if t.strip()]
+    draft = bool(os.environ.get("THREEDEEFORGE_DRAFT"))
+    deflection = float(os.environ.get("THREEDEEFORGE_DEFLECTION", "0.05"))
+    colours = [c.strip() for c in os.environ.get("THREEDEEFORGE_COLOURS", "").split(",") if c.strip()]
     doc.recompute()
     export(doc, out, tid, name, author, tags, draft, deflection, colours, log=FreeCAD.Console.PrintMessage
            if not model else lambda s: print(s))

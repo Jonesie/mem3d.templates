@@ -5,7 +5,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { readGlbAsset } from './glb.mts'
 
-const templatesDir = process.env.MEM3D_TEMPLATES_DIR ?? 'templates'
+const templatesDir = process.env.THREEDEEFORGE_TEMPLATES_DIR ?? 'templates'
 const hex = /^#[0-9a-fA-F]{6}$/
 const isVec3 = (v: unknown): v is number[] =>
   Array.isArray(v) && v.length === 3 && v.every((n) => typeof n === 'number' && Number.isFinite(n))

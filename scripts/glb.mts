@@ -22,7 +22,7 @@ export function writeGlb(positions: Float32Array, indices: Uint32Array, meta?: G
     }
 
   const json = {
-    asset: { version: '2.0', generator: 'mem3d', ...meta },
+    asset: { version: '2.0', generator: 'threedeeforge', ...meta },
     scene: 0,
     scenes: [{ nodes: [0] }],
     nodes: [{ mesh: 0 }],

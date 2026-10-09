@@ -1,7 +1,7 @@
-# mem3d.templates
+# threedeeforge.templates
 
-Template source for [mem3d](https://mem3d.jonesie.kiwi) — kept independent
-of the site's own repo (`~/dev/mem3d`) so templates can be authored,
+Template source for [threedeeforge](https://threedeeforge.com) — kept independent
+of the site's own repo (`~/dev/threedeeforge`) so templates can be authored,
 reviewed and contributed by others without touching the app itself, and so
 a template can sit as a draft indefinitely with zero risk of it going live
 before it's ready.
@@ -37,7 +37,7 @@ below for what happens after you open the PR.
    no container restart — the site's own `TemplateCatalogue` rescans on
    file mtime.
 4. Commit. This repo is the history of what's been published and when,
-   independent of the mem3d app's own commit history.
+   independent of the threedeeforge app's own commit history.
 
 ## Contributing
 
@@ -55,7 +55,7 @@ Every submission goes through the same path:
 flowchart LR
     A[PR opened] --> B[Review]
     B -->|changes requested| A
-    B -->|merged| C[Draft publish to mem3d<br/>unverified, author-only]
+    B -->|merged| C[Draft publish to threedeeforge<br/>unverified, author-only]
     C --> D[Verification<br/>submitter sends a print photo]
     D --> E[Final approval<br/>verified, live in the public gallery]
 ```
@@ -66,10 +66,10 @@ Checks at each stage:
   templates match), `npm run check-schema` (`template.json` valid),
   `npm run stl-check` (meshes watertight, parts don't intersect).
 - **Before publishing (maintainer, local):** check out the PR and run
-  `npm run verify`. It runs the above plus the main mem3d repo's full
+  `npm run verify`. It runs the above plus the main threedeeforge repo's full
   `stl-check` (default text on every zone, every symbol, stroke
-  printability) against this checkout. Set `MEM3D_REPO` if the main repo
-  isn't at `~/dev/mem3d`.
+  printability) against this checkout. Set `THREEDEEFORGE_REPO` if the main repo
+  isn't at `~/dev/threedeeforge`.
 
 1. **PR opened.** One template (or one focused fix) per PR, `"published": false`.
 2. **Review.** I read through the PR — geometry, zone placement, notes —
